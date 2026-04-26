@@ -140,6 +140,42 @@
   .modal-actions button.danger{color:var(--hot);border-color:var(--hot);flex:0 0 auto;padding:12px 16px}
   .modal h3{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;margin-top:24px;padding-top:14px;border-top:1px solid var(--hair);color:var(--mute)}
   .empty{padding:32px 16px;text-align:center;color:var(--mute);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700}
+  /* DROP ZONE */
+  .dz{position:relative;display:block;width:100%;aspect-ratio:4/3;border:1px dashed var(--mute);background:#0a0a0a;cursor:pointer;overflow:hidden;margin-top:6px;transition:border-color .12s,background .12s}
+  .dz:hover{border-color:#fff}
+  .dz.over{border-color:#fff;border-style:solid;background:#1a1a1a}
+  .dz.uploading{opacity:0.6}
+  .dz .dz-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .dz .dz-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.55);opacity:0;transition:opacity .15s;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;color:#fff;text-align:center;padding:14px}
+  .dz:hover .dz-overlay,.dz.over .dz-overlay,.dz:not(:has(.dz-img)) .dz-overlay{opacity:1}
+  .dz.uploading .dz-overlay{opacity:1}
+  .dz.uploading .dz-overlay::after{content:" UPLOADING...";color:var(--warn)}
+  .dz-multi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+  .dz-multi .dz{aspect-ratio:1;margin-top:0}
+  .dz-multi .dz-add{aspect-ratio:1;border:1px dashed var(--mute);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;color:var(--mute);background:#0a0a0a}
+  .dz-multi .dz-add:hover{color:#fff;border-color:#fff}
+  .dz-thumb{position:relative;aspect-ratio:1;background:#0a0a0a;overflow:hidden;border:1px solid var(--hair)}
+  .dz-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .dz-thumb .dz-rm{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.7);color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;cursor:pointer;border:0}
+  .dz-thumb .dz-rm:hover{background:var(--hot)}
+  /* ARCHIVE GRID */
+  .archive-filters{display:flex;gap:0;margin:0;padding:12px 16px;border-bottom:1px solid var(--hair);overflow-x:auto;background:rgba(255,255,255,.02)}
+  .archive-filters button{padding:6px 12px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--mute);border:1px solid var(--hair);margin-right:6px;white-space:nowrap}
+  .archive-filters button.on{background:#fff;color:#000;border-color:#fff}
+  .archive-filters button:hover{color:var(--ink)}
+  .archive-filters input{flex:1;padding:6px 12px;font-size:11px;color:var(--ink);border-bottom:1px solid var(--hair);min-width:160px;margin-left:12px}
+  .archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:rgba(255,255,255,.05);padding:1px}
+  .archive-tile{aspect-ratio:1;position:relative;cursor:pointer;background:#0a0a0a;overflow:hidden}
+  .archive-tile img,.archive-tile video{width:100%;height:100%;object-fit:cover;display:block}
+  .archive-tile .archive-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,0) 50%);opacity:0;transition:opacity .15s;display:flex;align-items:flex-end;padding:14px;color:#fff}
+  .archive-tile:hover .archive-overlay,.archive-tile.no-img .archive-overlay{opacity:1}
+  .archive-tile.no-img .archive-overlay{background:#0a0a0a;align-items:center;justify-content:center;text-align:center;padding:14px}
+  .archive-tile .archive-title{font-size:12px;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;line-height:1.15}
+  .archive-tile .archive-sub{font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,.7);text-transform:uppercase;font-weight:700;margin-top:4px}
+  .archive-tile .archive-info{flex:1}
+  .archive-tile .archive-badge{position:absolute;top:8px;right:8px;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;padding:3px 6px;background:rgba(0,0,0,.75);color:#fff;backdrop-filter:blur(4px)}
+  .archive-tile.add-tile{background:transparent;border:1px dashed var(--mute);display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--mute)}
+  .archive-tile.add-tile:hover{color:#fff;border-color:#fff;border-style:solid}
   .rules-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border:1px solid var(--hair)}
   .rules-wall .r{padding:24px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);font-weight:900;font-size:18px;letter-spacing:-0.01em;text-transform:uppercase;line-height:1.1}
   .rules-wall .r .num{display:block;font-size:9px;color:var(--mute);letter-spacing:0.24em;font-weight:700;margin-bottom:10px}
@@ -282,7 +318,23 @@
 
 <!-- LIBRARY -->
 <section class="view" id="view-library">
-  <div class="sec-h"><h1>Library</h1><div class="meta">Style engine<br>References · Looks · Test queue</div></div>
+  <div class="sec-h"><h1>Library</h1><div class="meta">The archive · the playbook · the queue<br>Your work · idols · IG · refs</div></div>
+
+  <div class="card">
+    <div class="card-head">
+      <span>Archive <span class="count" id="ct-refs">—</span></span>
+      <button class="add" onclick="openInspoModal()">+ Add</button>
+    </div>
+    <div class="archive-filters" id="archive-filters">
+      <button class="on" data-af="all">All</button>
+      <button data-af="MINE">My work</button>
+      <button data-af="IDOL">Idols</button>
+      <button data-af="IG">Instagram</button>
+      <button data-af="VIDEO">Video</button>
+      <input type="text" id="archive-search" placeholder="SEARCH ARCHIVE">
+    </div>
+    <div class="archive-grid" id="library-refs"></div>
+  </div>
 
   <div class="card">
     <div class="card-head">
@@ -298,14 +350,6 @@
       <button class="add" onclick="openTestModal()">+ Add test</button>
     </div>
     <div id="library-test"></div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <span>References <span class="count" id="ct-refs">—</span></span>
-      <button class="add" onclick="openInspoModal()">+ Add ref</button>
-    </div>
-    <div id="library-refs"></div>
   </div>
 </section>
 
@@ -326,6 +370,97 @@ function daysFromToday(s){if(!s)return null;const d=new Date(s);d.setHours(0,0,0
 function dateClass(s){const d=daysFromToday(s);if(d===null)return'';if(d<0)return'overdue';if(d===0)return'due-today';if(d<=7)return'upcoming';return''}
 function fmtMoney(n){if(n===null||n===undefined)return'£0';return'£'+Number(n).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:2})}
 function escapeHtml(s){if(!s)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
+
+// =========== DRAG-DROP UPLOAD ===========
+async function uploadFile(file){
+  const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+  const path=`${Date.now()}-${Math.random().toString(36).slice(2,8)}.${ext}`;
+  const{error}=await sb.storage.from('inspo-images').upload(path,file,{contentType:file.type});
+  if(error){alert('Upload failed: '+error.message);return null}
+  const{data:{publicUrl}}=sb.storage.from('inspo-images').getPublicUrl(path);
+  return publicUrl;
+}
+function dropZoneHtml(name,value,label){
+  return `<div class="dz" data-name="${name}">
+    <input type="hidden" name="${name}" value="${escapeHtml(value||'')}">
+    <input type="file" accept="image/*,video/*" hidden>
+    ${value?`<img src="${escapeHtml(value)}" class="dz-img"/>`:''}
+    <div class="dz-overlay"><span>${value?'REPLACE':label||'DROP IMAGE OR CLICK'}</span></div>
+  </div>`;
+}
+function dropZoneMultiHtml(name,values){
+  values=values||[];
+  return `<div class="dz-multi-wrap" data-name="${name}">
+    <input type="hidden" name="${name}_json" value='${escapeHtml(JSON.stringify(values))}'>
+    <div class="dz-multi">
+      ${values.map((v,i)=>`<div class="dz-thumb"><img src="${escapeHtml(v)}"/><button type="button" class="dz-rm" data-i="${i}">×</button></div>`).join('')}
+      <div class="dz dz-add"><input type="file" accept="image/*" hidden multiple><div class="dz-overlay" style="opacity:1;background:transparent;font-size:24px;color:var(--mute)">+</div></div>
+    </div>
+  </div>`;
+}
+function setupDropZones(formEl){
+  formEl.querySelectorAll('.dz').forEach(dz=>{
+    if(dz.dataset.wired)return;
+    dz.dataset.wired='1';
+    const fileInput=dz.querySelector('input[type=file]');
+    const isMulti=dz.classList.contains('dz-add');
+    const hidden=isMulti?dz.closest('.dz-multi-wrap').querySelector('input[type=hidden]'):dz.querySelector('input[type=hidden]');
+    const handle=async(files)=>{
+      dz.classList.add('uploading');
+      for(const f of files){
+        const url=await uploadFile(f);
+        if(!url)continue;
+        if(isMulti){
+          const arr=JSON.parse(hidden.value||'[]');arr.push(url);hidden.value=JSON.stringify(arr);
+          // append thumb
+          const wrap=dz.parentElement;
+          const thumb=document.createElement('div');
+          thumb.className='dz-thumb';
+          thumb.innerHTML=`<img src="${url}"/><button type="button" class="dz-rm" data-i="${arr.length-1}">×</button>`;
+          wrap.insertBefore(thumb,dz);
+          thumb.querySelector('.dz-rm').onclick=()=>{
+            const a=JSON.parse(hidden.value||'[]');
+            const i=Array.from(wrap.querySelectorAll('.dz-thumb')).indexOf(thumb);
+            a.splice(i,1);hidden.value=JSON.stringify(a);
+            thumb.remove();
+          };
+        } else {
+          hidden.value=url;
+          let img=dz.querySelector('.dz-img');
+          if(!img){img=document.createElement('img');img.className='dz-img';dz.insertBefore(img,dz.firstChild)}
+          img.src=url;
+          dz.querySelector('.dz-overlay span').textContent='REPLACE';
+        }
+      }
+      dz.classList.remove('uploading');
+    };
+    dz.addEventListener('click',e=>{if(e.target.classList.contains('dz-rm'))return;fileInput.click()});
+    dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over')});
+    dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+    dz.addEventListener('drop',async e=>{e.preventDefault();dz.classList.remove('over');if(e.dataTransfer.files.length)await handle(e.dataTransfer.files)});
+    fileInput.addEventListener('change',async()=>{if(fileInput.files.length)await handle(fileInput.files);fileInput.value=''});
+  });
+  // Wire existing remove buttons on multi-image thumbnails
+  formEl.querySelectorAll('.dz-multi-wrap').forEach(wrap=>{
+    const hidden=wrap.querySelector('input[type=hidden]');
+    wrap.querySelectorAll('.dz-thumb .dz-rm').forEach(btn=>{
+      if(btn.dataset.wired)return;
+      btn.dataset.wired='1';
+      btn.onclick=()=>{
+        const a=JSON.parse(hidden.value||'[]');
+        const thumb=btn.parentElement;
+        const i=Array.from(wrap.querySelectorAll('.dz-thumb')).indexOf(thumb);
+        a.splice(i,1);hidden.value=JSON.stringify(a);
+        thumb.remove();
+      };
+    });
+  });
+}
+function detectInstagramUrl(url){
+  if(!url)return null;
+  const m=url.match(/instagram\.com\/(p|reel|tv)\/([A-Za-z0-9_-]+)/);
+  return m?{type:m[1],id:m[2],embed:`https://www.instagram.com/${m[1]}/${m[2]}/embed/`}:null;
+}
 (function(){const t=new Date();document.getElementById('now-meta').textContent=`${days[t.getDay()]} ${String(t.getDate()).padStart(2,'0')} ${months[t.getMonth()]} ${t.getFullYear()}`;document.getElementById('today-date').textContent=`${days[t.getDay()]} ${String(t.getDate()).padStart(2,'0')} ${months[t.getMonth()]} ${t.getFullYear()}`})();
 
 function setView(v){document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>a.classList.toggle('active',a.dataset.view===v));const fn={today:renderToday,pipeline:renderPipeline,contacts:renderContacts,work:renderWork,money:renderMoney,direct:renderDirect,library:renderLibrary}[v];if(fn)fn();window.scrollTo(0,0)}
@@ -444,8 +579,28 @@ async function renderLibrary(){
   document.getElementById('ct-tests').textContent=(tests||[]).length;
   document.getElementById('library-test').innerHTML=(tests||[]).length?(tests||[]).map(t=>`<div class="row" onclick="editTest(${t.id})"><span></span><span class="body"><strong>${escapeHtml(t.title)}</strong>${t.who_with?`<small>WITH ${escapeHtml(t.who_with)}</small>`:''}</span><span class="meta ${dateClass(t.when_to_test)}">${t.when_to_test?fmtDate(t.when_to_test):'—'}</span><span><span class="badge ${t.status==='done'?'delivered':t.status==='planned'?'editing':'shooting'}">${(t.status||'to_test').replace('_',' ').toUpperCase()}</span></span></div>`).join(''):'<div class="empty">Add what to test on next shoot</div>';
 
+  // Archive grid
   document.getElementById('ct-refs').textContent=(refs||[]).length;
-  document.getElementById('library-refs').innerHTML=(refs||[]).length?(refs||[]).map(r=>`<div class="row" onclick="editInspo(${r.id})"><span></span><span class="body"><strong>${escapeHtml(r.title)}</strong>${r.subtitle?`<small>${escapeHtml(r.subtitle)}</small>`:''}</span><span style="font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em;font-weight:700">${(r.tags||[]).slice(0,2).join(' · ')}</span><span class="meta">${r.video_url?'VIDEO':r.hero_image_url?'IMAGE':'—'}</span></div>`).join(''):'<div class="empty">No references yet</div>';
+  const archiveSearch=(document.getElementById('archive-search')?.value||'').toLowerCase();
+  const archiveFilter=document.querySelector('#archive-filters button.on')?.dataset.af||'all';
+  let filtered=refs||[];
+  if(archiveFilter==='MINE')filtered=filtered.filter(r=>(r.tags||[]).includes('MINE'));
+  else if(archiveFilter==='IDOL')filtered=filtered.filter(r=>(r.tags||[]).includes('IDOL'));
+  else if(archiveFilter==='IG')filtered=filtered.filter(r=>(r.video_url||'').includes('instagram.com')||(r.tags||[]).includes('IG'));
+  else if(archiveFilter==='VIDEO')filtered=filtered.filter(r=>r.video_url);
+  if(archiveSearch)filtered=filtered.filter(r=>(r.title||'').toLowerCase().includes(archiveSearch)||(r.subtitle||'').toLowerCase().includes(archiveSearch)||(r.body||'').toLowerCase().includes(archiveSearch)||(r.tags||[]).some(t=>t.toLowerCase().includes(archiveSearch)));
+  const tiles=filtered.map(r=>{
+    const ig=detectInstagramUrl(r.video_url);
+    const hasVideo=r.video_url&&!ig;
+    const hasImg=r.hero_image_url;
+    const badge=ig?'IG':hasVideo?'VIDEO':(r.tags||[]).find(t=>['MINE','IDOL'].includes(t))||'';
+    return `<div class="archive-tile ${!hasImg?'no-img':''}" onclick="editInspo(${r.id})">
+      ${hasImg?`<img src="${escapeHtml(r.hero_image_url)}" loading="lazy"/>`:''}
+      ${badge?`<span class="archive-badge">${badge}</span>`:''}
+      <div class="archive-overlay"><div class="archive-info"><div class="archive-title">${escapeHtml(r.title)}</div>${r.subtitle?`<div class="archive-sub">${escapeHtml(r.subtitle)}</div>`:''}</div></div>
+    </div>`;
+  }).join('');
+  document.getElementById('library-refs').innerHTML=tiles+`<div class="archive-tile add-tile" onclick="openInspoModal()">+</div>`;
 }
 
 function modal(html,onSave,onDelete){
@@ -456,15 +611,16 @@ function modal(html,onSave,onDelete){
   bg.onclick=()=>bg.classList.remove('on');
   const form=bg.querySelector('form');
   if(form){
+    setupDropZones(form);
     form.onsubmit=(e)=>{
       e.preventDefault();
       const fd=new FormData(form);const data={};
       for(const [k,v] of fd.entries()){
         if(form.elements[k]?.type==='checkbox')data[k]=form.elements[k].checked;
+        else if(k.endsWith('_json')){data[k.slice(0,-5)]=JSON.parse(v||'[]')}
         else if(v==='')data[k]=null;
         else data[k]=v;
       }
-      // also pick up unchecked checkboxes
       Array.from(form.querySelectorAll('input[type=checkbox]')).forEach(cb=>{if(!(cb.name in data))data[cb.name]=cb.checked});
       onSave(data).then(()=>{bg.classList.remove('on');setView(getView())});
     };
@@ -523,13 +679,25 @@ async function editLook(id){const{data:l}=await sb.from('looks').select('*').eq(
 function openTestModal(){modal(`<h2>New test</h2><form><label>What to test (look name)</label><input name="title" required autofocus><label>When</label><input name="when_to_test" type="date"><label>Who with (model / contact)</label><input name="who_with"><label>Status</label><select name="status"><option value="to_test">To test</option><option value="planned">Planned</option><option value="done">Done</option></select><label>Notes</label><textarea name="notes"></textarea><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{await sb.from('test_queue').insert(d)})}
 async function editTest(id){const{data:t}=await sb.from('test_queue').select('*').eq('id',id).single();modal(`<h2>Edit test</h2><form><label>What to test</label><input name="title" value="${escapeHtml(t.title||'')}" required><label>When</label><input name="when_to_test" type="date" value="${t.when_to_test||''}"><label>Who with</label><input name="who_with" value="${escapeHtml(t.who_with||'')}"><label>Status</label><select name="status"><option value="to_test" ${t.status==='to_test'?'selected':''}>To test</option><option value="planned" ${t.status==='planned'?'selected':''}>Planned</option><option value="done" ${t.status==='done'?'selected':''}>Done</option></select><label>Notes</label><textarea name="notes">${escapeHtml(t.notes||'')}</textarea><div class="modal-actions"><button type="button" class="danger">Delete</button><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Save</button></div></form>`,async(d)=>{await sb.from('test_queue').update(d).eq('id',id)},async()=>{await sb.from('test_queue').delete().eq('id',id)})}
 
-function openInspoModal(){modal(`<h2>New reference</h2><form><label>Title</label><input name="title" required autofocus><label>Subtitle</label><input name="subtitle"><label>Body</label><textarea name="body"></textarea><label>Hero image URL</label><input name="hero_image_url" placeholder="https://..."><label>Video URL</label><input name="video_url" placeholder="YouTube / Vimeo / Loom / mp4"><label>Tags</label><input name="tags_raw" placeholder="FLASH, ARCHIVE, STUDY"><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('inspo_refs').insert(d)})}
-async function editInspo(id){const{data:r}=await sb.from('inspo_refs').select('*').eq('id',id).single();modal(`<h2>Edit reference</h2><form><label>Title</label><input name="title" value="${escapeHtml(r.title||'')}" required><label>Subtitle</label><input name="subtitle" value="${escapeHtml(r.subtitle||'')}"><label>Body</label><textarea name="body">${escapeHtml(r.body||'')}</textarea><label>Hero image URL</label><input name="hero_image_url" value="${escapeHtml(r.hero_image_url||'')}"><label>Video URL</label><input name="video_url" value="${escapeHtml(r.video_url||'')}"><label>Tags</label><input name="tags_raw" value="${(r.tags||[]).join(', ')}"><div class="modal-actions"><button type="button" class="danger">Delete</button><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Save</button></div></form>`,async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('inspo_refs').update(d).eq('id',id)},async()=>{await sb.from('inspo_refs').delete().eq('id',id)})}
+function inspoModalHTML(r){r=r||{};return `<h2>${r.id?'Edit':'New'} reference</h2><form>
+<label>Title</label><input name="title" value="${escapeHtml(r.title||'')}" required autofocus placeholder="TERRY · DIOR HOMME · IG SCREENSHOT">
+<label>Subtitle / source</label><input name="subtitle" value="${escapeHtml(r.subtitle||'')}" placeholder="WHO MADE IT · WHEN">
+<label>Hero image (drag-drop or click)</label>${dropZoneHtml('hero_image_url',r.hero_image_url,'DROP HERO IMAGE OR CLICK')}
+<label>Gallery (multiple images)</label>${dropZoneMultiHtml('gallery_urls',r.gallery_urls)}
+<label>Source URL (Instagram / web / video — paste link)</label><input name="video_url" value="${escapeHtml(r.video_url||'')}" placeholder="https://instagram.com/p/... or YouTube / Vimeo / Loom">
+<label>Why it works / what to steal</label><textarea name="body" placeholder="WHAT MAKES THIS WORK. WHAT TO PULL FROM IT.">${escapeHtml(r.body||'')}</textarea>
+<label>Tags (comma-separated — flash, bedroom, 24mm, intimate)</label><input name="tags_raw" value="${(r.tags||[]).join(', ')}">
+<div class="modal-actions">${r.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${r.id?'Save':'Add'}</button></div>
+</form>`}
+function openInspoModal(){modal(inspoModalHTML(),async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('inspo_refs').insert(d)})}
+async function editInspo(id){const{data:r}=await sb.from('inspo_refs').select('*').eq('id',id).single();modal(inspoModalHTML(r),async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('inspo_refs').update(d).eq('id',id)},async()=>{await sb.from('inspo_refs').delete().eq('id',id)})}
 
 document.querySelectorAll('#view-contacts .filters button[data-cf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-contacts .filters button[data-cf]').forEach(x=>x.classList.toggle('on',x===b));contactFilter=b.dataset.cf;renderContacts()});
 document.getElementById('contacts-search')?.addEventListener('input',()=>renderContacts());
 document.querySelectorAll('#view-work .filters button[data-wf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-work .filters button[data-wf]').forEach(x=>x.classList.toggle('on',x===b));workFilter=b.dataset.wf;renderWork()});
 document.querySelectorAll('#view-money .filters button[data-mf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-money .filters button[data-mf]').forEach(x=>x.classList.toggle('on',x===b));moneyFilter=b.dataset.mf;renderMoney()});
+document.querySelectorAll('#archive-filters button[data-af]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#archive-filters button[data-af]').forEach(x=>x.classList.toggle('on',x===b));renderLibrary()});
+document.getElementById('archive-search')?.addEventListener('input',()=>renderLibrary());
 
 setView(getView());
 </script>
