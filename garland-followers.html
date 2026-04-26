@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NATHAN GARLAND</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#000;
+    --ink:#fff;
+    --hair:rgba(255,255,255,.20);
+  }
+  html,body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:700;
+    -webkit-font-smoothing:antialiased;
+    text-transform:uppercase;
+  }
+  body{font-size:13px;line-height:1.6;letter-spacing:0.02em}
+  a{color:inherit;text-decoration:none}
+
+  /* COVER */
+  .cover{
+    height:100vh;
+    min-height:720px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
+    padding:96px 48px 48px;
+    position:relative;
+  }
+  .cover .wordmark{
+    font-weight:700;
+    font-size:clamp(40px, 7vw, 96px);
+    line-height:0.92;
+    letter-spacing:-0.02em;
+    margin-bottom:20px;
+  }
+  .cover .sub{
+    font-size:13px;
+    line-height:1.15;
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+  .cover .credit{
+    position:absolute;
+    bottom:48px;
+    left:48px;
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+
+  /* ARTICLE */
+  article{
+    padding:96px 48px 96px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .label{
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:24px;
+  }
+  h1.h{
+    font-weight:700;
+    font-size:clamp(40px, 7vw, 88px);
+    line-height:0.95;
+    letter-spacing:-0.025em;
+    margin-bottom:48px;
+    max-width:1000px;
+  }
+  .body p{
+    font-size:13px;
+    line-height:1.85;
+    letter-spacing:0.02em;
+    font-weight:400;
+    max-width:680px;
+    margin-bottom:18px;
+  }
+  .body p:last-child{margin-bottom:0}
+  .credit-line{
+    margin-top:96px;
+    padding-top:18px;
+    border-top:1px solid var(--hair);
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+
+  /* LIST */
+  .list{
+    margin-top:64px;
+    border-top:1px solid var(--ink);
+  }
+  .list-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:18px 0;
+    border-bottom:1px solid var(--hair);
+    font-size:13px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    gap:24px;
+  }
+  .list-item .handle{flex:0 0 auto}
+  .list-item .name{
+    flex:1;
+    text-align:right;
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:400;
+  }
+  .list-item.verified .handle::before{
+    content:"●  ";
+    font-size:8px;
+    vertical-align:middle;
+  }
+
+  /* FEATURE BLOCK — for the 14 names section */
+  .feature-block{
+    padding:36px 0;
+    border-bottom:1px solid var(--hair);
+    max-width:880px;
+  }
+  .feature-block:first-of-type{border-top:1px solid var(--ink);margin-top:64px}
+  .feature-block .f-label{
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:14px;
+    color:rgba(255,255,255,.5);
+  }
+  .feature-block .f-handle{
+    font-weight:700;
+    font-size:clamp(20px,2.6vw,32px);
+    line-height:1;
+    letter-spacing:-0.01em;
+    margin-bottom:8px;
+  }
+  .feature-block .f-name{
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  .feature-block .f-note{
+    font-size:13px;
+    line-height:1.7;
+    letter-spacing:0.02em;
+    font-weight:400;
+    max-width:680px;
+  }
+
+  /* DIVIDER */
+  .divider{
+    height:1px;
+    background:var(--ink);
+    margin:0 48px;
+  }
+
+  @media(max-width:760px){
+    article{padding:64px 24px}
+    .cover{padding:64px 24px 32px}
+    .cover .credit{left:24px;bottom:32px}
+    .list-item{flex-direction:column;align-items:flex-start;gap:6px}
+    .list-item .name{text-align:left}
+    .divider{margin:0 24px}
+  }
+  @page{margin:14mm; size:A4}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="wordmark">NATHAN GARLAND</div>
+  <div class="sub">
+    <div>FOLLOWERS</div>
+    <div>A SURVEY · 3,295</div>
+    <div>NATHANGARLAND.CO.UK</div>
+  </div>
+  <div class="credit">04.26 · LONDON</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOREWORD -->
+<article>
+  <div class="label">04.26</div>
+  <h1 class="h">WHO IS<br>WATCHING.</h1>
+  <div class="body">
+    <p>A SURVEY OF 3,295 INSTAGRAM FOLLOWERS. FILTERED FOR INDUSTRY, CONNECTION AND INTENT. BOTS REMOVED.</p>
+    <p>3,295 TOTAL. 101 VERIFIED. AROUND 1,400 BOTS REMOVED. 374 NAMES OF SIGNAL.</p>
+    <p>A SOLID DOT MARKS A VERIFIED ACCOUNT. THE BLUE TICK IS A SHORTCUT FOR EDITORS AND BRANDS WHEN VETTING WHO YOU MOVE WITH.</p>
+  </div>
+  <div class="credit-line">NG · 04.26</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- NAMES WORTH KNOWING -->
+<article>
+  <div class="label">NAMES WORTH KNOWING</div>
+  <h1 class="h">FOURTEEN VERIFIED.<br>FOURTEEN DOORS.</h1>
+  <div class="body">
+    <p>VERIFIED ACCOUNTS YOU MAY NOT REALISE ARE FOLLOWING. EACH IS A DOOR. SOME OPEN INWARD.</p>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · MEDIA</div>
+    <div class="f-handle">@REALLUKEDAY</div>
+    <div class="f-name">LUKE DAY</div>
+    <div class="f-note">FORMER GQ STYLE FASHION EDITOR. DEEPLY NETWORKED INTO UK FASHION MEDIA. THE KIND OF FOLLOWER WHO, IF YOU EVER PITCHED HIM DIRECTLY, OPENS DOORS.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · STYLING</div>
+    <div class="f-handle">@KYLEDEVOLLE</div>
+    <div class="f-name">KYLE DE'VOLLE</div>
+    <div class="f-note">CELEBRITY STYLIST. LONDON / LA. DRESSED RITA ORA, STORMZY, JORJA SMITH. VERIFIED CONNECTOR. SOFT-PITCH TERRITORY IF A STORY ALIGNS.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · CULTURE</div>
+    <div class="f-handle">@RYANLANJI</div>
+    <div class="f-name">RYAN LANJI</div>
+    <div class="f-note">LONDON CULTURAL CURATOR · DJ · HOST. HUNGAMA PARTY. EDITORIAL FIXTURE. IF HE FOLLOWS, THE UNDERGROUND KNOWS YOU EXIST.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · MUSIC</div>
+    <div class="f-handle">@LUKESPILLER</div>
+    <div class="f-name">LUKE SPILLER · THE STRUTS</div>
+    <div class="f-note">FRONTMAN. REAL ARTIST FOLLOWING YOU — THE KIND OF NAME A MAGAZINE PITCH CAN LEAN ON. MUSIC PORTRAIT TERRITORY.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · MUSIC</div>
+    <div class="f-handle">@KELSYKARTER</div>
+    <div class="f-name">KELSY KARTER</div>
+    <div class="f-note">ALREADY SHOT — VERIFIED RELATIONSHIP. RE-ENGAGE WHEN THERE IS A RECORD CYCLE.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · CLIENT</div>
+    <div class="f-handle">@ANDAZLONDON</div>
+    <div class="f-name">ANDAZ LONDON LIVERPOOL ST</div>
+    <div class="f-note">PAST CLIENT (JAD LIAN). THE HOTEL ITSELF FOLLOWS. DOOR OPEN FOR REPEAT WORK, LIFESTYLE SHOOTS, HOTEL CONTENT.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · CLIENT</div>
+    <div class="f-handle">@GARTHGLAMPING</div>
+    <div class="f-name">GARTH GLAMPING</div>
+    <div class="f-note">EXISTING REPEAT CLIENT (JORDAN LEWIS). THE BRAND FOLLOWS YOU. LOCK IN SEASONAL REPEAT CONTENT.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · ADVOCATE</div>
+    <div class="f-handle">@HERMATESTELLA</div>
+    <div class="f-name">LANA SOPHIA</div>
+    <div class="f-note">ALREADY IN YOUR TESTIMONIALS. VERIFIED. FRIEND-OF-THE-WORK — THE KIND WHO ADVOCATES WITHOUT PROMPTING.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · BRAND</div>
+    <div class="f-handle">@HAVOCULT</div>
+    <div class="f-name">HAVOC</div>
+    <div class="f-note">CULT / UNDERGROUND BRAND PRESENCE. EDITORIAL-ALIGNED. THE AESTHETIC MATCH IS OBVIOUS.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · INTL.</div>
+    <div class="f-handle">@SCHAEFFERSGARMENTHOTEL</div>
+    <div class="f-name">SCHAEFFERS GARMENT HOTEL · NYC</div>
+    <div class="f-note">NYC VINTAGE / AMERICANA BOUTIQUE. TOM FORD / SAINT LAURENT CROSSOVER. INTL. BRAND PICKUP IF YOU EVER PITCHED A NEW YORK TRIP.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · CAST</div>
+    <div class="f-handle">@GIPSYDEB</div>
+    <div class="f-name">DEBORAH MASINI</div>
+    <div class="f-note">VERIFIED ALT MODEL · CONTENT CREATOR. DIRECT CAST OPTION FOR OFF-DUTY OR DRESSING / UNDRESSING.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · TATTOO</div>
+    <div class="f-handle">@IDLEHANDCOLLECTIVE</div>
+    <div class="f-name">IDLE HAND COLLECTIVE</div>
+    <div class="f-note">LONDON TATTOO STUDIO. VERIFIED. YOU SIT IN THE CENTRE OF THE LONDON TATTOO SCENE — THEY ARE WATCHING.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · CARDIFF</div>
+    <div class="f-handle">@BESPOKESPRAY</div>
+    <div class="f-name">BESPOKE SPRAY · CARDIFF</div>
+    <div class="f-note">CARDIFF AND SOUTH WALES BRAND. LOCAL COMMERCIAL PICKUP. POSSIBLE CARDIFF-SIDE LEAD.</div>
+  </div>
+
+  <div class="feature-block">
+    <div class="f-label">VERIFIED · UNEXPECTED</div>
+    <div class="f-handle">@MIAKHALIFA</div>
+    <div class="f-name">MIA K.</div>
+    <div class="f-note">MASS-REACH VERIFIED ACCOUNT. UNEXPECTED. PROBABLY SURFACED VIA A HASHTAG OR SHARED POST. LATENT REACH, NOT INDUSTRY WEIGHT.</div>
+  </div>
+
+  <div class="credit-line">NG · 14 NAMES</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- PHOTOGRAPHERS -->
+<article>
+  <div class="label">PHOTOGRAPHERS &amp; STUDIOS</div>
+  <h1 class="h">FIFTY-NINE PEERS<br>WATCHING.</h1>
+  <div class="body">
+    <p>PHOTOGRAPHER PEERS. THIS IS REPUTATIONAL CAPITAL. DO NOT DISCOUNT IT.</p>
+  </div>
+  <div class="list">
+    <div class="list-item verified"><span class="handle">@ABBIDRAPERPHOTO</span><span class="name">ABBI DRAPER-SCOTT</span></div>
+    <div class="list-item verified"><span class="handle">@LEWISPALMERPHOTO</span><span class="name">LEWIS PALMER</span></div>
+    <div class="list-item verified"><span class="handle">@POLDIVINA</span><span class="name">POL DIVINA</span></div>
+    <div class="list-item verified"><span class="handle">@MICHAELKELLYMEDIA</span><span class="name">MICHAEL KELLY · VIDEOGRAPHER</span></div>
+    <div class="list-item"><span class="handle">@SOIF.STUDIOS</span><span class="name">SOIF · EAST LDN STUDIO HIRE</span></div>
+    <div class="list-item"><span class="handle">@MIKEPALMERPHOTO</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@SMALLPHOTOGRAPHS_</span><span class="name">HOPE · MUSIC PHOTOGRAPHER</span></div>
+    <div class="list-item"><span class="handle">@THROUGHELIZABETHSCAMERA</span><span class="name">ELIZABETH · VIDEO + PHOTO</span></div>
+    <div class="list-item"><span class="handle">@DEEPVISUALS.JPG</span><span class="name">PHOTOGRAPHER · MARBELLA</span></div>
+    <div class="list-item"><span class="handle">@ERICAJOANPHOTO</span><span class="name">ERICA JOAN</span></div>
+    <div class="list-item"><span class="handle">@PETECOCOPHOTO</span><span class="name">PETE COCO</span></div>
+    <div class="list-item"><span class="handle">@GINGER_OLLIE_PHOTOGRAPHY</span><span class="name">OLIVER SAVILLE</span></div>
+    <div class="list-item"><span class="handle">@NICKSPHOTOVR</span><span class="name">NICOLA SIMONI</span></div>
+    <div class="list-item"><span class="handle">@PLPHOTOSTUDIO</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@PHOTO_WINDOW_T</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@HARDPOUR.STUDIO</span><span class="name">—</span></div>
+  </div>
+  <div class="credit-line">NG · 16 OF 59</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- TATTOO -->
+<article>
+  <div class="label">TATTOO SCENE</div>
+  <h1 class="h">SEVENTY-FIVE<br>ACCOUNTS.<br>NINE VERIFIED.</h1>
+  <div class="body">
+    <p>YOU SIT AT THE CENTRE OF THE LONDON / UK TATTOO WORLD WITHOUT TRYING. THIS IS YOUR DENSEST CATEGORY OF FOLLOWER. INK STUDIES IS PRACTICALLY PRE-CAST.</p>
+  </div>
+  <div class="list">
+    <div class="list-item verified"><span class="handle">@IDLEHANDCOLLECTIVE</span><span class="name">IDLE HAND · LONDON</span></div>
+    <div class="list-item verified"><span class="handle">@CHAPTA.TOO_HK</span><span class="name">CHAPTA · BLACKWORK</span></div>
+    <div class="list-item verified"><span class="handle">@HOST_TATTOOER</span><span class="name">DAMIAN SIMES</span></div>
+    <div class="list-item verified"><span class="handle">@ITSCHLOEPEACH</span><span class="name">CHLOE · LONDON</span></div>
+    <div class="list-item verified"><span class="handle">@JADEWILDMANTATTOO</span><span class="name">JADE WILDMAN</span></div>
+    <div class="list-item verified"><span class="handle">@PHIL_PHERRARI_TATTOO</span><span class="name">PHIL PHERRARI</span></div>
+    <div class="list-item verified"><span class="handle">@LETITIA_TATTOOS</span><span class="name">LETI MORTIMER</span></div>
+    <div class="list-item verified"><span class="handle">@CHRISHARVEYTATTOO</span><span class="name">CHRIS HARVEY · SWANSEA</span></div>
+    <div class="list-item verified"><span class="handle">@WANDATATTOO</span><span class="name">MARIA MIHAELA COJOCARU</span></div>
+    <div class="list-item verified"><span class="handle">@HOLIDAYJELLO</span><span class="name">FINELINE · MARGATE</span></div>
+    <div class="list-item"><span class="handle">@BLANKCOLLECTIVE</span><span class="name">BLANK COLLECTIVE · LONDON</span></div>
+    <div class="list-item"><span class="handle">@BADMOODMARTY</span><span class="name">MARTIN · FINELINE LDN</span></div>
+    <div class="list-item"><span class="handle">@NIKITAROSE_TATTOO</span><span class="name">NIKITA ROSE · NEWCASTLE</span></div>
+    <div class="list-item"><span class="handle">@NOOIRTATTOO</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@MIKATATTOOS</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@DELITETATTOO</span><span class="name">—</span></div>
+  </div>
+  <div class="credit-line">NG · 16 OF 75</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- MUSIC -->
+<article>
+  <div class="label">MUSIC &amp; ARTISTS</div>
+  <h1 class="h">SUBJECTS.<br>PORTRAIT TERRITORY.</h1>
+  <div class="body">
+    <p>MAGAZINE LEVERAGE. THE NAMES YOU CAN BUILD A PITCH AROUND.</p>
+  </div>
+  <div class="list">
+    <div class="list-item verified"><span class="handle">@LUKESPILLER</span><span class="name">THE STRUTS · FRONTMAN</span></div>
+    <div class="list-item verified"><span class="handle">@KELSYKARTER</span><span class="name">ARTIST · ALREADY SHOT</span></div>
+    <div class="list-item verified"><span class="handle">@ELLISCOOPEROFFICIAL</span><span class="name">ELLIS COOPER</span></div>
+    <div class="list-item verified"><span class="handle">@XDANNYXBROWNX</span><span class="name">DANNY BROWN</span></div>
+    <div class="list-item verified"><span class="handle">@HAVOCULT</span><span class="name">HAVOC</span></div>
+    <div class="list-item verified"><span class="handle">@CRAWFORDMACK_</span><span class="name">CRAWFORD MACK</span></div>
+    <div class="list-item verified"><span class="handle">@NOBLEGENT</span><span class="name">DANIEL P. MAYNARD</span></div>
+    <div class="list-item verified"><span class="handle">@DJNOJAN</span><span class="name">NOJAN</span></div>
+    <div class="list-item"><span class="handle">@ANIKDOTE_MUSIC</span><span class="name">ANIKDOTE</span></div>
+    <div class="list-item"><span class="handle">@BIZWICKSMUSIC</span><span class="name">BIZ</span></div>
+  </div>
+  <div class="credit-line">NG · 10 OF 20</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- FASHION -->
+<article>
+  <div class="label">FASHION &amp; TASTE</div>
+  <h1 class="h">CONNECTORS.<br>GATEKEEPERS.</h1>
+  <div class="body">
+    <p>THE NAMES THAT TRAVEL.</p>
+  </div>
+  <div class="list">
+    <div class="list-item verified"><span class="handle">@REALLUKEDAY</span><span class="name">LUKE DAY · ED.</span></div>
+    <div class="list-item verified"><span class="handle">@KYLEDEVOLLE</span><span class="name">CELEBRITY STYLIST</span></div>
+    <div class="list-item verified"><span class="handle">@RYANLANJI</span><span class="name">CULTURAL CURATOR</span></div>
+    <div class="list-item verified"><span class="handle">@SCHAEFFERSGARMENTHOTEL</span><span class="name">VINTAGE · NYC</span></div>
+    <div class="list-item verified"><span class="handle">@HEDERASHOP.UK</span><span class="name">HEDERA SNEAKERS</span></div>
+    <div class="list-item verified"><span class="handle">@KAKTUS.VANS</span><span class="name">KAKTUS VANS</span></div>
+    <div class="list-item verified"><span class="handle">@IOURDESIGNER</span><span class="name">DESIGN FOR SALE</span></div>
+    <div class="list-item verified"><span class="handle">@DYSEONECLOTHING</span><span class="name">DYSE ONE CLOTHING CO.</span></div>
+  </div>
+  <div class="credit-line">NG · 8 NAMES</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- MODELS -->
+<article>
+  <div class="label">MODELS</div>
+  <h1 class="h">CAST POOL.</h1>
+  <div class="body">
+    <p>VERIFIED &amp; REAL ONLY. EVERYTHING ELSE WAS DROPPED.</p>
+  </div>
+  <div class="list">
+    <div class="list-item verified"><span class="handle">@GIPSYDEB</span><span class="name">DEBORAH MASINI · ALT MODEL</span></div>
+    <div class="list-item verified"><span class="handle">@GAIARAGONE</span><span class="name">GAIA RAGONE</span></div>
+    <div class="list-item verified"><span class="handle">@TRIXEDENBREULS</span><span class="name">TRIX EDEN</span></div>
+    <div class="list-item verified"><span class="handle">@HUNTERMORENO</span><span class="name">HUNTER MORENO</span></div>
+    <div class="list-item verified"><span class="handle">@FRANCESCAMONTEOFFICIAL</span><span class="name">FRANCESCA MONTE</span></div>
+    <div class="list-item verified"><span class="handle">@ISABELLEPENQUE</span><span class="name">ISABELLE PENQUE</span></div>
+    <div class="list-item"><span class="handle">@MIAMOOREMODEL</span><span class="name">MIA MOORE</span></div>
+    <div class="list-item"><span class="handle">@KEIKOMODEL</span><span class="name">STEPHANI SAMS</span></div>
+    <div class="list-item"><span class="handle">@PHIROSEMODEL</span><span class="name">—</span></div>
+  </div>
+  <div class="credit-line">NG · 9 NAMES</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- VENUES -->
+<article>
+  <div class="label">VENUES &amp; HOSPITALITY</div>
+  <h1 class="h">ROOMS.<br>THE SPACES THAT KNOW YOU.</h1>
+  <div class="body">
+    <p>HOTELS, BARS, NIGHTLIFE. THE FEW THAT FOLLOW BACK.</p>
+  </div>
+  <div class="list">
+    <div class="list-item verified"><span class="handle">@ANDAZLONDON</span><span class="name">ANDAZ LDN · LIVERPOOL ST</span></div>
+    <div class="list-item verified"><span class="handle">@BUOYANDOYSTER</span><span class="name">BUOY + OYSTER · MARGATE</span></div>
+    <div class="list-item verified"><span class="handle">@HIKITALO</span><span class="name">HIKITALO SAUNA</span></div>
+    <div class="list-item"><span class="handle">@STEREOCOVENTGARDENLONDON</span><span class="name">STEREO · COVENT GARDEN</span></div>
+    <div class="list-item"><span class="handle">@HOOD_LONDON</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@THESAINTSLONDON</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@DRAGO_LONDON</span><span class="name">—</span></div>
+    <div class="list-item"><span class="handle">@HEYCOWBOYLONDON</span><span class="name">HEY COWBOY!</span></div>
+    <div class="list-item"><span class="handle">@MR_FINBAR</span><span class="name">—</span></div>
+  </div>
+  <div class="credit-line">NG · 9 NAMES</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- CARDIFF -->
+<article>
+  <div class="label">CARDIFF &amp; WALES</div>
+  <h1 class="h">HOMETOWN.<br>BREAD AND BUTTER.</h1>
+  <div class="body">
+    <p>THE LOCAL ACCOUNTS WORTH KNOWING ABOUT.</p>
+  </div>
+  <div class="list">
+    <div class="list-item verified"><span class="handle">@BESPOKESPRAY</span><span class="name">CARDIFF · SOUTH WALES</span></div>
+    <div class="list-item verified"><span class="handle">@CHRISHARVEYTATTOO</span><span class="name">WOODCUT · SWANSEA</span></div>
+    <div class="list-item verified"><span class="handle">@HAIRBYANDREWTHOMASJONES</span><span class="name">ANDREW THOMAS JONES</span></div>
+    <div class="list-item"><span class="handle">@CARDIFFEMBROIDERY</span><span class="name">—</span></div>
+  </div>
+  <div class="credit-line">NG · 4 NAMES</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- METHODOLOGY -->
+<article>
+  <div class="label">METHODOLOGY</div>
+  <h1 class="h">FIVE NOTES.</h1>
+  <div class="body">
+    <p>HOW TO READ THIS DOCUMENT. WHERE THE NUMBERS COME FROM. WHAT TO DO NEXT.</p>
+    <p>A SOLID DOT (●) MARKS A VERIFIED ACCOUNT. THESE CARRY DISPROPORTIONATE WEIGHT IN ANY PITCH OR FOLLOW-UP — THE BLUE TICK IS A SHORTCUT FOR EDITORS AND BRANDS WHEN VETTING WHO YOU MOVE WITH.</p>
+    <p>THE TATTOO SCENE IS BY FAR YOUR DENSEST CATEGORY. SEVENTY-FIVE ACCOUNTS, NINE OF THEM VERIFIED. YOU SIT IN THE CENTRE OF THE LONDON / UK TATTOO WORLD WITHOUT TRYING. INK STUDIES IS PRACTICALLY PRE-CAST.</p>
+    <p>PHOTOGRAPHER PEERS (FIFTY-NINE) IS A SIGN YOU ARE BEING WATCHED BY THE ROOM. THIS IS REPUTATIONAL CAPITAL. DO NOT DISCOUNT IT.</p>
+    <p>THE DEAD-WEIGHT (3,295 → 374 SIGNAL = ~11% INDUSTRY DENSITY) IS NORMAL FOR A LONDON PHOTOGRAPHER ACCOUNT. THE ELEVEN PER CENT IS WHO MATTERS. EVERYTHING ELSE IS WALLPAPER.</p>
+    <p>YOU ARE UNDERINDEXED ON PRESS / EDITORS. THREE MAGAZINE FOLLOWERS. KING KONG, FACE AND INTERVIEW DO NOT FOLLOW YOU. PRIORITY ASK FOR THE NEXT QUARTER — GET TWO OF THEM TO.</p>
+  </div>
+  <div class="credit-line">NG · METHODOLOGY · 04.26</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- SIGN-OFF -->
+<section class="cover">
+  <div class="wordmark">NATHAN GARLAND</div>
+  <div class="sub">
+    <div>FOLLOWERS</div>
+    <div>FIN</div>
+    <div>NATHANGARLAND.CO.UK</div>
+  </div>
+  <div class="credit">04.26 · LONDON</div>
+</section>
+
+</body>
+</html>

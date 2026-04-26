@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFF-DUTY · NATHAN GARLAND</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#000;
+    --ink:#fff;
+    --hair:rgba(255,255,255,.20);
+    --mute:rgba(255,255,255,.5);
+  }
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  html,body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:700;
+    -webkit-font-smoothing:antialiased;
+    text-transform:uppercase;
+  }
+  body{font-size:13px;line-height:1.6;letter-spacing:0.02em}
+  a{color:inherit;text-decoration:none}
+
+  /* TOP BAR */
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 48px;
+    border-bottom:1px solid var(--ink);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    position:sticky;
+    top:0;
+    background:var(--bg);
+    z-index:50;
+  }
+  .topbar .back::before{content:"← "}
+  .topbar .meta{color:var(--mute)}
+
+  /* TITLE BLOCK */
+  .title-block{
+    padding:96px 48px 48px;
+    max-width:1200px;
+    margin:0 auto;
+    border-bottom:1px solid var(--ink);
+  }
+  .title-block .label{
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:24px;
+  }
+  .title-block .label .status{color:var(--mute);margin-left:14px}
+  .title-block h1{
+    font-weight:700;
+    font-size:clamp(56px, 12vw, 160px);
+    line-height:0.9;
+    letter-spacing:-0.025em;
+    margin-bottom:32px;
+  }
+  .title-block .dek{
+    font-size:18px;
+    line-height:1.4;
+    letter-spacing:-0.005em;
+    font-weight:700;
+    max-width:680px;
+  }
+
+  /* SECTION */
+  section.s{
+    padding:80px 48px 40px;
+    max-width:1200px;
+    margin:0 auto;
+    border-bottom:1px solid var(--hair);
+  }
+  section.s .s-label{
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:32px;
+  }
+  section.s h2{
+    font-weight:700;
+    font-size:clamp(32px,5vw,56px);
+    line-height:0.95;
+    letter-spacing:-0.02em;
+    margin-bottom:48px;
+    max-width:880px;
+  }
+  section.s .body p{
+    font-size:13px;
+    line-height:1.85;
+    letter-spacing:0.02em;
+    font-weight:400;
+    max-width:680px;
+    margin-bottom:18px;
+  }
+
+  /* MOODBOARD GRID */
+  .grid{
+    margin-top:48px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--ink);
+    border:1px solid var(--ink);
+  }
+  .grid .cell{
+    aspect-ratio:4/5;
+    background:#0a0a0a;
+    position:relative;
+    overflow:hidden;
+  }
+  .grid .cell img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .grid .cell.placeholder::after{
+    content:"IMAGE";
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:9px;
+    color:var(--mute);
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+  .grid .cell .cap{
+    position:absolute;
+    bottom:8px;
+    left:8px;
+    right:8px;
+    font-size:8px;
+    color:var(--mute);
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+  .grid.wide{grid-template-columns:repeat(2, 1fr)}
+  .grid.wide .cell{aspect-ratio:3/2}
+
+  /* DETAIL ROWS (cast, locations) */
+  .detail-list{
+    margin-top:32px;
+    border-top:1px solid var(--ink);
+  }
+  .detail-list .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:18px 0;
+    border-bottom:1px solid var(--hair);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    gap:24px;
+  }
+  .detail-list .row .l{flex:0 0 auto}
+  .detail-list .row .r{
+    flex:1;
+    text-align:right;
+    font-size:11px;
+    font-weight:400;
+    color:var(--mute);
+  }
+
+  /* PULL */
+  .pull{
+    font-weight:700;
+    font-size:24px;
+    line-height:1.3;
+    letter-spacing:-0.005em;
+    border-left:2px solid var(--ink);
+    padding:12px 0 12px 24px;
+    margin:48px 0;
+    max-width:680px;
+  }
+
+  /* TAG ROW */
+  .tags{
+    display:flex;
+    gap:0;
+    flex-wrap:wrap;
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    color:var(--mute);
+    margin-top:32px;
+    padding-top:18px;
+    border-top:1px solid var(--hair);
+  }
+  .tags span{
+    padding-right:14px;
+    margin-right:14px;
+    border-right:1px solid var(--hair);
+  }
+  .tags span:last-child{border-right:0}
+
+  /* FOOTER */
+  footer{
+    padding:96px 48px 48px;
+    text-align:left;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  footer .back-link{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:4px;
+  }
+  footer .back-link::before{content:"← "}
+  footer .credit{
+    margin-top:64px;
+    font-size:9px;
+    color:var(--mute);
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+
+  @media(max-width:760px){
+    .title-block,section.s,footer,.topbar{padding-left:24px;padding-right:24px}
+    .grid{grid-template-columns:1fr 1fr}
+    .grid.wide{grid-template-columns:1fr}
+  }
+  @page{margin:14mm; size:A4}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a class="back" href="garland-studio.html#concepts">STUDIO / CONCEPTS</a>
+  <span class="meta">CONCEPT 01 · OFF-DUTY · 04.26</span>
+</div>
+
+<!-- TITLE -->
+<div class="title-block">
+  <div class="label">CONCEPT · IDEA <span class="status">TARGET — KING KONG</span></div>
+  <h1>OFF-DUTY</h1>
+  <div class="dek">MODELS WITH THEIR GUARDS DOWN. BEDROOMS, KITCHENS, NO STYLING. THE FIVE MINUTES BETWEEN POSES.</div>
+</div>
+
+<!-- THE BRIEF -->
+<section class="s">
+  <div class="s-label">— THE BRIEF</div>
+  <h2>FIVE SUBJECTS.<br>ONE DAY EACH.<br>NO STYLIST.</h2>
+  <div class="body">
+    <p>DIRECT FLASH AT 24MM PROXIMITY. THE POINT ISN'T THE CLOTHES — IT'S THE CIGARETTE BREAK, THE UNMADE BED, THE HALF-EATEN BREAKFAST. THEY KNOW THE CAMERA IS THERE. THEY DON'T PERFORM.</p>
+    <p>EACH SUBJECT GETS A DAY. THEIR PLACE OR YOURS. NO HMUA, NO STYLIST, NO ART DEPARTMENT. ONE CAMERA, ONE LIGHT.</p>
+    <p>THE EDIT IS THE WORK. PULL TWO TO THREE FRAMES PER SUBJECT. FIFTEEN FRAMES TOTAL. THE PITCH IS A SET OF CONTACT SHEETS WITH ONE HERO PULLED.</p>
+  </div>
+
+  <div class="pull">EDITORIAL OUTTAKES, NOT EDITORIAL. THE FRAMES THE MAGAZINE WOULDN'T USE.</div>
+</section>
+
+<!-- THE MOOD -->
+<section class="s">
+  <div class="s-label">— THE MOOD</div>
+  <h2>UNDONE. AWARE. CLOSE.</h2>
+  <div class="body">
+    <p>HEDI 2003-2007 FACE-FORWARD COMPRESSION. TELLER'S MARC JACOBS RUDENESS OF FRAME. TERRY'S DAYTIME FLASH. AS LITTLE BACKGROUND AS POSSIBLE — THE ROOM IS THE MOOD, NOT A SET.</p>
+  </div>
+
+  <div class="grid">
+    <div class="cell placeholder"><div class="cap">HEDI · DIOR HOMME 04</div></div>
+    <div class="cell placeholder"><div class="cap">TERRY · SUPREME 06</div></div>
+    <div class="cell placeholder"><div class="cap">TELLER · MARC JACOBS</div></div>
+    <div class="cell placeholder"><div class="cap">REF · BEDROOM</div></div>
+    <div class="cell placeholder"><div class="cap">REF · KITCHEN</div></div>
+    <div class="cell placeholder"><div class="cap">REF · MIRROR</div></div>
+  </div>
+</section>
+
+<!-- CAST -->
+<section class="s">
+  <div class="s-label">— CAST · IN MIND</div>
+  <h2>FIVE SUBJECTS.<br>FROM THE SCENE.</h2>
+  <div class="detail-list">
+    <div class="row"><span class="l">@STORMMCCORMICKK</span><span class="r">STORM · CONFIRMED INTEREST</span></div>
+    <div class="row"><span class="l">@GIPSYDEB</span><span class="r">DEBORAH MASINI · ALT MODEL · COLD</span></div>
+    <div class="row"><span class="l">—</span><span class="r">SUBJECT 03 · TBD</span></div>
+    <div class="row"><span class="l">—</span><span class="r">SUBJECT 04 · TBD</span></div>
+    <div class="row"><span class="l">—</span><span class="r">SUBJECT 05 · TBD</span></div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="s">
+  <div class="s-label">— LOCATIONS · IDEAS</div>
+  <h2>THEIR PLACE.<br>OR YOURS.</h2>
+  <div class="detail-list">
+    <div class="row"><span class="l">DAY 01</span><span class="r">SUBJECT'S OWN FLAT · LDN</span></div>
+    <div class="row"><span class="l">DAY 02</span><span class="r">CARDIFF / FAMILY KITCHEN</span></div>
+    <div class="row"><span class="l">DAY 03</span><span class="r">SHOREDITCH STUDIO HIRE · FALLBACK</span></div>
+    <div class="row"><span class="l">DAY 04</span><span class="r">HOTEL ROOM · HOTEL CAFÉ ROYAL · PITCH</span></div>
+    <div class="row"><span class="l">DAY 05</span><span class="r">CAR / EXTERIOR · BUS STOP</span></div>
+  </div>
+</section>
+
+<!-- KIT -->
+<section class="s">
+  <div class="s-label">— KIT</div>
+  <h2>ONE BODY.<br>ONE LIGHT.</h2>
+  <div class="detail-list">
+    <div class="row"><span class="l">CAMERA</span><span class="r">SONY A7IV · 24MM</span></div>
+    <div class="row"><span class="l">LIGHT</span><span class="r">SPEEDLIGHT · TTL · DIRECT</span></div>
+    <div class="row"><span class="l">FILM ALT</span><span class="r">CONTAX T2 · BACKUP B&amp;W</span></div>
+    <div class="row"><span class="l">NO</span><span class="r">NO REFLECTORS · NO MODIFIERS · NO STYLIST</span></div>
+  </div>
+</section>
+
+<!-- WORKING NOTES -->
+<section class="s">
+  <div class="s-label">— WORKING NOTES</div>
+  <h2>WHAT YOU'RE STILL FIGURING OUT.</h2>
+  <div class="body">
+    <p>WHETHER ALL FIVE SUBJECTS NEED TO BE FROM THE SAME WORLD (NIGHTLIFE / NINE8 / FASHION) OR WHETHER MIXING TIGHTENS THE EDIT.</p>
+    <p>WHETHER THE FINAL PITCH IS A KING KONG SUBMISSION OR A SELF-PUBLISHED ZINE FIRST. PROBABLY ZINE FIRST — KING KONG WANTS PROVEN BODIES.</p>
+    <p>WHETHER TO INCLUDE B&amp;W AT ALL OR KEEP IT COLOUR. LEANING COLOUR FOR THE GRADE TO READ AS DAYTIME-FLASH-FORWARD.</p>
+  </div>
+
+  <div class="tags">
+    <span>FLASH</span><span>BEDROOM</span><span>24MM</span><span>NO STYLIST</span><span>FIVE-DAY</span><span>KING KONG</span><span>ZINE-FIRST</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="garland-studio.html#concepts" class="back-link">BACK TO STUDIO / CONCEPTS</a>
+  <div class="credit">NG · CONCEPT 01 · OFF-DUTY · 04.26 · LONDON</div>
+</footer>
+
+</body>
+</html>
