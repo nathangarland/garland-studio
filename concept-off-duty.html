@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style id="ng-lock">html.ng-locked > body > *:not(#ng-auth-gate){display:none!important}</style>
+<script>
+(function(){
+  if (localStorage.getItem('ng_auth') === 'ok') return;
+  document.documentElement.classList.add('ng-locked');
+  document.addEventListener('DOMContentLoaded', function(){
+    var g = document.createElement('div');
+    g.id = 'ng-auth-gate';
+    g.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em';
+    g.innerHTML = '<div style="text-align:center;padding:48px;max-width:480px;width:100%"><div style="font-size:clamp(36px,7vw,64px);line-height:.92;letter-spacing:-.02em;margin-bottom:14px">NATHAN GARLAND</div><div style="font-size:11px;margin-bottom:64px">STUDIO &middot; PRIVATE</div><form id="ng-gf"><input id="ng-gp" type="password" placeholder="PASSWORD" autocomplete="current-password" autofocus style="background:transparent;border:0;border-bottom:1px solid #fff;padding:14px 0;color:#fff;font:inherit;text-align:center;outline:none;width:100%;text-transform:uppercase"><button type="submit" style="margin-top:24px;background:#fff;color:#000;border:0;padding:14px;font:inherit;cursor:pointer;width:100%;text-transform:uppercase">ENTER</button></form><div id="ng-ge" style="margin-top:18px;font-size:9px;color:#d8443c;height:12px"></div></div>';
+    document.body.appendChild(g);
+    document.getElementById('ng-gf').addEventListener('submit', function(e){
+      e.preventDefault();
+      if (document.getElementById('ng-gp').value === 'garland2026') {
+        localStorage.setItem('ng_auth','ok');
+        location.reload();
+      } else {
+        document.getElementById('ng-ge').textContent = 'WRONG PASSWORD';
+        document.getElementById('ng-gp').value = '';
+      }
+    });
+  });
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OFF-DUTY · NATHAN GARLAND</title>
@@ -238,7 +262,7 @@
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <a class="back" href="garland-studio.html#concepts">STUDIO / CONCEPTS</a>
+  <a class="back" href="magazine.html#concepts">STUDIO / CONCEPTS</a>
   <span class="meta">CONCEPT 01 · OFF-DUTY · 04.26</span>
 </div>
 
@@ -335,7 +359,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <a href="garland-studio.html#concepts" class="back-link">BACK TO STUDIO / CONCEPTS</a>
+  <a href="magazine.html#concepts" class="back-link">BACK TO STUDIO / CONCEPTS</a>
   <div class="credit">NG · CONCEPT 01 · OFF-DUTY · 04.26 · LONDON</div>
 </footer>
 

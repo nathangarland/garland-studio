@@ -4,678 +4,534 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NATHAN GARLAND — STUDIO</title>
+
+<!-- AUTH GATE -->
+<style id="ng-lock">html.ng-locked > body > *:not(#ng-auth-gate){display:none!important}</style>
+<script>
+(function(){
+  if (localStorage.getItem('ng_auth') === 'ok') return;
+  document.documentElement.classList.add('ng-locked');
+  document.addEventListener('DOMContentLoaded', function(){
+    var g = document.createElement('div');
+    g.id = 'ng-auth-gate';
+    g.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em';
+    g.innerHTML = '<div style="text-align:center;padding:48px;max-width:480px;width:100%"><div style="font-size:clamp(36px,7vw,64px);line-height:.92;letter-spacing:-.02em;margin-bottom:14px">NATHAN GARLAND</div><div style="font-size:11px;margin-bottom:64px">STUDIO &middot; PRIVATE</div><form id="ng-gf"><input id="ng-gp" type="password" placeholder="PASSWORD" autocomplete="current-password" autofocus style="background:transparent;border:0;border-bottom:1px solid #fff;padding:14px 0;color:#fff;font:inherit;text-align:center;outline:none;width:100%;text-transform:uppercase"><button type="submit" style="margin-top:24px;background:#fff;color:#000;border:0;padding:14px;font:inherit;cursor:pointer;width:100%;text-transform:uppercase">ENTER</button></form><div id="ng-ge" style="margin-top:18px;font-size:9px;color:#d8443c;height:12px"></div></div>';
+    document.body.appendChild(g);
+    document.getElementById('ng-gf').addEventListener('submit', function(e){
+      e.preventDefault();
+      if (document.getElementById('ng-gp').value === 'garland2026') {
+        localStorage.setItem('ng_auth','ok');
+        location.reload();
+      } else {
+        document.getElementById('ng-ge').textContent = 'WRONG PASSWORD';
+        document.getElementById('ng-gp').value = '';
+      }
+    });
+  });
+})();
+</script>
+
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#000;
-    --ink:#fff;
-    --hair:rgba(255,255,255,.20);
-    --mute:rgba(255,255,255,.5);
-  }
-  html{scroll-behavior:smooth;scroll-padding-top:80px}
-  html,body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight:700;
-    -webkit-font-smoothing:antialiased;
-    text-transform:uppercase;
-  }
-  body{font-size:13px;line-height:1.6;letter-spacing:0.02em}
+  :root{--bg:#000;--ink:#fff;--hair:rgba(255,255,255,.18);--mute:rgba(255,255,255,.5);--hot:#d8443c;--warn:#d4a23c;--ok:#7be089;--blue:#9bb1ff}
+  html,body{background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;font-size:13px;line-height:1.5;letter-spacing:0.02em}
+  body{min-height:100vh;padding-bottom:80px}
   a{color:inherit;text-decoration:none}
-
-  /* COVER */
-  .cover{
-    height:100vh;
-    min-height:720px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items:flex-start;
-    padding:96px 48px 48px;
-    position:relative;
+  button{font:inherit;background:none;border:0;color:inherit;cursor:pointer}
+  input,textarea,select{font:inherit;background:transparent;color:#fff;border:0;outline:none}
+  header.top{border-bottom:1px solid var(--ink);position:sticky;top:0;background:var(--bg);z-index:50}
+  .top-mark{padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--hair);font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:0.06em}
+  .top-mark .brand{font-weight:900;letter-spacing:0.04em}
+  .top-mark .meta{color:var(--mute);font-size:10px}
+  nav.tabs{display:flex;overflow-x:auto}
+  nav.tabs a{padding:14px 22px;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);border-right:1px solid var(--hair);white-space:nowrap;transition:color .12s,background .12s}
+  nav.tabs a:hover{color:var(--ink)}
+  nav.tabs a.active{color:#000;background:#fff}
+  nav.tabs a.archive{margin-left:auto;border-right:0;font-style:italic;text-transform:none;letter-spacing:0.04em;font-weight:400}
+  main{max-width:1400px;margin:0 auto;padding:32px 24px}
+  section.view{display:none}
+  section.view.active{display:block}
+  .sec-h{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--ink);padding-bottom:14px;margin-bottom:24px}
+  .sec-h h1{font-weight:900;font-size:clamp(28px,4vw,48px);line-height:1;letter-spacing:-0.02em;text-transform:uppercase}
+  .sec-h .meta{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);font-weight:700;text-align:right;line-height:1.6}
+  .card{border:1px solid var(--hair);margin-bottom:20px}
+  .card-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--hair);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;background:rgba(255,255,255,.025)}
+  .card-head .count{color:var(--mute);font-size:9px;letter-spacing:0.18em}
+  .card-head .add{font-size:10px;letter-spacing:0.18em;color:var(--ink);padding:4px 10px;border:1px solid var(--ink);cursor:pointer;background:transparent}
+  .card-head .add:hover{background:#fff;color:#000}
+  .row{display:grid;grid-template-columns:auto 1fr auto auto;gap:14px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--hair);cursor:pointer;transition:background .1s}
+  .row:last-child{border-bottom:0}
+  .row:hover{background:rgba(255,255,255,.03)}
+  .row .check{width:14px;height:14px;border:1px solid var(--mute);flex:0 0 14px;transition:all .12s}
+  .row.done .check{background:#fff;border-color:#fff}
+  .row.done .check::after{content:"";display:block;width:10px;height:5px;border-left:1.5px solid #000;border-bottom:1.5px solid #000;transform:rotate(-45deg) translate(2px,-1px)}
+  .row.done .body{text-decoration:line-through;color:var(--mute)}
+  .row .body{font-size:13px}
+  .row .body small{display:block;font-size:10px;color:var(--mute);letter-spacing:0.04em;margin-top:2px;text-transform:uppercase}
+  .row .meta{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);font-weight:700;text-align:right}
+  .row .meta.due-today{color:var(--warn)}
+  .row .meta.overdue{color:var(--hot);font-weight:900}
+  .row .meta.upcoming{color:var(--ink)}
+  .row .meta.ok{color:var(--ok)}
+  .row .pin{color:var(--warn);font-size:10px;letter-spacing:0}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink);margin-bottom:32px}
+  .stat{padding:18px;border-right:1px solid var(--hair)}
+  .stat:last-child{border-right:0}
+  .stat .num{font-weight:900;font-size:32px;line-height:1;letter-spacing:-0.02em;margin-bottom:6px}
+  .stat .lbl{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--mute);font-weight:700}
+  .stat .num.hot{color:var(--hot)}
+  .stat .num.warn{color:var(--warn)}
+  .stat .num.ok{color:var(--ok)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+  .pipe-board{display:grid;grid-template-columns:repeat(6,1fr);border-left:1px solid var(--hair);border-top:1px solid var(--hair)}
+  .pipe-col{border-right:1px solid var(--hair);min-height:400px}
+  .pipe-col .col-head{padding:10px 12px;border-bottom:1px solid var(--hair);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;display:flex;justify-content:space-between}
+  .pipe-col .col-head .ct{color:var(--mute)}
+  .pipe-card{padding:10px 12px;border-bottom:1px solid var(--hair);cursor:pointer;font-size:12px}
+  .pipe-card:hover{background:rgba(255,255,255,.04)}
+  .pipe-card .nm{font-weight:700;margin-bottom:4px}
+  .pipe-card .typ{font-size:9px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em}
+  .pipe-card .nf{font-size:9px;color:var(--mute);margin-top:6px}
+  .pipe-card .nf.due{color:var(--warn)}
+  .pipe-card .nf.over{color:var(--hot)}
+  .list-table{border:1px solid var(--hair)}
+  .list-table .lt-head{padding:10px 16px;border-bottom:1px solid var(--ink);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mute);font-weight:700;background:rgba(255,255,255,.03);display:grid}
+  .list-table .lt-row{padding:12px 16px;border-bottom:1px solid var(--hair);cursor:pointer;align-items:center;display:grid}
+  .list-table .lt-row:last-child{border-bottom:0}
+  .list-table .lt-row:hover{background:rgba(255,255,255,.03)}
+  .lt-contacts .lt-head,.lt-contacts .lt-row{grid-template-columns:1fr 100px 80px 80px 110px 110px}
+  .lt-money .lt-head,.lt-money .lt-row{grid-template-columns:1fr 90px 90px 110px 80px}
+  .lt-work .lt-head,.lt-work .lt-row{grid-template-columns:1fr 1fr 100px 100px 80px}
+  .badge{display:inline-block;padding:2px 8px;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;border:1px solid currentColor}
+  .badge.high{color:#fff}
+  .badge.medium{color:var(--mute)}
+  .badge.low{color:var(--mute);opacity:0.6}
+  .badge.client{color:var(--ok)}
+  .badge.connector{color:var(--warn)}
+  .badge.talent{color:#fff}
+  .badge.gatekeeper{color:var(--blue)}
+  .badge.paid{color:var(--ok)}
+  .badge.unpaid{color:var(--hot)}
+  .badge.invoiced{color:var(--warn)}
+  .badge.shooting{color:var(--warn)}
+  .badge.editing{color:var(--blue)}
+  .badge.delivered{color:var(--ok)}
+  .badge.locked{color:var(--ok)}
+  .badge.testing{color:var(--warn)}
+  .badge.not_tested{color:var(--mute)}
+  .filters{display:flex;gap:0;margin-bottom:18px;border:1px solid var(--hair);overflow-x:auto}
+  .filters button{padding:10px 14px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--mute);border-right:1px solid var(--hair);white-space:nowrap}
+  .filters button:last-child{border-right:0}
+  .filters button.on{background:#fff;color:#000}
+  .filters button:hover{color:var(--ink)}
+  .filters input{flex:1;padding:10px 14px;font-size:12px;color:var(--ink);border-left:1px solid var(--hair);min-width:200px}
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:48px 24px}
+  .modal-bg.on{display:flex}
+  .modal{background:#000;border:1px solid #fff;width:100%;max-width:560px;padding:32px;max-height:calc(100vh - 96px);overflow-y:auto}
+  .modal h2{font-weight:900;font-size:24px;letter-spacing:-0.02em;margin-bottom:20px;text-transform:uppercase}
+  .modal label{display:block;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;color:var(--mute);margin-bottom:6px;margin-top:14px}
+  .modal input,.modal textarea,.modal select{width:100%;padding:10px 0;border-bottom:1px solid var(--hair);font-size:13px}
+  .modal input:focus,.modal textarea:focus,.modal select:focus{border-bottom-color:#fff}
+  .modal textarea{min-height:60px;resize:vertical;font-family:inherit}
+  .modal select{appearance:none;cursor:pointer}
+  .modal-actions{display:flex;gap:10px;margin-top:32px;padding-top:18px;border-top:1px solid var(--hair)}
+  .modal-actions button{padding:12px 20px;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;flex:1;border:1px solid var(--ink)}
+  .modal-actions button.primary{background:#fff;color:#000}
+  .modal-actions button.danger{color:var(--hot);border-color:var(--hot);flex:0 0 auto;padding:12px 16px}
+  .modal h3{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;margin-top:24px;padding-top:14px;border-top:1px solid var(--hair);color:var(--mute)}
+  .empty{padding:32px 16px;text-align:center;color:var(--mute);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700}
+  .rules-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border:1px solid var(--hair)}
+  .rules-wall .r{padding:24px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);font-weight:900;font-size:18px;letter-spacing:-0.01em;text-transform:uppercase;line-height:1.1}
+  .rules-wall .r .num{display:block;font-size:9px;color:var(--mute);letter-spacing:0.24em;font-weight:700;margin-bottom:10px}
+  .look-card{padding:18px;border-bottom:1px solid var(--hair);cursor:pointer}
+  .look-card:hover{background:rgba(255,255,255,.025)}
+  .look-card .lh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:14px}
+  .look-card .lh-name{font-weight:900;font-size:18px;letter-spacing:-0.01em;text-transform:uppercase}
+  .look-card .lh-active{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ok);font-weight:700}
+  .look-card .lt{font-size:11px;color:var(--ink);margin-bottom:10px;line-height:1.5}
+  .look-card .lt em{font-style:normal;color:var(--mute);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;margin-right:6px}
+  .look-card .ltags{display:flex;flex-wrap:wrap;gap:6px;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;color:var(--mute)}
+  .look-card .ltags span{padding:2px 6px;border:1px solid var(--hair)}
+  @media(max-width:800px){
+    main{padding:24px 16px}
+    .stat-grid{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2){border-right:0}
+    .two-col{grid-template-columns:1fr}
+    .pipe-board{grid-template-columns:1fr}
+    .pipe-col{border-right:0;border-bottom:1px solid var(--hair)}
+    .lt-contacts .lt-head,.lt-contacts .lt-row{grid-template-columns:1fr 80px}
+    .lt-contacts .lt-head>*:nth-child(n+3),.lt-contacts .lt-row>*:nth-child(n+3){display:none}
+    .lt-money .lt-head,.lt-money .lt-row{grid-template-columns:1fr 80px 80px}
+    .lt-money .lt-head>*:nth-child(n+4),.lt-money .lt-row>*:nth-child(n+4){display:none}
   }
-  .cover .wordmark{
-    font-weight:700;
-    font-size:clamp(40px, 7vw, 96px);
-    line-height:0.92;
-    letter-spacing:-0.02em;
-    margin-bottom:20px;
-  }
-  .cover .sub{
-    font-size:13px;
-    line-height:1.15;
-    letter-spacing:0.02em;
-    font-weight:700;
-  }
-  .cover .credit{
-    position:absolute;
-    bottom:48px;
-    left:48px;
-    font-size:9px;
-    letter-spacing:0.02em;
-    font-weight:700;
-  }
-
-  /* NAV */
-  nav.jump{
-    position:sticky;
-    top:0;
-    background:var(--bg);
-    border-top:1px solid var(--ink);
-    border-bottom:1px solid var(--ink);
-    z-index:50;
-    display:flex;
-    overflow-x:auto;
-  }
-  nav.jump a{
-    padding:18px 32px;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:0.02em;
-    border-right:1px solid var(--hair);
-    color:var(--mute);
-    transition:color .15s;
-    white-space:nowrap;
-  }
-  nav.jump a:hover{color:var(--ink)}
-  nav.jump a:last-child{border-right:0}
-
-  /* ARTICLE */
-  article{
-    padding:96px 48px 96px;
-    max-width:1200px;
-    margin:0 auto;
-  }
-  .label{
-    font-size:11px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    margin-bottom:24px;
-  }
-  h1.h{
-    font-weight:700;
-    font-size:clamp(40px, 7vw, 88px);
-    line-height:0.95;
-    letter-spacing:-0.025em;
-    margin-bottom:48px;
-    max-width:1000px;
-  }
-  .body p{
-    font-size:13px;
-    line-height:1.85;
-    letter-spacing:0.02em;
-    font-weight:400;
-    max-width:680px;
-    margin-bottom:18px;
-  }
-  .body p:last-child{margin-bottom:0}
-  .credit-line{
-    margin-top:96px;
-    padding-top:18px;
-    border-top:1px solid var(--hair);
-    font-size:9px;
-    letter-spacing:0.02em;
-    font-weight:700;
-  }
-
-  /* LIST (people, editorial pubs) */
-  .list{
-    margin-top:64px;
-    border-top:1px solid var(--ink);
-  }
-  .list-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    padding:18px 0;
-    border-bottom:1px solid var(--hair);
-    font-size:13px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    gap:24px;
-  }
-  .list-item .handle{flex:0 0 auto}
-  .list-item .name{
-    flex:1;
-    text-align:right;
-    font-size:11px;
-    font-weight:400;
-  }
-  .list-item.flag .handle::before{
-    content:"●  ";
-    font-size:8px;
-    vertical-align:middle;
-  }
-
-  /* IMAGE ZONE */
-  .b-image{
-    width:100%;
-    max-width:680px;
-    aspect-ratio:4/5;
-    background:#0a0a0a;
-    border:1px solid var(--hair);
-    margin-bottom:32px;
-    position:relative;
-    overflow:hidden;
-  }
-  .b-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
-  .b-image.placeholder::after{
-    content:"IMAGE — 4:5";
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    font-size:9px;
-    letter-spacing:0.02em;
-    color:var(--mute);
-    font-weight:700;
-  }
-  .b-image.wide{
-    max-width:880px;
-    aspect-ratio:3/2;
-  }
-  .b-image.wide.placeholder::after{
-    content:"IMAGE — 3:2";
-  }
-  .b-caption{
-    font-size:9px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    color:var(--mute);
-    margin-top:-20px;
-    margin-bottom:32px;
-    max-width:680px;
-  }
-
-  /* FEATURE BLOCK (concepts, key people, journal entries) */
-  .block{
-    padding:48px 0;
-    border-bottom:1px solid var(--hair);
-    max-width:880px;
-    display:block;
-    text-decoration:none;
-    color:inherit;
-  }
-  a.block{cursor:pointer;transition:background .15s}
-  a.block:hover{background:rgba(255,255,255,.025)}
-  a.block:hover .b-image{border-color:var(--ink)}
-  a.block:hover .b-view{color:var(--ink)}
-  .b-view{
-    margin-top:24px;
-    padding-top:18px;
-    border-top:1px solid var(--hair);
-    font-size:9px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    color:var(--mute);
-  }
-  .b-view::after{content:"  →"}
-  .block:first-of-type{border-top:1px solid var(--ink);margin-top:64px}
-  .block .b-label{
-    font-size:9px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    margin-bottom:14px;
-    color:var(--mute);
-  }
-  .block .b-handle{
-    font-weight:700;
-    font-size:clamp(24px,3vw,40px);
-    line-height:0.95;
-    letter-spacing:-0.015em;
-    margin-bottom:8px;
-  }
-  .block .b-name{
-    font-size:11px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    margin-bottom:18px;
-  }
-  .block .b-body{
-    font-size:13px;
-    line-height:1.7;
-    letter-spacing:0.02em;
-    font-weight:400;
-    max-width:680px;
-    margin-bottom:18px;
-  }
-  .block .b-pull{
-    font-weight:700;
-    font-size:18px;
-    line-height:1.3;
-    letter-spacing:-0.005em;
-    border-left:2px solid var(--ink);
-    padding:6px 0 6px 18px;
-    margin:24px 0;
-    max-width:520px;
-  }
-  .block .b-tags{
-    display:flex;
-    gap:0;
-    flex-wrap:wrap;
-    font-size:9px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    color:var(--mute);
-  }
-  .block .b-tags span{
-    padding-right:14px;
-    margin-right:14px;
-    border-right:1px solid var(--hair);
-  }
-  .block .b-tags span:last-child{border-right:0}
-
-  /* EDITORIAL STAGES */
-  .stage{
-    padding:48px 0 32px;
-    border-top:1px solid var(--ink);
-    margin-bottom:0;
-  }
-  .stage:first-of-type{margin-top:64px}
-  .stage .s-label{
-    font-size:11px;
-    letter-spacing:0.02em;
-    font-weight:700;
-    margin-bottom:6px;
-  }
-  .stage .s-count{
-    font-size:9px;
-    color:var(--mute);
-    margin-bottom:24px;
-    font-weight:700;
-  }
-
-  /* DIVIDER */
-  .divider{
-    height:1px;
-    background:var(--ink);
-    margin:0 48px;
-  }
-
-  @media(max-width:760px){
-    article{padding:64px 24px}
-    .cover{padding:64px 24px 32px}
-    .cover .credit{left:24px;bottom:32px}
-    .list-item{flex-direction:column;align-items:flex-start;gap:6px}
-    .list-item .name{text-align:left}
-    .divider{margin:0 24px}
-    nav.jump a{padding:14px 20px}
-  }
-  @page{margin:14mm; size:A4}
 </style>
 </head>
 <body>
 
-<!-- COVER -->
-<section class="cover">
-  <div class="wordmark">NATHAN GARLAND</div>
-  <div class="sub">
-    <div>STUDIO</div>
-    <div>A WORKING DOCUMENT</div>
-    <div>NATHANGARLAND.CO.UK</div>
+<header class="top">
+  <div class="top-mark">
+    <span class="brand">NATHAN GARLAND · STUDIO</span>
+    <span class="meta" id="now-meta">—</span>
   </div>
-  <div class="credit">04.26 · LONDON</div>
+  <nav class="tabs" id="nav">
+    <a href="#today" data-view="today" class="active">Today</a>
+    <a href="#pipeline" data-view="pipeline">Pipeline</a>
+    <a href="#contacts" data-view="contacts">Contacts</a>
+    <a href="#work" data-view="work">Work</a>
+    <a href="#money" data-view="money">Money</a>
+    <a href="#direct" data-view="direct">Direct</a>
+    <a href="#library" data-view="library">Library</a>
+    <a href="magazine.html" class="archive">magazine →</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- TODAY -->
+<section class="view active" id="view-today">
+  <div class="sec-h"><h1>Today</h1><div class="meta" id="today-date">—</div></div>
+  <div class="stat-grid">
+    <div class="stat"><div class="num" id="s-followups">·</div><div class="lbl">Follow-ups due</div></div>
+    <div class="stat"><div class="num warn" id="s-unpaid">·</div><div class="lbl">Unpaid invoices</div></div>
+    <div class="stat"><div class="num" id="s-shoots">·</div><div class="lbl">Upcoming shoots</div></div>
+    <div class="stat"><div class="num hot" id="s-overdue">·</div><div class="lbl">Overdue</div></div>
+  </div>
+  <div class="two-col">
+    <div class="card"><div class="card-head"><span>Follow-ups due today</span><span class="count" id="ct-fu">—</span></div><div id="today-fu"></div></div>
+    <div class="card"><div class="card-head"><span>Loose tasks</span><button class="add" onclick="openTaskModal()">+ Add</button></div><div id="today-tasks"></div></div>
+  </div>
+  <div class="two-col">
+    <div class="card"><div class="card-head"><span>Unpaid invoices</span><span class="count" id="ct-unpaid">—</span></div><div id="today-invoices"></div></div>
+    <div class="card"><div class="card-head"><span>Upcoming shoots — next 7 days</span><span class="count" id="ct-shoots">—</span></div><div id="today-shoots"></div></div>
+  </div>
 </section>
 
-<!-- NAV -->
-<nav class="jump">
-  <a href="#scene">SCENE</a>
-  <a href="#map">MAP</a>
-  <a href="#concepts">CONCEPTS</a>
-  <a href="#inspo">INSPO</a>
-  <a href="#editorial">EDITORIAL</a>
-  <a href="#journal">JOURNAL</a>
-</nav>
-
-<!-- =================== SCENE =================== -->
-<article id="scene">
-  <div class="label">THE SCENE</div>
-  <h1 class="h">THE PEOPLE<br>WHO MAKE<br>THE LANE.</h1>
-  <div class="body">
-    <p>DESIGNERS, ARTISTS, MUSICIANS, BARBERS. THE NAMES THAT BELONG TO THE WORK YOU ACTUALLY WANT TO MAKE.</p>
-    <p>NOT THE COMMERCIAL ROSTER. NOT THE PR AGENCIES. NOT THE DENTAL CHAINS. THAT LIVES IN ROADHOUSE.</p>
-    <p>THIS IS WHO WOULD TAKE THE CALL. A SOLID DOT MARKS A LIVE OR RECENT EXCHANGE.</p>
-  </div>
-
-  <div class="list">
-    <div class="list-item"><span class="handle">SAINT LAURENT</span><span class="name">AESTHETIC ANCHOR · ALWAYS</span></div>
-    <div class="list-item"><span class="handle">HEDI SLIMANE</span><span class="name">DIOR HOMME · CELINE · SAINT LAURENT</span></div>
-    <div class="list-item"><span class="handle">STEVEN KLEIN</span><span class="name">DARK LUXURY · CAMPAIGN ARCHIVE</span></div>
-    <div class="list-item"><span class="handle">TERRY RICHARDSON</span><span class="name">DIRECT FLASH · 2000S ARCHIVE</span></div>
-    <div class="list-item"><span class="handle">JUERGEN TELLER</span><span class="name">ANTI-POLISH · MARC JACOBS</span></div>
-    <div class="list-item"><span class="handle">@THECOBRASNAKE</span><span class="name">PARTY DOCUMENTATION · 2005-2012</span></div>
-    <div class="list-item flag"><span class="handle">@GEESMALL_FACES</span><span class="name">GEE · IN THE SCENE</span></div>
-    <div class="list-item flag"><span class="handle">@SOPHIAKELLY</span><span class="name">SOPHIA KELLY</span></div>
-    <div class="list-item flag"><span class="handle">—</span><span class="name">COCO BLAKE</span></div>
-    <div class="list-item flag"><span class="handle">—</span><span class="name">JXDEN</span></div>
-    <div class="list-item flag"><span class="handle">@HENNYSEEAR</span><span class="name">HENNY SEAR · CONNECTOR</span></div>
-    <div class="list-item flag"><span class="handle">@TEDDYCORSICA</span><span class="name">TEDDY CORSICA · CONNECTOR</span></div>
-    <div class="list-item flag"><span class="handle">@STORMMCCORMICKK</span><span class="name">STORM MCCORMICK · CONNECTOR</span></div>
-    <div class="list-item flag"><span class="handle">@LAVALARUE</span><span class="name">LAVA LA RUE · NINE8 · ARTIST</span></div>
-    <div class="list-item flag"><span class="handle">@KELSYKARTER</span><span class="name">KELSY KARTER · ARTIST</span></div>
-    <div class="list-item flag"><span class="handle">—</span><span class="name">HENRY HOTROCC · ARTIST</span></div>
-    <div class="list-item flag"><span class="handle">@MIAKHALIFA</span><span class="name">MIA K. · CULTURAL MASS</span></div>
-    <div class="list-item flag"><span class="handle">@JAEGRILLS</span><span class="name">JAKE EVANS · JEWELLERY</span></div>
-    <div class="list-item flag"><span class="handle">@LAWLESS_STUDIO</span><span class="name">JOSH MOORE · DESIGNER</span></div>
-  </div>
-
-  <div class="credit-line">NG · SCENE · HEAVY HITTERS · WORKING ROSTER LIVES IN THE MAP</div>
-</article>
-
-<div class="divider"></div>
-
-<!-- =================== CONCEPTS =================== -->
-<article id="concepts">
-  <div class="label">CONCEPTS</div>
-  <h1 class="h">SHOOTS THAT<br>DON'T EXIST<br>YET.</h1>
-  <div class="body">
-    <p>LIVES HERE UNTIL YOU MAKE IT REAL OR KILL IT.</p>
-  </div>
-
-  <a class="block" href="concept-off-duty.html">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">IDEA · TARGET — KING KONG</div>
-    <div class="b-handle">OFF-DUTY</div>
-    <div class="b-name">MODELS WITH THEIR GUARDS DOWN.</div>
-    <div class="b-body">FIVE SUBJECTS. ONE DAY EACH. DIRECT FLASH, 24MM PROXIMITY. NOT THE CLOTHES — THE CIGARETTE BREAK, THE UNMADE BED, THE HALF-EATEN BREAKFAST. STORM, LILY, WHITNEY. LOOP IN TWO OR THREE FROM YOUR FOLLOWS.</div>
-    <div class="b-tags"><span>FLASH</span><span>BEDROOM</span><span>24MM</span><span>NO STYLIST</span></div>
-    <div class="b-view">OPEN DETAIL</div>
-  </a>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">PLANNED · TARGET — SNEEZE</div>
-    <div class="b-handle">LATE SHIFT</div>
-    <div class="b-name">A KITCHEN BRIGADE AFTER SERVICE.</div>
-    <div class="b-body">SHOT IN A REAL LONDON KITCHEN AT 1AM, POST-SERVICE. CREW IN WHITES, SHIRTS OPEN, PULLING BEERS. STEAM. BURNT EDGES. APPROACH VIA FOLD OR THE STANDARD DECOY CHEFS.</div>
-    <div class="b-tags"><span>KITCHEN</span><span>NIGHT</span><span>REAL CREW</span><span>HEAT</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">IDEA · TARGET — THE FACE</div>
-    <div class="b-handle">SOUTH OF THE RIVER</div>
-    <div class="b-name">PECKHAM, BRIXTON, NEW CROSS.</div>
-    <div class="b-body">ONGOING, NO DEADLINE. ANYONE INTERESTING SOUTH OF THE THAMES. BUS STOPS, TOWER BLOCKS, OFF-LICENCES. RESISTS POSTCARD LONDON. BUILDS SLOWLY INTO A BODY OF WORK — A YEAR MINIMUM.</div>
-    <div class="b-tags"><span>DOCUMENTARY</span><span>SOUTH LDN</span><span>ONGOING</span><span>STREET</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">IDEA · TARGET — PASCAL</div>
-    <div class="b-handle">COUPLES, ARGUING</div>
-    <div class="b-name">REAL CHEMISTRY. NOT ROMANCE.</div>
-    <div class="b-body">TWO PEOPLE WHO ACTUALLY KNOW EACH OTHER. A SCRIPTED-ISH ARGUMENT, OR THE LONG SILENCE AFTER ONE. CAMERA CLOSE. THE ENERGY REAL COUPLES HAVE THAT YOU CAN'T CAST FOR. KIRAN X LEIGH FIT.</div>
-    <div class="b-tags"><span>COUPLES</span><span>TENSION</span><span>INTIMATE</span><span>BEDROOM</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">SHOT · TARGET — ROLLACOASTER</div>
-    <div class="b-handle">DRESSING / UNDRESSING</div>
-    <div class="b-name">THE FIVE MINUTES EITHER SIDE OF A SHOOT.</div>
-    <div class="b-body">SUBJECTS GETTING READY, OR UNWINDING AFTER. THE ROBE, THE HALF-PULLED JEANS, THE MAKEUP WIPE, THE CIGARETTE IN THE DOORWAY. ALREADY SHOT ONE FRAME WITH NUSRAT.</div>
-    <div class="b-tags"><span>BTS</span><span>INTIMATE</span><span>FLASH</span><span>FASHION-ADJACENT</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">IDEA · TARGET — ZINE / DAZED</div>
-    <div class="b-handle">DUBSTEP DOCUMENT</div>
-    <div class="b-name">THE REAL UNDERGROUND. NOT THE BROSTEP.</div>
-    <div class="b-body">LONG-FORM. DJS IN THEIR FLATS, SOUNDCHECK NIGHTS, BASEMENT RAVES. B&amp;W, OCCASIONAL FLASH. MOTHCLUB, PICKLE FACTORY, VILLAGE UNDERGROUND AS VENUES. BUILDS TOWARD A ZINE.</div>
-    <div class="b-tags"><span>MUSIC</span><span>UNDERGROUND</span><span>B&amp;W</span><span>ZINE</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">IDEA · TARGET — KING KONG / SOLO</div>
-    <div class="b-handle">INK STUDIES</div>
-    <div class="b-name">TATTOOED BODIES AS PORTRAIT SUBJECTS.</div>
-    <div class="b-body">THREE SITTINGS AT BLANK COLLECTIVE. SUBJECTS IN THEIR OWN INK, FULL SKIN IN FRAME. BLACK BACKGROUNDS. HARD FLASH ON BODY, SOFT ON FACE. ALREADY HALF-THINKING ABOUT IT EVERY TIME YOU SHOOT LAWLESS.</div>
-    <div class="b-tags"><span>TATTOO</span><span>BLANK COLLECTIVE</span><span>B&amp;W</span><span>STUDIO</span><span>SKIN</span></div>
-  </div>
-
-  <div class="credit-line">NG · CONCEPTS · 7 LIVE</div>
-</article>
-
-<div class="divider"></div>
-
-<!-- =================== INSPO =================== -->
-<article id="inspo">
-  <div class="label">INSPO</div>
-  <h1 class="h">THE ARCHIVE.<br>WHAT TO STUDY.</h1>
-  <div class="body">
-    <p>PAST CAMPAIGNS, ARCHIVE FRAMES, REFERENCE IMAGERY. THE WORK YOU PULL FROM WHEN YOU NEED TO REMEMBER THE LANE.</p>
-    <p>NOT WHAT YOU'VE SHOT. WHAT TAUGHT YOU HOW TO SEE.</p>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">TERRY RICHARDSON · CAMPAIGN ARCHIVE</div>
-    <div class="b-handle">DIRECT FLASH. NO APOLOGY.</div>
-    <div class="b-body">THE WHOLE LANE STARTS HERE. SUPREME, SISLEY, THE 2000S TERRY ARCHIVE. BLOWN HIGHLIGHTS, IMPERFECT SKIN, SUBJECT KNOWS THE CAMERA IS THERE. STUDY: THE FRAMING IS NEVER POLITE.</div>
-    <div class="b-tags"><span>FLASH</span><span>2000S</span><span>CONFRONTATIONAL</span><span>STUDY</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">HEDI SLIMANE · DIOR HOMME 2003-2007</div>
-    <div class="b-handle">THE COMPRESSION YEARS.</div>
-    <div class="b-body">NOT THE SILHOUETTES. THE COMPRESSION. HOW TIGHT HE STAYS ON THE FACE. HOW LITTLE BACKGROUND HE ALLOWS. THE WHOLE POINT OF 24MM IS THE PRESSURE.</div>
-    <div class="b-tags"><span>HEDI</span><span>BLACK + WHITE</span><span>FRAMING</span><span>YOUTH</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">JUERGEN TELLER · MARC JACOBS</div>
-    <div class="b-handle">THE RUDENESS OF THE FRAMING.</div>
-    <div class="b-body">NOBODY COPIES THE RUDENESS. BODY CROPPED WRONG. EYES HALF-CLOSED. SKIN IMPERFECT ON PURPOSE. OPPOSITE OF CORRECT. OPPOSITE OF SAFE. THE CAMPAIGN-AS-OUTTAKE.</div>
-    <div class="b-tags"><span>TELLER</span><span>CAMPAIGN</span><span>ANTI-POLISH</span><span>HONEST</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">MARK THE COBRASNAKE · 2005-2012</div>
-    <div class="b-handle">PARTY DOCUMENTATION AS ART.</div>
-    <div class="b-body">THE LANE HE CARVED IS THE ONE YOU'RE BUILDING — JUST WITH MORE TENSION AND LESS SMILE. THE FLASH, THE PROXIMITY, THE ACCESS — ALL THERE. THE DIFFERENCE IS INTENT. HE DOCUMENTED. YOU'RE DIRECTING.</div>
-    <div class="b-tags"><span>COBRASNAKE</span><span>PARTY</span><span>FLASH</span><span>ACCESS</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">STEVEN KLEIN · CAMPAIGN ARCHIVE</div>
-    <div class="b-handle">DARK LUXURY. HIGH TENSION.</div>
-    <div class="b-body">WHEN THE COMMERCIAL IS DANGEROUS. KLEIN IS THE PROOF YOU CAN SHOOT BIG BUDGETS WITHOUT GOING SAFE. STUDY: HOW HE HOLDS THE LIGHT, HOW HE LETS THE FRAME GO QUIET.</div>
-    <div class="b-tags"><span>KLEIN</span><span>HIGH FASHION</span><span>TENSION</span><span>STUDY</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">ESTEVAN ORIOL · LA</div>
-    <div class="b-handle">DOCUMENT YOUR CITY.</div>
-    <div class="b-body">THE LA STREETS BECAME HIS LIFETIME PROJECT. THE LESSON FOR LONDON: PICK A ROOM, PICK A SCENE, KEEP COMING BACK. ONE BODY OF WORK, MANY YEARS.</div>
-    <div class="b-tags"><span>ORIOL</span><span>STREET</span><span>LA</span><span>LONG-FORM</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder wide"></div>
-    <div class="b-label">FILM · DRIVE · NIGHTCRAWLER · THE PLACE BEYOND THE PINES</div>
-    <div class="b-handle">THE LONE OPERATOR.</div>
-    <div class="b-body">NIGHTTIME ENVIRONMENTS. STYLISED REALISM. TENSION + ATMOSPHERE. THESE ARE NOT REFERENCES FOR FRAMES, THEY'RE REFERENCES FOR THE MOOD YOU WANT THE WORK TO HAVE.</div>
-    <div class="b-tags"><span>FILM</span><span>NIGHT</span><span>TENSION</span><span>MOOD</span></div>
-  </div>
-
-  <div class="credit-line">NG · INSPO · 7 STUDIES</div>
-</article>
-
-<div class="divider"></div>
-
-<!-- =================== EDITORIAL =================== -->
-<article id="editorial">
-  <div class="label">EDITORIAL</div>
-  <h1 class="h">SUBMISSIONS<br>IN MOTION.</h1>
-  <div class="body">
-    <p>KING KONG. THE FACE. INTERVIEW. ROLLACOASTER. SNEEZE. PASCAL.</p>
-    <p>STAGES MOVE TOP-TO-BOTTOM. PUSH STORIES INTO THE WORLD.</p>
-  </div>
-
-  <div class="stage">
-    <div class="s-label">IDEA</div>
-    <div class="s-count">3 STORIES</div>
-    <div class="list-item"><span class="handle">THE FACE</span><span class="name">SOUTH OF THE RIVER · PHOTO ESSAY</span></div>
-    <div class="list-item"><span class="handle">I-D</span><span class="name">DRESSING / UNDRESSING · 8 FRAMES</span></div>
-    <div class="list-item"><span class="handle">SNEEZE</span><span class="name">LATE SHIFT · KITCHEN BRIGADE</span></div>
-  </div>
-
-  <div class="stage">
-    <div class="s-label">RESEARCHED</div>
-    <div class="s-count">2 STORIES</div>
-    <div class="list-item"><span class="handle">KING KONG</span><span class="name">OFF-DUTY · 5 MODELS · ONE DAY EACH</span></div>
-    <div class="list-item"><span class="handle">ROLLACOASTER</span><span class="name">DRESSING / UNDRESSING · ALT FRAMES</span></div>
-  </div>
-
-  <div class="stage">
-    <div class="s-label">PITCHED</div>
-    <div class="s-count">2 STORIES</div>
-    <div class="list-item"><span class="handle">PASCAL MAGAZINE</span><span class="name">COUPLES, ARGUING · STUDIO DAY</span></div>
-    <div class="list-item"><span class="handle">THE PERFECT</span><span class="name">LATE SHIFT · ALT PITCH</span></div>
-  </div>
-
-  <div class="stage">
-    <div class="s-label">ACCEPTED</div>
-    <div class="s-count">1 STORY</div>
-    <div class="list-item flag"><span class="handle">NINE8 / LAVA</span><span class="name">LAVARAZZI · LISTENING PARTY</span></div>
-  </div>
-
-  <div class="stage">
-    <div class="s-label">PUBLISHED</div>
-    <div class="s-count">NOTHING YET</div>
-    <div class="list-item"><span class="handle">—</span><span class="name">MAKE IT.</span></div>
-  </div>
-
-  <div class="credit-line">NG · EDITORIAL · 8 STORIES IN MOTION</div>
-</article>
-
-<div class="divider"></div>
-
-<!-- =================== JOURNAL =================== -->
-<article id="journal">
-  <div class="label">JOURNAL</div>
-  <h1 class="h">FIELD NOTES.</h1>
-  <div class="body">
-    <p>WHERE YOU'VE BEEN. WHO YOU SHOT. THE REFS THAT HIT.</p>
-    <p>PRIVATE. REVERSE-CHRONOLOGICAL.</p>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">26.04 · NOTE</div>
-    <div class="b-handle">TWO ENGINES RUNNING.</div>
-    <div class="b-body">ROADHOUSE PAYS. THIS IS FOR THE REST. BRAND ENGINE GETS ITS OWN ROOM TO BREATHE. CASH FUNDS THE EDITORIAL. EDITORIAL FUNDS THE LANE. LIVE, NETWORK, ENJOY LIFE, HAVE FUN, EXPERIMENT, MAKE ICONIC IMAGERY, EXIST.</div>
-    <div class="b-tags"><span>STRATEGY</span><span>RULES</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">19.04 · SHOOT — LAWLESS</div>
-    <div class="b-handle">FOOTIE TEES, ESTATE + PUB.</div>
-    <div class="b-body">JOSH MOORE, SELF-FUNDED WORLD CUP PROJECT. LAURA MODELLING CROPPED GIRLS VERSIONS. ESTATE LOCATION THEN PUB. LOW BUDGET, HIGH TRUST. THE KIND OF WORK THAT BUILDS THE LANE.</div>
-    <div class="b-pull">CONFIRMING 19TH MY BRO.</div>
-    <div class="b-tags"><span>LAWLESS</span><span>ESTATE</span><span>PUB</span><span>WORLD CUP</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">12.04 · SHOOT — NUSRAT</div>
-    <div class="b-handle">REGENTS PARK, SECOND PASS.</div>
-    <div class="b-body">1PM START, 2-3 HOURS. MULTIPLE LOOKS, 15-20 MIN EACH. ONE HOUR FOR GROUPS. SHE KNOWS WHAT SHE WANTS AND SHOOTS FAST. THE MAR 29 SET WAS RIGHT — HOLD THE LINE.</div>
-    <div class="b-tags"><span>FASHION</span><span>REGENTS PARK</span><span>RE-DO</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">04.04 · REFERENCE</div>
-    <div class="b-handle">HEDI AT YVES — THE FLASH YEARS.</div>
-    <div class="b-body">PULLED THE 2003-2007 SLIMANE ARCHIVE AGAIN. NOT THE SILHOUETTES. THE COMPRESSION. HOW TIGHT HE STAYS ON THE FACE. HOW LITTLE BACKGROUND HE ALLOWS. THE WHOLE POINT OF 24MM IS THE PRESSURE.</div>
-    <div class="b-pull">TIGHT, INVASIVE FRAMING. SUBJECTS AWARE OF CAMERA. TENSION, ATTITUDE, PRESENCE.</div>
-    <div class="b-tags"><span>HEDI</span><span>ARCHIVE</span><span>FRAMING</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">29.03 · SHOOT — NUSRAT &amp; LUKE</div>
-    <div class="b-handle">TWO SUBJECTS, ONE PARK, ONE FLASH.</div>
-    <div class="b-body">NUSRAT'S FASHION SHOOT FIRST, THEN LUKE'S DIGITALS STRAIGHT AFTER. SAME 24MM, SAME SPEEDLIGHT, TWO DIFFERENT PEOPLE. LUKE HAD NEVER BEEN SHOT BEFORE. THE FIRST FRAME AFTER HE STOPPED TRYING TO POSE — THAT'S THE ONE.</div>
-    <div class="b-tags"><span>REGENTS PARK</span><span>FLASH</span><span>DIGITALS</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">26.03 · SHOOT — LAVA LA RUE</div>
-    <div class="b-handle">LAVARAZZI, NO PHONES INSIDE.</div>
-    <div class="b-body">LISTENING PARTY. PAPARAZZI-STYLE STREET PHOTOGRAPHY ONLY — GUESTS ENTERING AND LEAVING. STRICTLY NO PHONES IN THE VENUE. £100 FEE BUT THE ACCESS IS THE POINT. LAVA IS A REAL ARTIST. THIS IS THE WORLD.</div>
-    <div class="b-pull">EDITORIAL GOLD HAS NOTHING TO DO WITH THE DAY RATE.</div>
-    <div class="b-tags"><span>NINE8</span><span>MUSIC</span><span>STREET</span><span>PAPARAZZI</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">24.03 · NOTE</div>
-    <div class="b-handle">OLD BLUE LAST IS HALF A MILE AWAY.</div>
-    <div class="b-body">YOU FOLLOW THE VENUES, YOU DON'T SHOOT IN THEM. FIX THAT. ONE NIGHT AT OLD BLUE LAST, ONE AT MOTHCLUB, ONE AT DALSTON SUPERSTORE — THREE FRAMES IN THREE WEEKS. STOP WAITING TO BE INVITED.</div>
-    <div class="b-tags"><span>VENUES</span><span>OLD BLUE LAST</span><span>MOTHCLUB</span><span>ACTION</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">21.03 · REFERENCE</div>
-    <div class="b-handle">TELLER, AGAIN.</div>
-    <div class="b-body">MARC JACOBS CAMPAIGNS THIS MORNING. THE THING NOBODY COPIES IS THE RUDENESS OF THE FRAMING. BODY CROPPED WRONG. EYES HALF-CLOSED. SKIN IMPERFECT ON PURPOSE. OPPOSITE OF CORRECT. OPPOSITE OF SAFE.</div>
-    <div class="b-tags"><span>TELLER</span><span>CAMPAIGN</span><span>STUDY</span></div>
-  </div>
-
-  <div class="block">
-    <div class="b-image placeholder"></div>
-    <div class="b-label">15.03 · REFERENCE</div>
-    <div class="b-handle">COBRASNAKE, MARK THE COBRASNAKE.</div>
-    <div class="b-body">SPENT THE NIGHT WITH THE ARCHIVE. THE LANE HE CARVED IS THE ONE YOU'RE BUILDING, JUST WITH MORE TENSION AND LESS SMILE. THE FLASH, THE PROXIMITY, THE ACCESS — ALL THERE. THE DIFFERENCE IS INTENT. HE DOCUMENTED. YOU'RE DIRECTING.</div>
-    <div class="b-tags"><span>COBRASNAKE</span><span>ARCHIVE</span><span>STUDY</span></div>
-  </div>
-
-  <div class="credit-line">NG · JOURNAL · 9 ENTRIES</div>
-</article>
-
-<div class="divider"></div>
-
-<!-- SIGN-OFF -->
-<section class="cover">
-  <div class="wordmark">NATHAN GARLAND</div>
-  <div class="sub">
-    <div>STUDIO</div>
-    <div>FIN</div>
-    <div>NATHANGARLAND.CO.UK</div>
-  </div>
-  <div class="credit">04.26 · LONDON</div>
+<!-- PIPELINE -->
+<section class="view" id="view-pipeline">
+  <div class="sec-h"><h1>Pipeline</h1><div class="meta">Who do I message?<br>Click cards to update</div></div>
+  <div class="filters"><button onclick="openPipelineModal()">+ New lead</button></div>
+  <div class="pipe-board" id="pipe-board"></div>
 </section>
 
+<!-- CONTACTS -->
+<section class="view" id="view-contacts">
+  <div class="sec-h"><h1>Contacts</h1><div class="meta">The networking engine<br>Tag · rate · follow up</div></div>
+  <div class="filters">
+    <button class="on" data-cf="all">All</button>
+    <button data-cf="CLIENT">Clients</button>
+    <button data-cf="CONNECTOR">Connectors</button>
+    <button data-cf="TALENT">Talent</button>
+    <button data-cf="GATEKEEPER">Gatekeepers</button>
+    <button data-cf="high">High value</button>
+    <button data-cf="dormant_30">Quiet 30+ days</button>
+    <input type="text" id="contacts-search" placeholder="SEARCH NAME OR LOCATION" />
+    <button onclick="openContactModal()">+ Add</button>
+  </div>
+  <div class="list-table lt-contacts">
+    <div class="lt-head"><span>Name / Role</span><span>Category</span><span>Value</span><span>Status</span><span>Last contact</span><span>Next follow-up</span></div>
+    <div id="contacts-list"></div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="view" id="view-work">
+  <div class="sec-h"><h1>Work</h1><div class="meta">Active jobs<br>Status · payment · deadline</div></div>
+  <div class="filters">
+    <button class="on" data-wf="active">Active</button>
+    <button data-wf="all">All</button>
+    <button data-wf="shooting">Shooting</button>
+    <button data-wf="editing">Editing</button>
+    <button data-wf="delivered">Delivered</button>
+    <button onclick="openWorkModal()">+ Add job</button>
+  </div>
+  <div class="list-table lt-work">
+    <div class="lt-head"><span>Client</span><span>Deliverables</span><span>Deadline</span><span>Status</span><span>Payment</span></div>
+    <div id="work-list"></div>
+  </div>
+</section>
+
+<!-- MONEY -->
+<section class="view" id="view-money">
+  <div class="sec-h"><h1>Money</h1><div class="meta">Invoiced · Paid · Outstanding</div></div>
+  <div class="stat-grid">
+    <div class="stat"><div class="num" id="m-invoiced">·</div><div class="lbl">Invoiced</div></div>
+    <div class="stat"><div class="num ok" id="m-paid">·</div><div class="lbl">Paid</div></div>
+    <div class="stat"><div class="num warn" id="m-outstanding">·</div><div class="lbl">Outstanding</div></div>
+    <div class="stat"><div class="num hot" id="m-overdue">·</div><div class="lbl">Overdue</div></div>
+  </div>
+  <div class="filters">
+    <button class="on" data-mf="all">All</button>
+    <button data-mf="invoiced">Invoiced</button>
+    <button data-mf="paid">Paid</button>
+    <button data-mf="overdue">Overdue</button>
+    <button onclick="openInvoiceModal()">+ Add invoice</button>
+  </div>
+  <div class="list-table lt-money">
+    <div class="lt-head"><span>Client</span><span>Amount</span><span>Issued</span><span>Due / Paid</span><span>Status</span></div>
+    <div id="money-list"></div>
+  </div>
+</section>
+
+<!-- DIRECT -->
+<section class="view" id="view-direct">
+  <div class="sec-h"><h1>Direct</h1><div class="meta">Taste · creative authority<br>Concepts · casting · rules</div></div>
+  <div class="card"><div class="card-head"><span>Active concepts</span><button class="add" onclick="openConceptModal()">+ New concept</button></div><div id="concepts-list"></div></div>
+  <div class="card"><div class="card-head"><span>Rules</span><button class="add" onclick="openRuleModal()">+ Add rule</button></div><div class="rules-wall" id="rules-wall"></div></div>
+  <div class="card"><div class="card-head"><span>Casting filter</span><button class="add" onclick="openCastingModal()">+ Add</button></div><div id="casting-list"></div></div>
+</section>
+
+<!-- LIBRARY -->
+<section class="view" id="view-library">
+  <div class="sec-h"><h1>Library</h1><div class="meta">Style engine<br>References · Looks · Test queue</div></div>
+
+  <div class="card">
+    <div class="card-head">
+      <span>Looks to achieve <span class="count" id="ct-looks-active">—</span></span>
+      <button class="add" onclick="openLookModal()">+ New look</button>
+    </div>
+    <div id="library-looks"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span>Test queue <span class="count" id="ct-tests">—</span></span>
+      <button class="add" onclick="openTestModal()">+ Add test</button>
+    </div>
+    <div id="library-test"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span>References <span class="count" id="ct-refs">—</span></span>
+      <button class="add" onclick="openInspoModal()">+ Add ref</button>
+    </div>
+    <div id="library-refs"></div>
+  </div>
+</section>
+
+</main>
+
+<div class="modal-bg" id="modal-bg"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // JS-based scroll instead of native anchor jumping
-  // (native anchors get intercepted in some preview environments)
-  document.querySelectorAll('nav.jump a').forEach(a => {
-    a.addEventListener('click', e => {
+const SUPABASE_URL='https://odddcrlycukizwqqlfzd.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kZGRjcmx5Y3VraXp3cXFsZnpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjIyODAsImV4cCI6MjA5Mjc5ODI4MH0.v1k4vFhDS2_Hs2r-bLne0AendTkOcbOo2Fndg_64FK4';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const TODAY=new Date().toISOString().slice(0,10);
+const days=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+function fmtDate(s){if(!s)return'';const d=new Date(s);return `${String(d.getDate()).padStart(2,'0')} ${months[d.getMonth()]}`}
+function daysFromToday(s){if(!s)return null;const d=new Date(s);d.setHours(0,0,0,0);const t=new Date();t.setHours(0,0,0,0);return Math.round((d-t)/86400000)}
+function dateClass(s){const d=daysFromToday(s);if(d===null)return'';if(d<0)return'overdue';if(d===0)return'due-today';if(d<=7)return'upcoming';return''}
+function fmtMoney(n){if(n===null||n===undefined)return'£0';return'£'+Number(n).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:2})}
+function escapeHtml(s){if(!s)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
+(function(){const t=new Date();document.getElementById('now-meta').textContent=`${days[t.getDay()]} ${String(t.getDate()).padStart(2,'0')} ${months[t.getMonth()]} ${t.getFullYear()}`;document.getElementById('today-date').textContent=`${days[t.getDay()]} ${String(t.getDate()).padStart(2,'0')} ${months[t.getMonth()]} ${t.getFullYear()}`})();
+
+function setView(v){document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>a.classList.toggle('active',a.dataset.view===v));const fn={today:renderToday,pipeline:renderPipeline,contacts:renderContacts,work:renderWork,money:renderMoney,direct:renderDirect,library:renderLibrary}[v];if(fn)fn();window.scrollTo(0,0)}
+function getView(){const h=(location.hash||'#today').replace('#','');return['today','pipeline','contacts','work','money','direct','library'].includes(h)?h:'today'}
+window.addEventListener('hashchange',()=>setView(getView()));
+
+async function renderToday(){
+  const [{data:contacts},{data:pipe},{data:tasks},{data:invoices},{data:work}]=await Promise.all([
+    sb.from('contacts').select('*').not('next_followup_date','is',null).lte('next_followup_date',TODAY),
+    sb.from('pipeline').select('*').not('next_followup_date','is',null).lte('next_followup_date',TODAY),
+    sb.from('tasks').select('*').eq('done',false).order('pinned',{ascending:false}).order('due_date',{nullsFirst:false}),
+    sb.from('invoices').select('*').neq('status','paid').order('due_date',{nullsFirst:false}),
+    sb.from('work').select('*').gte('shoot_date',TODAY).order('shoot_date')
+  ]);
+  const fuCount=(contacts||[]).length+(pipe||[]).length;
+  const unpaidCount=(invoices||[]).length;
+  const upcoming=(work||[]).filter(w=>daysFromToday(w.shoot_date)<=7);
+  const overdueCount=(invoices||[]).filter(i=>daysFromToday(i.due_date)<0).length+(tasks||[]).filter(t=>t.due_date&&daysFromToday(t.due_date)<0).length+(contacts||[]).filter(c=>daysFromToday(c.next_followup_date)<0).length+(pipe||[]).filter(p=>daysFromToday(p.next_followup_date)<0).length;
+  document.getElementById('s-followups').textContent=fuCount;
+  document.getElementById('s-unpaid').textContent=unpaidCount;
+  document.getElementById('s-shoots').textContent=upcoming.length;
+  document.getElementById('s-overdue').textContent=overdueCount;
+
+  const fuItems=[...(contacts||[]).map(c=>({type:'contact',id:c.id,name:c.name,sub:c.role||c.category,when:c.next_followup_date})),...(pipe||[]).map(p=>({type:'pipeline',id:p.id,name:p.name,sub:p.type||p.stage,when:p.next_followup_date}))].sort((a,b)=>(a.when||'').localeCompare(b.when||''));
+  document.getElementById('ct-fu').textContent=fuItems.length;
+  document.getElementById('today-fu').innerHTML=fuItems.length?fuItems.map(i=>`<div class="row" onclick="${i.type==='contact'?'editContact('+i.id+')':'editPipeline('+i.id+')'}"><span></span><span class="body">${escapeHtml(i.name)}<small>${escapeHtml(i.sub||'')}</small></span><span></span><span class="meta ${dateClass(i.when)}">${dateClass(i.when)==='overdue'?'OVERDUE · ':''}${fmtDate(i.when)}</span></div>`).join(''):'<div class="empty">All clear — no follow-ups due</div>';
+
+  document.getElementById('today-tasks').innerHTML=(tasks||[]).length?(tasks||[]).map(t=>`<div class="row ${t.done?'done':''}" onclick="toggleTask(${t.id},${!t.done})"><span class="check"></span><span class="body">${escapeHtml(t.title)}${t.body?`<small>${escapeHtml(t.body)}</small>`:''}</span><span class="pin">${t.pinned?'PINNED':''}</span><span class="meta ${dateClass(t.due_date)}">${t.due_date?fmtDate(t.due_date):''}</span></div>`).join(''):'<div class="empty">No loose tasks</div>';
+
+  document.getElementById('ct-unpaid').textContent=(invoices||[]).length;
+  document.getElementById('today-invoices').innerHTML=(invoices||[]).length?(invoices||[]).slice(0,8).map(i=>`<div class="row" onclick="editInvoice(${i.id})"><span></span><span class="body">${escapeHtml(i.client)}<small>${escapeHtml(i.invoice_number||'')} · ${i.status.toUpperCase()}</small></span><span class="meta">${fmtMoney(i.amount)}</span><span class="meta ${dateClass(i.due_date)}">${i.due_date?fmtDate(i.due_date):'—'}</span></div>`).join(''):'<div class="empty">Nothing outstanding</div>';
+
+  document.getElementById('ct-shoots').textContent=upcoming.length;
+  document.getElementById('today-shoots').innerHTML=upcoming.length?upcoming.map(w=>`<div class="row" onclick="editWork(${w.id})"><span></span><span class="body">${escapeHtml(w.client)}<small>${escapeHtml(w.deliverables||'')}</small></span><span></span><span class="meta ${dateClass(w.shoot_date)}">${fmtDate(w.shoot_date)}</span></div>`).join(''):'<div class="empty">No shoots in the next 7 days</div>';
+}
+async function toggleTask(id,done){await sb.from('tasks').update({done,done_at:done?new Date().toISOString():null}).eq('id',id);renderToday()}
+
+const STAGES=[{key:'new_lead',label:'New Lead'},{key:'contacted',label:'Contacted'},{key:'waiting_reply',label:'Waiting Reply'},{key:'warm',label:'Warm'},{key:'booked',label:'Booked'},{key:'dead',label:'Dead'}];
+async function renderPipeline(){
+  const {data:pipe}=await sb.from('pipeline').select('*').order('updated_at',{ascending:false});
+  document.getElementById('pipe-board').innerHTML=STAGES.map(s=>{
+    const items=(pipe||[]).filter(p=>p.stage===s.key);
+    return `<div class="pipe-col"><div class="col-head"><span>${s.label}</span><span class="ct">${items.length}</span></div>${items.map(p=>`<div class="pipe-card" onclick="editPipeline(${p.id})"><div class="nm">${escapeHtml(p.name)}</div><div class="typ">${escapeHtml(p.type||'')}</div>${p.next_followup_date?`<div class="nf ${dateClass(p.next_followup_date)==='overdue'?'over':dateClass(p.next_followup_date)==='due-today'?'due':''}">FU ${fmtDate(p.next_followup_date)}</div>`:''}</div>`).join('')||'<div class="empty" style="padding:20px 12px;font-size:9px">·</div>'}</div>`;
+  }).join('');
+}
+
+let contactFilter='all';
+async function renderContacts(){
+  const {data}=await sb.from('contacts').select('*').order('value_rating',{ascending:false}).order('updated_at',{ascending:false});
+  const search=(document.getElementById('contacts-search')?.value||'').toLowerCase();
+  let list=data||[];
+  if(['CLIENT','CONNECTOR','TALENT','GATEKEEPER'].includes(contactFilter))list=list.filter(c=>c.category===contactFilter);
+  else if(contactFilter==='high')list=list.filter(c=>c.value_rating==='high');
+  else if(contactFilter==='dormant_30')list=list.filter(c=>!c.last_contact_date||daysFromToday(c.last_contact_date)<-30);
+  if(search)list=list.filter(c=>(c.name||'').toLowerCase().includes(search)||(c.location||'').toLowerCase().includes(search)||(c.role||'').toLowerCase().includes(search));
+  document.getElementById('contacts-list').innerHTML=list.length?list.map(c=>`<div class="lt-row" onclick="editContact(${c.id})"><span><strong>${escapeHtml(c.name)}</strong>${c.role?` <span style="color:var(--mute);font-size:10px">· ${escapeHtml(c.role)}</span>`:''}${c.instagram?`<br><small style="color:var(--mute);font-size:10px">${escapeHtml(c.instagram)}</small>`:''}</span><span><span class="badge ${(c.category||'').toLowerCase()}">${escapeHtml(c.category||'')}</span></span><span><span class="badge ${c.value_rating}">${(c.value_rating||'').toUpperCase()}</span></span><span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);font-weight:700">${escapeHtml(c.status||'')}</span><span class="meta ${dateClass(c.last_contact_date)}">${c.last_contact_date?fmtDate(c.last_contact_date):'—'}</span><span class="meta ${dateClass(c.next_followup_date)}">${c.next_followup_date?fmtDate(c.next_followup_date):'—'}</span></div>`).join(''):'<div class="empty">No contacts match</div>';
+}
+
+let workFilter='active';
+async function renderWork(){
+  const {data}=await sb.from('work').select('*').order('shoot_date',{nullsFirst:false}).order('updated_at',{ascending:false});
+  let list=data||[];
+  if(workFilter==='active')list=list.filter(w=>w.status!=='delivered');
+  else if(['shooting','editing','delivered'].includes(workFilter))list=list.filter(w=>w.status===workFilter);
+  document.getElementById('work-list').innerHTML=list.length?list.map(w=>`<div class="lt-row" onclick="editWork(${w.id})"><span><strong>${escapeHtml(w.client)}</strong>${w.shoot_date?`<br><small style="color:var(--mute);font-size:10px">SHOOT ${fmtDate(w.shoot_date)}</small>`:''}</span><span style="font-size:11px;color:var(--mute)">${escapeHtml(w.deliverables||'—')}</span><span class="meta ${dateClass(w.deadline)}">${w.deadline?fmtDate(w.deadline):'—'}</span><span><span class="badge ${w.status}">${(w.status||'').toUpperCase()}</span></span><span><span class="badge ${w.payment_status}">${(w.payment_status||'').toUpperCase()}</span></span></div>`).join(''):'<div class="empty">No active jobs</div>';
+}
+
+let moneyFilter='all';
+async function renderMoney(){
+  const {data}=await sb.from('invoices').select('*').order('invoice_date',{ascending:false,nullsFirst:false});
+  const list=data||[];
+  const tot=list.reduce((s,i)=>s+Number(i.amount||0),0);
+  const paid=list.filter(i=>i.status==='paid').reduce((s,i)=>s+Number(i.amount||0),0);
+  const out=list.filter(i=>i.status!=='paid').reduce((s,i)=>s+Number(i.amount||0),0);
+  const overdue=list.filter(i=>i.status!=='paid'&&i.due_date&&daysFromToday(i.due_date)<0).reduce((s,i)=>s+Number(i.amount||0),0);
+  document.getElementById('m-invoiced').textContent=fmtMoney(tot);
+  document.getElementById('m-paid').textContent=fmtMoney(paid);
+  document.getElementById('m-outstanding').textContent=fmtMoney(out);
+  document.getElementById('m-overdue').textContent=fmtMoney(overdue);
+  let f=list;
+  if(moneyFilter==='invoiced')f=list.filter(i=>i.status==='invoiced');
+  else if(moneyFilter==='paid')f=list.filter(i=>i.status==='paid');
+  else if(moneyFilter==='overdue')f=list.filter(i=>i.status!=='paid'&&i.due_date&&daysFromToday(i.due_date)<0);
+  document.getElementById('money-list').innerHTML=f.length?f.map(i=>`<div class="lt-row" onclick="editInvoice(${i.id})"><span><strong>${escapeHtml(i.client)}</strong>${i.invoice_number?`<br><small style="color:var(--mute);font-size:10px">${escapeHtml(i.invoice_number)}</small>`:''}</span><span style="font-weight:700">${fmtMoney(i.amount)}</span><span class="meta">${i.invoice_date?fmtDate(i.invoice_date):'—'}</span><span class="meta ${i.status!=='paid'?dateClass(i.due_date):''}">${i.status==='paid'&&i.paid_date?fmtDate(i.paid_date):i.due_date?fmtDate(i.due_date):'—'}</span><span><span class="badge ${i.status}">${(i.status||'').toUpperCase()}</span></span></div>`).join(''):'<div class="empty">No invoices match</div>';
+}
+
+async function renderDirect(){
+  const [{data:concepts},{data:rules},{data:casting}]=await Promise.all([
+    sb.from('concepts').select('*').order('updated_at',{ascending:false}),
+    sb.from('rules').select('*').order('position'),
+    sb.from('casting_filter').select('*').order('category')
+  ]);
+  document.getElementById('concepts-list').innerHTML=(concepts||[]).length?(concepts||[]).map(c=>`<div class="row" onclick="editConcept(${c.id})"><span></span><span class="body"><strong>${escapeHtml(c.title)}</strong>${c.outcome?`<small>${escapeHtml(c.outcome)}</small>`:''}</span><span style="font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em;font-weight:700">${escapeHtml(c.target_publication||'')}</span><span><span class="badge">${(c.status||'').toUpperCase()}</span></span></div>`).join(''):'<div class="empty">No concepts yet</div>';
+  document.getElementById('rules-wall').innerHTML=(rules||[]).map((r,i)=>`<div class="r"><span class="num">RULE ${String(i+1).padStart(2,'0')}</span>${escapeHtml(r.rule)}</div>`).join('');
+  document.getElementById('casting-list').innerHTML=(casting||[]).length?(casting||[]).map(c=>`<div class="row" onclick="editCasting(${c.id})"><span></span><span class="body"><strong>${escapeHtml(c.trait)}</strong>${c.notes?`<small>${escapeHtml(c.notes)}</small>`:''}</span><span style="font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em;font-weight:700">${escapeHtml(c.trait_type||'')}</span><span><span class="badge ${c.category==='works_for_me'?'client':'low'}">${c.category==='works_for_me'?'WORKS':'NO'}</span></span></div>`).join(''):'<div class="empty">Empty — define who works in your world</div>';
+}
+
+async function renderLibrary(){
+  const [{data:looks},{data:tests},{data:refs}]=await Promise.all([
+    sb.from('looks').select('*').order('is_active',{ascending:false}).order('updated_at',{ascending:false}),
+    sb.from('test_queue').select('*').order('when_to_test',{nullsFirst:false}),
+    sb.from('inspo_refs').select('*').order('position')
+  ]);
+  const activeLooks=(looks||[]).filter(l=>l.is_active);
+  document.getElementById('ct-looks-active').textContent=`${activeLooks.length} ACTIVE / ${(looks||[]).length}`;
+  document.getElementById('library-looks').innerHTML=(looks||[]).length?(looks||[]).map(l=>{
+    const tags=[l.how_lighting,l.how_lens,l.how_environment].filter(Boolean);
+    return `<div class="look-card" onclick="editLook(${l.id})">
+      <div class="lh"><div class="lh-name">${escapeHtml(l.title)}</div><div class="lh-active">${l.is_active?'★ ACTIVE':''} <span class="badge ${l.status||'not_tested'}" style="margin-left:8px">${(l.status||'not_tested').replace('_',' ').toUpperCase()}</span></div></div>
+      ${l.why_it_works?`<div class="lt"><em>WHY</em>${escapeHtml(l.why_it_works)}</div>`:''}
+      ${l.what_to_steal?`<div class="lt"><em>STEAL</em>${escapeHtml(l.what_to_steal)}</div>`:''}
+      ${tags.length?`<div class="ltags">${tags.map(t=>`<span>${escapeHtml(t)}</span>`).join('')}${(l.tags||[]).map(t=>`<span>${escapeHtml(t)}</span>`).join('')}</div>`:''}
+    </div>`;
+  }).join(''):'<div class="empty">Add looks — these are your style playbook</div>';
+
+  document.getElementById('ct-tests').textContent=(tests||[]).length;
+  document.getElementById('library-test').innerHTML=(tests||[]).length?(tests||[]).map(t=>`<div class="row" onclick="editTest(${t.id})"><span></span><span class="body"><strong>${escapeHtml(t.title)}</strong>${t.who_with?`<small>WITH ${escapeHtml(t.who_with)}</small>`:''}</span><span class="meta ${dateClass(t.when_to_test)}">${t.when_to_test?fmtDate(t.when_to_test):'—'}</span><span><span class="badge ${t.status==='done'?'delivered':t.status==='planned'?'editing':'shooting'}">${(t.status||'to_test').replace('_',' ').toUpperCase()}</span></span></div>`).join(''):'<div class="empty">Add what to test on next shoot</div>';
+
+  document.getElementById('ct-refs').textContent=(refs||[]).length;
+  document.getElementById('library-refs').innerHTML=(refs||[]).length?(refs||[]).map(r=>`<div class="row" onclick="editInspo(${r.id})"><span></span><span class="body"><strong>${escapeHtml(r.title)}</strong>${r.subtitle?`<small>${escapeHtml(r.subtitle)}</small>`:''}</span><span style="font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em;font-weight:700">${(r.tags||[]).slice(0,2).join(' · ')}</span><span class="meta">${r.video_url?'VIDEO':r.hero_image_url?'IMAGE':'—'}</span></div>`).join(''):'<div class="empty">No references yet</div>';
+}
+
+function modal(html,onSave,onDelete){
+  const bg=document.getElementById('modal-bg');
+  bg.innerHTML=`<div class="modal">${html}</div>`;
+  bg.classList.add('on');
+  bg.querySelector('.modal').addEventListener('click',e=>e.stopPropagation());
+  bg.onclick=()=>bg.classList.remove('on');
+  const form=bg.querySelector('form');
+  if(form){
+    form.onsubmit=(e)=>{
       e.preventDefault();
-      const id = a.getAttribute('href').slice(1);
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
-    });
-  });
+      const fd=new FormData(form);const data={};
+      for(const [k,v] of fd.entries()){
+        if(form.elements[k]?.type==='checkbox')data[k]=form.elements[k].checked;
+        else if(v==='')data[k]=null;
+        else data[k]=v;
+      }
+      // also pick up unchecked checkboxes
+      Array.from(form.querySelectorAll('input[type=checkbox]')).forEach(cb=>{if(!(cb.name in data))data[cb.name]=cb.checked});
+      onSave(data).then(()=>{bg.classList.remove('on');setView(getView())});
+    };
+  }
+  if(onDelete){
+    const del=bg.querySelector('.danger');
+    if(del)del.onclick=()=>{if(!confirm('Delete?'))return;onDelete().then(()=>{bg.classList.remove('on');setView(getView())})};
+  }
+}
+function closeModal(){document.getElementById('modal-bg').classList.remove('on')}
+
+function openTaskModal(){modal(`<h2>New task</h2><form><label>Title</label><input name="title" required autofocus><label>Notes</label><textarea name="body"></textarea><label>Due date</label><input name="due_date" type="date"><label><input type="checkbox" name="pinned" style="width:auto;margin-right:8px">Pinned</label><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{await sb.from('tasks').insert(d)})}
+
+function openContactModal(c){c=c||{};modal(`<h2>${c.id?'Edit':'New'} contact</h2><form><label>Name</label><input name="name" value="${escapeHtml(c.name||'')}" required autofocus><label>Role</label><input name="role" value="${escapeHtml(c.role||'')}" placeholder="STYLIST · MODEL · PR · DESIGNER"><label>Category</label><select name="category">${['CLIENT','CONNECTOR','TALENT','GATEKEEPER'].map(o=>`<option ${c.category===o?'selected':''}>${o}</option>`).join('')}</select><label>Instagram</label><input name="instagram" value="${escapeHtml(c.instagram||'')}" placeholder="@handle"><label>Email</label><input name="email" value="${escapeHtml(c.email||'')}" type="email"><label>Phone</label><input name="phone" value="${escapeHtml(c.phone||'')}"><label>Location</label><input name="location" value="${escapeHtml(c.location||'')}"><label>Value</label><select name="value_rating">${['high','medium','low'].map(o=>`<option ${c.value_rating===o?'selected':''}>${o}</option>`).join('')}</select><label>Status</label><select name="status">${['new','warm','ongoing','dormant'].map(o=>`<option ${c.status===o?'selected':''}>${o}</option>`).join('')}</select><label>Last contact</label><input name="last_contact_date" type="date" value="${c.last_contact_date||''}"><label>Next follow-up</label><input name="next_followup_date" type="date" value="${c.next_followup_date||''}"><label>Notes</label><textarea name="notes">${escapeHtml(c.notes||'')}</textarea><div class="modal-actions">${c.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${c.id?'Save':'Add'}</button></div></form>`,async(d)=>{if(c.id)await sb.from('contacts').update(d).eq('id',c.id);else await sb.from('contacts').insert(d)},c.id?async()=>{await sb.from('contacts').delete().eq('id',c.id)}:null)}
+async function editContact(id){const{data}=await sb.from('contacts').select('*').eq('id',id).single();openContactModal(data)}
+
+function openPipelineModal(p){p=p||{};modal(`<h2>${p.id?'Edit':'New'} lead</h2><form><label>Name</label><input name="name" value="${escapeHtml(p.name||'')}" required autofocus><label>Type</label><input name="type" value="${escapeHtml(p.type||'')}" placeholder="BRAND · STYLIST · INFLUENCER · VENUE"><label>Stage</label><select name="stage">${STAGES.map(s=>`<option value="${s.key}" ${p.stage===s.key?'selected':''}>${s.label}</option>`).join('')}</select><label>Last contact</label><input name="last_contact_date" type="date" value="${p.last_contact_date||''}"><label>Next follow-up</label><input name="next_followup_date" type="date" value="${p.next_followup_date||''}"><label>Notes</label><textarea name="notes">${escapeHtml(p.notes||'')}</textarea><div class="modal-actions">${p.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${p.id?'Save':'Add'}</button></div></form>`,async(d)=>{if(p.id)await sb.from('pipeline').update(d).eq('id',p.id);else await sb.from('pipeline').insert(d)},p.id?async()=>{await sb.from('pipeline').delete().eq('id',p.id)}:null)}
+async function editPipeline(id){const{data}=await sb.from('pipeline').select('*').eq('id',id).single();openPipelineModal(data)}
+
+function openWorkModal(w){w=w||{};modal(`<h2>${w.id?'Edit':'New'} job</h2><form><label>Client</label><input name="client" value="${escapeHtml(w.client||'')}" required autofocus><label>Deliverables</label><textarea name="deliverables">${escapeHtml(w.deliverables||'')}</textarea><label>Shoot date</label><input name="shoot_date" type="date" value="${w.shoot_date||''}"><label>Deadline</label><input name="deadline" type="date" value="${w.deadline||''}"><label>Status</label><select name="status">${['shooting','editing','delivered'].map(o=>`<option ${w.status===o?'selected':''}>${o}</option>`).join('')}</select><label>Payment</label><select name="payment_status">${['unpaid','invoiced','paid'].map(o=>`<option ${w.payment_status===o?'selected':''}>${o}</option>`).join('')}</select><label>Notes</label><textarea name="notes">${escapeHtml(w.notes||'')}</textarea><div class="modal-actions">${w.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${w.id?'Save':'Add'}</button></div></form>`,async(d)=>{if(w.id)await sb.from('work').update(d).eq('id',w.id);else await sb.from('work').insert(d)},w.id?async()=>{await sb.from('work').delete().eq('id',w.id)}:null)}
+async function editWork(id){const{data}=await sb.from('work').select('*').eq('id',id).single();openWorkModal(data)}
+
+function openInvoiceModal(i){i=i||{};modal(`<h2>${i.id?'Edit':'New'} invoice</h2><form><label>Client</label><input name="client" value="${escapeHtml(i.client||'')}" required autofocus><label>Amount (£)</label><input name="amount" type="number" step="0.01" value="${i.amount||''}" required><label>Invoice number</label><input name="invoice_number" value="${escapeHtml(i.invoice_number||'')}"><label>Status</label><select name="status">${['invoiced','paid','overdue'].map(o=>`<option ${i.status===o?'selected':''}>${o}</option>`).join('')}</select><label>Issued</label><input name="invoice_date" type="date" value="${i.invoice_date||''}"><label>Due</label><input name="due_date" type="date" value="${i.due_date||''}"><label>Paid</label><input name="paid_date" type="date" value="${i.paid_date||''}"><label>Notes</label><textarea name="notes">${escapeHtml(i.notes||'')}</textarea><div class="modal-actions">${i.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${i.id?'Save':'Add'}</button></div></form>`,async(d)=>{if(i.id)await sb.from('invoices').update(d).eq('id',i.id);else await sb.from('invoices').insert(d)},i.id?async()=>{await sb.from('invoices').delete().eq('id',i.id)}:null)}
+async function editInvoice(id){const{data}=await sb.from('invoices').select('*').eq('id',id).single();openInvoiceModal(data)}
+
+function openConceptModal(c){c=c||{};modal(`<h2>${c.id?'Edit':'New'} concept</h2><form><label>Title</label><input name="title" value="${escapeHtml(c.title||'')}" required autofocus><label>Outcome — what should the images feel like</label><textarea name="outcome">${escapeHtml(c.outcome||'')}</textarea><label>Casting</label><input name="casting" value="${escapeHtml(c.casting||'')}"><label>Lighting</label><input name="lighting" value="${escapeHtml(c.lighting||'')}"><label>Location</label><input name="location" value="${escapeHtml(c.location||'')}"><label>Status</label><select name="status">${['idea','ready','shot','killed'].map(o=>`<option ${c.status===o?'selected':''}>${o}</option>`).join('')}</select><label>Target publication</label><input name="target_publication" value="${escapeHtml(c.target_publication||'')}"><label>Notes</label><textarea name="notes">${escapeHtml(c.notes||'')}</textarea><div class="modal-actions">${c.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${c.id?'Save':'Add'}</button></div></form>`,async(d)=>{if(c.id)await sb.from('concepts').update(d).eq('id',c.id);else await sb.from('concepts').insert(d)},c.id?async()=>{await sb.from('concepts').delete().eq('id',c.id)}:null)}
+async function editConcept(id){const{data}=await sb.from('concepts').select('*').eq('id',id).single();openConceptModal(data)}
+
+function openRuleModal(){modal(`<h2>New rule</h2><form><label>Rule</label><input name="rule" required autofocus placeholder="FLASH FIRST"><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{await sb.from('rules').insert(d)})}
+
+function openCastingModal(){modal(`<h2>New casting trait</h2><form><label>Category</label><select name="category"><option value="works_for_me">Works for me</option><option value="doesnt_work">Doesn't work</option></select><label>Type</label><select name="trait_type"><option value="physical">Physical</option><option value="energy">Energy</option><option value="attitude">Attitude</option></select><label>Trait</label><input name="trait" required><label>Notes</label><textarea name="notes"></textarea><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{await sb.from('casting_filter').insert(d)})}
+async function editCasting(id){const{data}=await sb.from('casting_filter').select('*').eq('id',id).single();modal(`<h2>Edit trait</h2><form><label>Category</label><select name="category"><option value="works_for_me" ${data.category==='works_for_me'?'selected':''}>Works for me</option><option value="doesnt_work" ${data.category==='doesnt_work'?'selected':''}>Doesn't work</option></select><label>Type</label><select name="trait_type"><option value="physical" ${data.trait_type==='physical'?'selected':''}>Physical</option><option value="energy" ${data.trait_type==='energy'?'selected':''}>Energy</option><option value="attitude" ${data.trait_type==='attitude'?'selected':''}>Attitude</option></select><label>Trait</label><input name="trait" value="${escapeHtml(data.trait||'')}" required><label>Notes</label><textarea name="notes">${escapeHtml(data.notes||'')}</textarea><div class="modal-actions"><button type="button" class="danger">Delete</button><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Save</button></div></form>`,async(d)=>{await sb.from('casting_filter').update(d).eq('id',id)},async()=>{await sb.from('casting_filter').delete().eq('id',id)})}
+
+// LOOK MODAL — full Style Engine spec
+function lookModalHTML(l){l=l||{};return `<h2>${l.id?'Edit':'New'} look</h2><form>
+<label>Look name (short, punchy)</label><input name="title" value="${escapeHtml(l.title||'')}" required autofocus placeholder="BATHROOM FLASH COUPLE / HARSH INTIMACY">
+<label>Source</label><input name="source" value="${escapeHtml(l.source||'')}" placeholder="TERRY · IG · CAMPAIGN">
+<label>Why it works (proximity · tension · lighting feel · subject energy)</label><textarea name="why_it_works">${escapeHtml(l.why_it_works||'')}</textarea>
+<h3>How to shoot it</h3>
+<label>Lighting (direct flash / bounce / ambient · distance · harsh vs soft)</label><input name="how_lighting" value="${escapeHtml(l.how_lighting||'')}">
+<label>Lens (24mm close / 35mm mid / 50mm controlled)</label><input name="how_lens" value="${escapeHtml(l.how_lens||'')}">
+<label>Distance (in their face / 1m / 2m)</label><input name="how_distance" value="${escapeHtml(l.how_distance||'')}">
+<label>Environment (bedroom / street / bathroom / car)</label><input name="how_environment" value="${escapeHtml(l.how_environment||'')}">
+<label>Subject direction (looking at camera / ignoring / interacting / static)</label><input name="how_subject_direction" value="${escapeHtml(l.how_subject_direction||'')}">
+<label>What to avoid</label><textarea name="what_to_avoid">${escapeHtml(l.what_to_avoid||'')}</textarea>
+<h3>Status</h3>
+<label>Status</label><select name="status"><option value="not_tested" ${l.status==='not_tested'?'selected':''}>Not tested</option><option value="testing" ${l.status==='testing'?'selected':''}>Testing</option><option value="locked" ${l.status==='locked'?'selected':''}>Locked</option></select>
+<label><input type="checkbox" name="is_active" ${l.is_active?'checked':''} style="width:auto;margin-right:8px">Active look (in your top 10–20)</label>
+<label>Tags (comma-separated — flash, ambient, 24mm, bedroom, intimate, etc.)</label><input name="tags_raw" value="${(l.tags||[]).join(', ')}">
+${l.id?`<h3>Feedback loop</h3><label>What worked</label><textarea name="feedback_worked">${escapeHtml(l.feedback_worked||'')}</textarea><label>What didn't</label><textarea name="feedback_didnt">${escapeHtml(l.feedback_didnt||'')}</textarea><label>What to adjust</label><textarea name="feedback_adjust">${escapeHtml(l.feedback_adjust||'')}</textarea>`:''}
+<div class="modal-actions">${l.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${l.id?'Save':'Add'}</button></div>
+</form>`}
+function openLookModal(){modal(lookModalHTML(),async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('looks').insert(d)})}
+async function editLook(id){const{data:l}=await sb.from('looks').select('*').eq('id',id).single();modal(lookModalHTML(l),async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('looks').update(d).eq('id',id)},async()=>{await sb.from('looks').delete().eq('id',id)})}
+
+function openTestModal(){modal(`<h2>New test</h2><form><label>What to test (look name)</label><input name="title" required autofocus><label>When</label><input name="when_to_test" type="date"><label>Who with (model / contact)</label><input name="who_with"><label>Status</label><select name="status"><option value="to_test">To test</option><option value="planned">Planned</option><option value="done">Done</option></select><label>Notes</label><textarea name="notes"></textarea><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{await sb.from('test_queue').insert(d)})}
+async function editTest(id){const{data:t}=await sb.from('test_queue').select('*').eq('id',id).single();modal(`<h2>Edit test</h2><form><label>What to test</label><input name="title" value="${escapeHtml(t.title||'')}" required><label>When</label><input name="when_to_test" type="date" value="${t.when_to_test||''}"><label>Who with</label><input name="who_with" value="${escapeHtml(t.who_with||'')}"><label>Status</label><select name="status"><option value="to_test" ${t.status==='to_test'?'selected':''}>To test</option><option value="planned" ${t.status==='planned'?'selected':''}>Planned</option><option value="done" ${t.status==='done'?'selected':''}>Done</option></select><label>Notes</label><textarea name="notes">${escapeHtml(t.notes||'')}</textarea><div class="modal-actions"><button type="button" class="danger">Delete</button><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Save</button></div></form>`,async(d)=>{await sb.from('test_queue').update(d).eq('id',id)},async()=>{await sb.from('test_queue').delete().eq('id',id)})}
+
+function openInspoModal(){modal(`<h2>New reference</h2><form><label>Title</label><input name="title" required autofocus><label>Subtitle</label><input name="subtitle"><label>Body</label><textarea name="body"></textarea><label>Hero image URL</label><input name="hero_image_url" placeholder="https://..."><label>Video URL</label><input name="video_url" placeholder="YouTube / Vimeo / Loom / mp4"><label>Tags</label><input name="tags_raw" placeholder="FLASH, ARCHIVE, STUDY"><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('inspo_refs').insert(d)})}
+async function editInspo(id){const{data:r}=await sb.from('inspo_refs').select('*').eq('id',id).single();modal(`<h2>Edit reference</h2><form><label>Title</label><input name="title" value="${escapeHtml(r.title||'')}" required><label>Subtitle</label><input name="subtitle" value="${escapeHtml(r.subtitle||'')}"><label>Body</label><textarea name="body">${escapeHtml(r.body||'')}</textarea><label>Hero image URL</label><input name="hero_image_url" value="${escapeHtml(r.hero_image_url||'')}"><label>Video URL</label><input name="video_url" value="${escapeHtml(r.video_url||'')}"><label>Tags</label><input name="tags_raw" value="${(r.tags||[]).join(', ')}"><div class="modal-actions"><button type="button" class="danger">Delete</button><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Save</button></div></form>`,async(d)=>{d.tags=d.tags_raw?d.tags_raw.split(',').map(s=>s.trim().toUpperCase()).filter(Boolean):[];delete d.tags_raw;await sb.from('inspo_refs').update(d).eq('id',id)},async()=>{await sb.from('inspo_refs').delete().eq('id',id)})}
+
+document.querySelectorAll('#view-contacts .filters button[data-cf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-contacts .filters button[data-cf]').forEach(x=>x.classList.toggle('on',x===b));contactFilter=b.dataset.cf;renderContacts()});
+document.getElementById('contacts-search')?.addEventListener('input',()=>renderContacts());
+document.querySelectorAll('#view-work .filters button[data-wf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-work .filters button[data-wf]').forEach(x=>x.classList.toggle('on',x===b));workFilter=b.dataset.wf;renderWork()});
+document.querySelectorAll('#view-money .filters button[data-mf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-money .filters button[data-mf]').forEach(x=>x.classList.toggle('on',x===b));moneyFilter=b.dataset.mf;renderMoney()});
+
+setView(getView());
 </script>
 
 </body>

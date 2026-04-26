@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style id="ng-lock">html.ng-locked > body > *:not(#ng-auth-gate){display:none!important}</style>
+<script>
+(function(){
+  if (localStorage.getItem('ng_auth') === 'ok') return;
+  document.documentElement.classList.add('ng-locked');
+  document.addEventListener('DOMContentLoaded', function(){
+    var g = document.createElement('div');
+    g.id = 'ng-auth-gate';
+    g.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em';
+    g.innerHTML = '<div style="text-align:center;padding:48px;max-width:480px;width:100%"><div style="font-size:clamp(36px,7vw,64px);line-height:.92;letter-spacing:-.02em;margin-bottom:14px">NATHAN GARLAND</div><div style="font-size:11px;margin-bottom:64px">STUDIO &middot; PRIVATE</div><form id="ng-gf"><input id="ng-gp" type="password" placeholder="PASSWORD" autocomplete="current-password" autofocus style="background:transparent;border:0;border-bottom:1px solid #fff;padding:14px 0;color:#fff;font:inherit;text-align:center;outline:none;width:100%;text-transform:uppercase"><button type="submit" style="margin-top:24px;background:#fff;color:#000;border:0;padding:14px;font:inherit;cursor:pointer;width:100%;text-transform:uppercase">ENTER</button></form><div id="ng-ge" style="margin-top:18px;font-size:9px;color:#d8443c;height:12px"></div></div>';
+    document.body.appendChild(g);
+    document.getElementById('ng-gf').addEventListener('submit', function(e){
+      e.preventDefault();
+      if (document.getElementById('ng-gp').value === 'garland2026') {
+        localStorage.setItem('ng_auth','ok');
+        location.reload();
+      } else {
+        document.getElementById('ng-ge').textContent = 'WRONG PASSWORD';
+        document.getElementById('ng-gp').value = '';
+      }
+    });
+  });
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NATHAN GARLAND — STUDIO</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#000;
+    --ink:#fff;
+    --hair:rgba(255,255,255,.20);
+    --mute:rgba(255,255,255,.5);
+  }
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  html,body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:700;
+    -webkit-font-smoothing:antialiased;
+    text-transform:uppercase;
+  }
+  body{font-size:13px;line-height:1.6;letter-spacing:0.02em}
+  a{color:inherit;text-decoration:none}
+
+  /* COVER */
+  .cover{
+    height:100vh;
+    min-height:720px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
+    padding:96px 48px 48px;
+    position:relative;
+  }
+  .cover .wordmark{
+    font-weight:700;
+    font-size:clamp(40px, 7vw, 96px);
+    line-height:0.92;
+    letter-spacing:-0.02em;
+    margin-bottom:20px;
+  }
+  .cover .sub{
+    font-size:13px;
+    line-height:1.15;
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+  .cover .credit{
+    position:absolute;
+    bottom:48px;
+    left:48px;
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+
+  /* NAV */
+  nav.jump{
+    position:sticky;
+    top:0;
+    background:var(--bg);
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    z-index:50;
+    display:flex;
+    overflow-x:auto;
+  }
+  nav.jump a{
+    padding:18px 32px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    border-right:1px solid var(--hair);
+    color:var(--mute);
+    transition:color .15s;
+    white-space:nowrap;
+  }
+  nav.jump a:hover{color:var(--ink)}
+  nav.jump a:last-child{border-right:0}
+
+  /* ARTICLE */
+  article{
+    padding:96px 48px 96px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  .label{
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:24px;
+  }
+  h1.h{
+    font-weight:700;
+    font-size:clamp(40px, 7vw, 88px);
+    line-height:0.95;
+    letter-spacing:-0.025em;
+    margin-bottom:48px;
+    max-width:1000px;
+  }
+  .body p{
+    font-size:13px;
+    line-height:1.85;
+    letter-spacing:0.02em;
+    font-weight:400;
+    max-width:680px;
+    margin-bottom:18px;
+  }
+  .body p:last-child{margin-bottom:0}
+  .credit-line{
+    margin-top:96px;
+    padding-top:18px;
+    border-top:1px solid var(--hair);
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+
+  /* LIST (people, editorial pubs) */
+  .list{
+    margin-top:64px;
+    border-top:1px solid var(--ink);
+  }
+  .list-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:18px 0;
+    border-bottom:1px solid var(--hair);
+    font-size:13px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    gap:24px;
+  }
+  .list-item .handle{flex:0 0 auto}
+  .list-item .name{
+    flex:1;
+    text-align:right;
+    font-size:11px;
+    font-weight:400;
+  }
+  .list-item.flag .handle::before{
+    content:"●  ";
+    font-size:8px;
+    vertical-align:middle;
+  }
+
+  /* IMAGE ZONE */
+  .b-image{
+    width:100%;
+    max-width:680px;
+    aspect-ratio:4/5;
+    background:#0a0a0a;
+    border:1px solid var(--hair);
+    margin-bottom:32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .b-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .b-image.placeholder::after{
+    content:"IMAGE — 4:5";
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    font-size:9px;
+    letter-spacing:0.02em;
+    color:var(--mute);
+    font-weight:700;
+  }
+  .b-image.wide{
+    max-width:880px;
+    aspect-ratio:3/2;
+  }
+  .b-image.wide.placeholder::after{
+    content:"IMAGE — 3:2";
+  }
+  .b-caption{
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    color:var(--mute);
+    margin-top:-20px;
+    margin-bottom:32px;
+    max-width:680px;
+  }
+
+  /* FEATURE BLOCK (concepts, key people, journal entries) */
+  .block{
+    padding:48px 0;
+    border-bottom:1px solid var(--hair);
+    max-width:880px;
+    display:block;
+    text-decoration:none;
+    color:inherit;
+  }
+  a.block{cursor:pointer;transition:background .15s}
+  a.block:hover{background:rgba(255,255,255,.025)}
+  a.block:hover .b-image{border-color:var(--ink)}
+  a.block:hover .b-view{color:var(--ink)}
+  .b-view{
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px solid var(--hair);
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    color:var(--mute);
+  }
+  .b-view::after{content:"  →"}
+  .block:first-of-type{border-top:1px solid var(--ink);margin-top:64px}
+  .block .b-label{
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:14px;
+    color:var(--mute);
+  }
+  .block .b-handle{
+    font-weight:700;
+    font-size:clamp(24px,3vw,40px);
+    line-height:0.95;
+    letter-spacing:-0.015em;
+    margin-bottom:8px;
+  }
+  .block .b-name{
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  .block .b-body{
+    font-size:13px;
+    line-height:1.7;
+    letter-spacing:0.02em;
+    font-weight:400;
+    max-width:680px;
+    margin-bottom:18px;
+  }
+  .block .b-pull{
+    font-weight:700;
+    font-size:18px;
+    line-height:1.3;
+    letter-spacing:-0.005em;
+    border-left:2px solid var(--ink);
+    padding:6px 0 6px 18px;
+    margin:24px 0;
+    max-width:520px;
+  }
+  .block .b-tags{
+    display:flex;
+    gap:0;
+    flex-wrap:wrap;
+    font-size:9px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    color:var(--mute);
+  }
+  .block .b-tags span{
+    padding-right:14px;
+    margin-right:14px;
+    border-right:1px solid var(--hair);
+  }
+  .block .b-tags span:last-child{border-right:0}
+
+  /* EDITORIAL STAGES */
+  .stage{
+    padding:48px 0 32px;
+    border-top:1px solid var(--ink);
+    margin-bottom:0;
+  }
+  .stage:first-of-type{margin-top:64px}
+  .stage .s-label{
+    font-size:11px;
+    letter-spacing:0.02em;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .stage .s-count{
+    font-size:9px;
+    color:var(--mute);
+    margin-bottom:24px;
+    font-weight:700;
+  }
+
+  /* DIVIDER */
+  .divider{
+    height:1px;
+    background:var(--ink);
+    margin:0 48px;
+  }
+
+  @media(max-width:760px){
+    article{padding:64px 24px}
+    .cover{padding:64px 24px 32px}
+    .cover .credit{left:24px;bottom:32px}
+    .list-item{flex-direction:column;align-items:flex-start;gap:6px}
+    .list-item .name{text-align:left}
+    .divider{margin:0 24px}
+    nav.jump a{padding:14px 20px}
+  }
+  @page{margin:14mm; size:A4}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="wordmark">NATHAN GARLAND</div>
+  <div class="sub">
+    <div>STUDIO</div>
+    <div>A WORKING DOCUMENT</div>
+    <div>NATHANGARLAND.CO.UK</div>
+  </div>
+  <div class="credit">04.26 · LONDON</div>
+</section>
+
+<!-- NAV -->
+<nav class="jump">
+  <a href="#scene">SCENE</a>
+  <a href="#map">MAP</a>
+  <a href="#concepts">CONCEPTS</a>
+  <a href="#inspo">INSPO</a>
+  <a href="#editorial">EDITORIAL</a>
+  <a href="#journal">JOURNAL</a>
+</nav>
+
+<!-- =================== SCENE =================== -->
+<article id="scene">
+  <div class="label">THE SCENE</div>
+  <h1 class="h">THE PEOPLE<br>WHO MAKE<br>THE LANE.</h1>
+  <div class="body">
+    <p>PEOPLE WITH PRESENCE. THE KIND YOU DON'T HAVE TO DIRECT.</p>
+    <p>CASTING OVER EVERYTHING.</p>
+    <p>NOT THE COMMERCIAL ROSTER. NOT THE PR AGENCIES. NOT THE DENTAL CHAINS. THAT LIVES IN ROADHOUSE.</p>
+    <p>THIS IS WHO WOULD TAKE THE CALL. A SOLID DOT MARKS A LIVE OR RECENT EXCHANGE.</p>
+  </div>
+
+  <div class="list">
+    <div class="list-item"><span class="handle">SAINT LAURENT</span><span class="name">AESTHETIC ANCHOR · ALWAYS</span></div>
+    <div class="list-item"><span class="handle">HEDI SLIMANE</span><span class="name">DIOR HOMME · CELINE · SAINT LAURENT</span></div>
+    <div class="list-item"><span class="handle">STEVEN KLEIN</span><span class="name">DARK LUXURY · CAMPAIGN ARCHIVE</span></div>
+    <div class="list-item"><span class="handle">TERRY RICHARDSON</span><span class="name">DIRECT FLASH · 2000S ARCHIVE</span></div>
+    <div class="list-item"><span class="handle">JUERGEN TELLER</span><span class="name">ANTI-POLISH · MARC JACOBS</span></div>
+    <div class="list-item"><span class="handle">@THECOBRASNAKE</span><span class="name">PARTY DOCUMENTATION · 2005-2012</span></div>
+    <div class="list-item flag"><span class="handle">@GEESMALL_FACES</span><span class="name">GEE · IN THE SCENE</span></div>
+    <div class="list-item flag"><span class="handle">@SOPHIAKELLY</span><span class="name">SOPHIA KELLY</span></div>
+    <div class="list-item flag"><span class="handle">—</span><span class="name">COCO BLAKE</span></div>
+    <div class="list-item flag"><span class="handle">—</span><span class="name">JXDEN</span></div>
+    <div class="list-item flag"><span class="handle">@HENNYSEEAR</span><span class="name">HENNY SEAR · CONNECTOR</span></div>
+    <div class="list-item flag"><span class="handle">@TEDDYCORSICA</span><span class="name">TEDDY CORSICA · CONNECTOR</span></div>
+    <div class="list-item flag"><span class="handle">@STORMMCCORMICKK</span><span class="name">STORM MCCORMICK · CONNECTOR</span></div>
+    <div class="list-item flag"><span class="handle">@LAVALARUE</span><span class="name">LAVA LA RUE · NINE8 · ARTIST</span></div>
+    <div class="list-item flag"><span class="handle">@KELSYKARTER</span><span class="name">KELSY KARTER · ARTIST</span></div>
+    <div class="list-item flag"><span class="handle">—</span><span class="name">HENRY HOTROCC · ARTIST</span></div>
+    <div class="list-item flag"><span class="handle">@MIAKHALIFA</span><span class="name">MIA K. · CULTURAL MASS</span></div>
+    <div class="list-item flag"><span class="handle">@JAEGRILLS</span><span class="name">JAKE EVANS · JEWELLERY</span></div>
+    <div class="list-item flag"><span class="handle">@LAWLESS_STUDIO</span><span class="name">JOSH MOORE · DESIGNER</span></div>
+  </div>
+
+  <div class="credit-line">NG · SCENE · HEAVY HITTERS · WORKING ROSTER LIVES IN THE MAP</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- =================== CONCEPTS =================== -->
+<article id="concepts">
+  <div class="label">CONCEPTS</div>
+  <h1 class="h">SHOOTS THAT<br>DON'T EXIST<br>YET.</h1>
+  <div class="body">
+    <p>LIVES HERE UNTIL YOU MAKE IT REAL OR KILL IT.</p>
+  </div>
+
+  <a class="block" href="concept-off-duty.html">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">IDEA · TARGET — KING KONG</div>
+    <div class="b-handle">OFF-DUTY</div>
+    <div class="b-name">MODELS WITH THEIR GUARDS DOWN.</div>
+    <div class="b-body">FIVE SUBJECTS. ONE DAY EACH. DIRECT FLASH, 24MM PROXIMITY. NOT THE CLOTHES — THE CIGARETTE BREAK, THE UNMADE BED, THE HALF-EATEN BREAKFAST. STORM, LILY, WHITNEY. LOOP IN TWO OR THREE FROM YOUR FOLLOWS.</div>
+    <div class="b-tags"><span>FLASH</span><span>BEDROOM</span><span>24MM</span><span>NO STYLIST</span></div>
+    <div class="b-view">OPEN DETAIL</div>
+  </a>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">PLANNED · TARGET — SNEEZE</div>
+    <div class="b-handle">LATE SHIFT</div>
+    <div class="b-name">A KITCHEN BRIGADE AFTER SERVICE.</div>
+    <div class="b-body">SHOT IN A REAL LONDON KITCHEN AT 1AM, POST-SERVICE. CREW IN WHITES, SHIRTS OPEN, PULLING BEERS. STEAM. BURNT EDGES. APPROACH VIA FOLD OR THE STANDARD DECOY CHEFS.</div>
+    <div class="b-tags"><span>KITCHEN</span><span>NIGHT</span><span>REAL CREW</span><span>HEAT</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">IDEA · TARGET — THE FACE</div>
+    <div class="b-handle">SOUTH OF THE RIVER</div>
+    <div class="b-name">PECKHAM, BRIXTON, NEW CROSS.</div>
+    <div class="b-body">ONGOING, NO DEADLINE. ANYONE INTERESTING SOUTH OF THE THAMES. BUS STOPS, TOWER BLOCKS, OFF-LICENCES. RESISTS POSTCARD LONDON. BUILDS SLOWLY INTO A BODY OF WORK — A YEAR MINIMUM.</div>
+    <div class="b-tags"><span>DOCUMENTARY</span><span>SOUTH LDN</span><span>ONGOING</span><span>STREET</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">IDEA · TARGET — PASCAL</div>
+    <div class="b-handle">COUPLES, ARGUING</div>
+    <div class="b-name">REAL CHEMISTRY. NOT ROMANCE.</div>
+    <div class="b-body">TWO PEOPLE WHO ACTUALLY KNOW EACH OTHER. A SCRIPTED-ISH ARGUMENT, OR THE LONG SILENCE AFTER ONE. CAMERA CLOSE. THE ENERGY REAL COUPLES HAVE THAT YOU CAN'T CAST FOR. KIRAN X LEIGH FIT.</div>
+    <div class="b-tags"><span>COUPLES</span><span>TENSION</span><span>INTIMATE</span><span>BEDROOM</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">SHOT · TARGET — ROLLACOASTER</div>
+    <div class="b-handle">DRESSING / UNDRESSING</div>
+    <div class="b-name">THE FIVE MINUTES EITHER SIDE OF A SHOOT.</div>
+    <div class="b-body">SUBJECTS GETTING READY, OR UNWINDING AFTER. THE ROBE, THE HALF-PULLED JEANS, THE MAKEUP WIPE, THE CIGARETTE IN THE DOORWAY. ALREADY SHOT ONE FRAME WITH NUSRAT.</div>
+    <div class="b-tags"><span>BTS</span><span>INTIMATE</span><span>FLASH</span><span>FASHION-ADJACENT</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">IDEA · TARGET — ZINE / DAZED</div>
+    <div class="b-handle">DUBSTEP DOCUMENT</div>
+    <div class="b-name">THE REAL UNDERGROUND. NOT THE BROSTEP.</div>
+    <div class="b-body">LONG-FORM. DJS IN THEIR FLATS, SOUNDCHECK NIGHTS, BASEMENT RAVES. B&amp;W, OCCASIONAL FLASH. MOTHCLUB, PICKLE FACTORY, VILLAGE UNDERGROUND AS VENUES. BUILDS TOWARD A ZINE.</div>
+    <div class="b-tags"><span>MUSIC</span><span>UNDERGROUND</span><span>B&amp;W</span><span>ZINE</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">IDEA · TARGET — KING KONG / SOLO</div>
+    <div class="b-handle">INK STUDIES</div>
+    <div class="b-name">TATTOOED BODIES AS PORTRAIT SUBJECTS.</div>
+    <div class="b-body">THREE SITTINGS AT BLANK COLLECTIVE. SUBJECTS IN THEIR OWN INK, FULL SKIN IN FRAME. BLACK BACKGROUNDS. HARD FLASH ON BODY, SOFT ON FACE. ALREADY HALF-THINKING ABOUT IT EVERY TIME YOU SHOOT LAWLESS.</div>
+    <div class="b-tags"><span>TATTOO</span><span>BLANK COLLECTIVE</span><span>B&amp;W</span><span>STUDIO</span><span>SKIN</span></div>
+  </div>
+
+  <div class="credit-line">NG · CONCEPTS · 7 LIVE</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- =================== INSPO =================== -->
+<article id="inspo">
+  <div class="label">INSPO</div>
+  <h1 class="h">THE ARCHIVE.<br>WHAT TO STUDY.</h1>
+  <div class="body">
+    <p>PAST CAMPAIGNS, ARCHIVE FRAMES, REFERENCE IMAGERY. THE WORK YOU PULL FROM WHEN YOU NEED TO REMEMBER THE LANE.</p>
+    <p>NOT WHAT YOU'VE SHOT. WHAT TAUGHT YOU HOW TO SEE.</p>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">TERRY RICHARDSON · CAMPAIGN ARCHIVE</div>
+    <div class="b-handle">DIRECT FLASH. NO APOLOGY.</div>
+    <div class="b-body">THE WHOLE LANE STARTS HERE. SUPREME, SISLEY, THE 2000S TERRY ARCHIVE. BLOWN HIGHLIGHTS, IMPERFECT SKIN, SUBJECT KNOWS THE CAMERA IS THERE. STUDY: THE FRAMING IS NEVER POLITE.</div>
+    <div class="b-tags"><span>FLASH</span><span>2000S</span><span>CONFRONTATIONAL</span><span>STUDY</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">HEDI SLIMANE · DIOR HOMME 2003-2007</div>
+    <div class="b-handle">THE COMPRESSION YEARS.</div>
+    <div class="b-body">NOT THE SILHOUETTES. THE COMPRESSION. HOW TIGHT HE STAYS ON THE FACE. HOW LITTLE BACKGROUND HE ALLOWS. THE WHOLE POINT OF 24MM IS THE PRESSURE.</div>
+    <div class="b-tags"><span>HEDI</span><span>BLACK + WHITE</span><span>FRAMING</span><span>YOUTH</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">JUERGEN TELLER · MARC JACOBS</div>
+    <div class="b-handle">THE RUDENESS OF THE FRAMING.</div>
+    <div class="b-body">NOBODY COPIES THE RUDENESS. BODY CROPPED WRONG. EYES HALF-CLOSED. SKIN IMPERFECT ON PURPOSE. OPPOSITE OF CORRECT. OPPOSITE OF SAFE. THE CAMPAIGN-AS-OUTTAKE.</div>
+    <div class="b-tags"><span>TELLER</span><span>CAMPAIGN</span><span>ANTI-POLISH</span><span>HONEST</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">MARK THE COBRASNAKE · 2005-2012</div>
+    <div class="b-handle">PARTY DOCUMENTATION AS ART.</div>
+    <div class="b-body">THE LANE HE CARVED IS THE ONE YOU'RE BUILDING — JUST WITH MORE TENSION AND LESS SMILE. THE FLASH, THE PROXIMITY, THE ACCESS — ALL THERE. THE DIFFERENCE IS INTENT. HE DOCUMENTED. YOU'RE DIRECTING.</div>
+    <div class="b-tags"><span>COBRASNAKE</span><span>PARTY</span><span>FLASH</span><span>ACCESS</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">STEVEN KLEIN · CAMPAIGN ARCHIVE</div>
+    <div class="b-handle">DARK LUXURY. HIGH TENSION.</div>
+    <div class="b-body">WHEN THE COMMERCIAL IS DANGEROUS. KLEIN IS THE PROOF YOU CAN SHOOT BIG BUDGETS WITHOUT GOING SAFE. STUDY: HOW HE HOLDS THE LIGHT, HOW HE LETS THE FRAME GO QUIET.</div>
+    <div class="b-tags"><span>KLEIN</span><span>HIGH FASHION</span><span>TENSION</span><span>STUDY</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">ESTEVAN ORIOL · LA</div>
+    <div class="b-handle">DOCUMENT YOUR CITY.</div>
+    <div class="b-body">THE LA STREETS BECAME HIS LIFETIME PROJECT. THE LESSON FOR LONDON: PICK A ROOM, PICK A SCENE, KEEP COMING BACK. ONE BODY OF WORK, MANY YEARS.</div>
+    <div class="b-tags"><span>ORIOL</span><span>STREET</span><span>LA</span><span>LONG-FORM</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder wide"></div>
+    <div class="b-label">FILM · DRIVE · NIGHTCRAWLER · THE PLACE BEYOND THE PINES</div>
+    <div class="b-handle">THE LONE OPERATOR.</div>
+    <div class="b-body">NIGHTTIME ENVIRONMENTS. STYLISED REALISM. TENSION + ATMOSPHERE. THESE ARE NOT REFERENCES FOR FRAMES, THEY'RE REFERENCES FOR THE MOOD YOU WANT THE WORK TO HAVE.</div>
+    <div class="b-tags"><span>FILM</span><span>NIGHT</span><span>TENSION</span><span>MOOD</span></div>
+  </div>
+
+  <div class="credit-line">NG · INSPO · 7 STUDIES</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- =================== EDITORIAL =================== -->
+<article id="editorial">
+  <div class="label">EDITORIAL</div>
+  <h1 class="h">SUBMISSIONS<br>IN MOTION.</h1>
+  <div class="body">
+    <p>KING KONG. THE FACE. INTERVIEW. ROLLACOASTER. SNEEZE. PASCAL.</p>
+    <p>STAGES MOVE TOP-TO-BOTTOM. PUSH STORIES INTO THE WORLD.</p>
+  </div>
+
+  <div class="stage">
+    <div class="s-label">IDEA</div>
+    <div class="s-count">3 STORIES</div>
+    <div class="list-item"><span class="handle">THE FACE</span><span class="name">SOUTH OF THE RIVER · PHOTO ESSAY</span></div>
+    <div class="list-item"><span class="handle">I-D</span><span class="name">DRESSING / UNDRESSING · 8 FRAMES</span></div>
+    <div class="list-item"><span class="handle">SNEEZE</span><span class="name">LATE SHIFT · KITCHEN BRIGADE</span></div>
+  </div>
+
+  <div class="stage">
+    <div class="s-label">RESEARCHED</div>
+    <div class="s-count">2 STORIES</div>
+    <div class="list-item"><span class="handle">KING KONG</span><span class="name">OFF-DUTY · 5 MODELS · ONE DAY EACH</span></div>
+    <div class="list-item"><span class="handle">ROLLACOASTER</span><span class="name">DRESSING / UNDRESSING · ALT FRAMES</span></div>
+  </div>
+
+  <div class="stage">
+    <div class="s-label">PITCHED</div>
+    <div class="s-count">2 STORIES</div>
+    <div class="list-item"><span class="handle">PASCAL MAGAZINE</span><span class="name">COUPLES, ARGUING · STUDIO DAY</span></div>
+    <div class="list-item"><span class="handle">THE PERFECT</span><span class="name">LATE SHIFT · ALT PITCH</span></div>
+  </div>
+
+  <div class="stage">
+    <div class="s-label">ACCEPTED</div>
+    <div class="s-count">1 STORY</div>
+    <div class="list-item flag"><span class="handle">NINE8 / LAVA</span><span class="name">LAVARAZZI · LISTENING PARTY</span></div>
+  </div>
+
+  <div class="stage">
+    <div class="s-label">PUBLISHED</div>
+    <div class="s-count">NOTHING YET</div>
+    <div class="list-item"><span class="handle">—</span><span class="name">MAKE IT.</span></div>
+  </div>
+
+  <div class="credit-line">NG · EDITORIAL · 8 STORIES IN MOTION</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- =================== JOURNAL =================== -->
+<article id="journal">
+  <div class="label">JOURNAL</div>
+  <h1 class="h">FIELD NOTES.</h1>
+  <div class="body">
+    <p>WHERE YOU'VE BEEN. WHO YOU SHOT. THE REFS THAT HIT.</p>
+    <p>PRIVATE. REVERSE-CHRONOLOGICAL.</p>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">26.04 · NOTE</div>
+    <div class="b-handle">TWO ENGINES RUNNING.</div>
+    <div class="b-body">ROADHOUSE PAYS. THIS IS FOR THE REST. BRAND ENGINE GETS ITS OWN ROOM TO BREATHE. CASH FUNDS THE EDITORIAL. EDITORIAL FUNDS THE LANE. LIVE, NETWORK, ENJOY LIFE, HAVE FUN, EXPERIMENT, MAKE ICONIC IMAGERY, EXIST.</div>
+    <div class="b-tags"><span>STRATEGY</span><span>RULES</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">19.04 · SHOOT — LAWLESS</div>
+    <div class="b-handle">FOOTIE TEES, ESTATE + PUB.</div>
+    <div class="b-body">JOSH MOORE, SELF-FUNDED WORLD CUP PROJECT. LAURA MODELLING CROPPED GIRLS VERSIONS. ESTATE LOCATION THEN PUB. LOW BUDGET, HIGH TRUST. THE KIND OF WORK THAT BUILDS THE LANE.</div>
+    <div class="b-pull">CONFIRMING 19TH MY BRO.</div>
+    <div class="b-tags"><span>LAWLESS</span><span>ESTATE</span><span>PUB</span><span>WORLD CUP</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">12.04 · SHOOT — NUSRAT</div>
+    <div class="b-handle">REGENTS PARK, SECOND PASS.</div>
+    <div class="b-body">1PM START, 2-3 HOURS. MULTIPLE LOOKS, 15-20 MIN EACH. ONE HOUR FOR GROUPS. SHE KNOWS WHAT SHE WANTS AND SHOOTS FAST. THE MAR 29 SET WAS RIGHT — HOLD THE LINE.</div>
+    <div class="b-tags"><span>FASHION</span><span>REGENTS PARK</span><span>RE-DO</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">04.04 · REFERENCE</div>
+    <div class="b-handle">HEDI AT YVES — THE FLASH YEARS.</div>
+    <div class="b-body">PULLED THE 2003-2007 SLIMANE ARCHIVE AGAIN. NOT THE SILHOUETTES. THE COMPRESSION. HOW TIGHT HE STAYS ON THE FACE. HOW LITTLE BACKGROUND HE ALLOWS. THE WHOLE POINT OF 24MM IS THE PRESSURE.</div>
+    <div class="b-pull">TIGHT, INVASIVE FRAMING. SUBJECTS AWARE OF CAMERA. TENSION, ATTITUDE, PRESENCE.</div>
+    <div class="b-tags"><span>HEDI</span><span>ARCHIVE</span><span>FRAMING</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">29.03 · SHOOT — NUSRAT &amp; LUKE</div>
+    <div class="b-handle">TWO SUBJECTS, ONE PARK, ONE FLASH.</div>
+    <div class="b-body">NUSRAT'S FASHION SHOOT FIRST, THEN LUKE'S DIGITALS STRAIGHT AFTER. SAME 24MM, SAME SPEEDLIGHT, TWO DIFFERENT PEOPLE. LUKE HAD NEVER BEEN SHOT BEFORE. THE FIRST FRAME AFTER HE STOPPED TRYING TO POSE — THAT'S THE ONE.</div>
+    <div class="b-tags"><span>REGENTS PARK</span><span>FLASH</span><span>DIGITALS</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">26.03 · SHOOT — LAVA LA RUE</div>
+    <div class="b-handle">LAVARAZZI, NO PHONES INSIDE.</div>
+    <div class="b-body">LISTENING PARTY. PAPARAZZI-STYLE STREET PHOTOGRAPHY ONLY — GUESTS ENTERING AND LEAVING. STRICTLY NO PHONES IN THE VENUE. £100 FEE BUT THE ACCESS IS THE POINT. LAVA IS A REAL ARTIST. THIS IS THE WORLD.</div>
+    <div class="b-pull">EDITORIAL GOLD HAS NOTHING TO DO WITH THE DAY RATE.</div>
+    <div class="b-tags"><span>NINE8</span><span>MUSIC</span><span>STREET</span><span>PAPARAZZI</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">24.03 · NOTE</div>
+    <div class="b-handle">OLD BLUE LAST IS HALF A MILE AWAY.</div>
+    <div class="b-body">YOU FOLLOW THE VENUES, YOU DON'T SHOOT IN THEM. FIX THAT. ONE NIGHT AT OLD BLUE LAST, ONE AT MOTHCLUB, ONE AT DALSTON SUPERSTORE — THREE FRAMES IN THREE WEEKS. STOP WAITING TO BE INVITED.</div>
+    <div class="b-tags"><span>VENUES</span><span>OLD BLUE LAST</span><span>MOTHCLUB</span><span>ACTION</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">21.03 · REFERENCE</div>
+    <div class="b-handle">TELLER, AGAIN.</div>
+    <div class="b-body">MARC JACOBS CAMPAIGNS THIS MORNING. THE THING NOBODY COPIES IS THE RUDENESS OF THE FRAMING. BODY CROPPED WRONG. EYES HALF-CLOSED. SKIN IMPERFECT ON PURPOSE. OPPOSITE OF CORRECT. OPPOSITE OF SAFE.</div>
+    <div class="b-tags"><span>TELLER</span><span>CAMPAIGN</span><span>STUDY</span></div>
+  </div>
+
+  <div class="block">
+    <div class="b-image placeholder"></div>
+    <div class="b-label">15.03 · REFERENCE</div>
+    <div class="b-handle">COBRASNAKE, MARK THE COBRASNAKE.</div>
+    <div class="b-body">SPENT THE NIGHT WITH THE ARCHIVE. THE LANE HE CARVED IS THE ONE YOU'RE BUILDING, JUST WITH MORE TENSION AND LESS SMILE. THE FLASH, THE PROXIMITY, THE ACCESS — ALL THERE. THE DIFFERENCE IS INTENT. HE DOCUMENTED. YOU'RE DIRECTING.</div>
+    <div class="b-tags"><span>COBRASNAKE</span><span>ARCHIVE</span><span>STUDY</span></div>
+  </div>
+
+  <div class="credit-line">NG · JOURNAL · 9 ENTRIES</div>
+</article>
+
+<div class="divider"></div>
+
+<!-- SIGN-OFF -->
+<section class="cover">
+  <div class="wordmark">NATHAN GARLAND</div>
+  <div class="sub">
+    <div>STUDIO</div>
+    <div>FIN</div>
+    <div>NATHANGARLAND.CO.UK</div>
+  </div>
+  <div class="credit">04.26 · LONDON</div>
+</section>
+
+<script>
+  // JS-based scroll instead of native anchor jumping
+  // (native anchors get intercepted in some preview environments)
+  document.querySelectorAll('nav.jump a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+  });
+</script>
+
+</body>
+</html>
