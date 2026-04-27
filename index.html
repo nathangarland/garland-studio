@@ -188,8 +188,8 @@
   .lb-actions button:hover{background:#fff;color:#000;border-color:#fff}
   .lb-actions button.close{padding:8px 12px;font-size:14px;letter-spacing:0}
   .lb-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:24px;width:100%}
-  .lb-hero{width:100%;max-width:1100px;background:#0a0a0a;display:flex;align-items:center;justify-content:center;margin-bottom:18px;min-height:300px;position:relative;overflow:hidden}
-  .lb-hero img,.lb-hero video{max-width:100%;max-height:82vh;object-fit:contain;display:block;transition:opacity .15s}
+  .lb-hero{width:100%;max-width:1100px;background:#0a0a0a;display:flex;align-items:center;justify-content:center;margin-bottom:12px;height:78vh;position:relative;overflow:hidden;flex:0 0 auto}
+  .lb-hero img,.lb-hero video{max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity .15s}
   .lb-hero img.loading{opacity:0}
   .lb-nav{position:absolute;top:0;bottom:0;width:18%;max-width:100px;display:flex;align-items:center;justify-content:center;background:transparent;color:rgba(255,255,255,.4);font-size:36px;font-weight:300;cursor:pointer;border:0;transition:color .12s,background .12s;z-index:2}
   .lb-nav:hover{color:#fff;background:linear-gradient(to right,rgba(0,0,0,.4),transparent)}
@@ -200,8 +200,10 @@
   .lb-nav:disabled:hover{background:transparent;color:rgba(255,255,255,.15)}
   .lb-counter{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:0.18em;font-weight:700;color:#fff;background:rgba(0,0,0,.65);padding:4px 10px;backdrop-filter:blur(6px);z-index:2}
   .lb-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:9px;letter-spacing:0.22em;font-weight:700;color:var(--mute);text-transform:uppercase}
-  .lb-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:4px;width:100%;max-width:1100px;margin-bottom:24px}
-  .lb-gallery .lb-thumb{aspect-ratio:1;background:#0a0a0a;cursor:pointer;border:1px solid var(--hair);overflow:hidden}
+  .lb-gallery{display:flex;flex-wrap:nowrap;gap:4px;width:100%;max-width:1100px;margin-bottom:24px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;scrollbar-color:var(--hair) transparent}
+  .lb-gallery::-webkit-scrollbar{height:6px}
+  .lb-gallery::-webkit-scrollbar-thumb{background:var(--hair);border-radius:3px}
+  .lb-gallery .lb-thumb{flex:0 0 90px;width:90px;height:90px;background:#0a0a0a;cursor:pointer;border:1px solid var(--hair);overflow:hidden}
   .lb-gallery .lb-thumb:hover{border-color:#fff}
   .lb-gallery .lb-thumb.active{border-color:#fff;border-width:2px}
   .lb-gallery .lb-thumb img{width:100%;height:100%;object-fit:cover}
@@ -214,6 +216,25 @@
   .lb-embed.ig iframe{aspect-ratio:9/14;border:1px solid var(--hair)}
   .lb-embed.video iframe{aspect-ratio:16/9}
   .lb-empty-hero{color:var(--mute);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;padding:80px 24px;text-align:center}
+  /* CONTACTS — featured heavy-hitter tier */
+  .heavies{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:rgba(255,255,255,.06);padding:1px;margin-bottom:24px;border:1px solid var(--ink)}
+  .heavy{aspect-ratio:3/4;position:relative;background:#0a0a0a;cursor:pointer;overflow:hidden}
+  .heavy:hover{background:#0f0f0f}
+  .heavy img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0.95;transition:opacity .15s,transform .25s}
+  .heavy:hover img{opacity:1;transform:scale(1.02)}
+  .heavy .heavy-mono{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:64px;letter-spacing:-0.04em;color:rgba(255,255,255,.85);background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%)}
+  .heavy .heavy-meta{position:absolute;left:0;right:0;bottom:0;padding:14px 16px 18px;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.6) 60%,rgba(0,0,0,0) 100%);color:#fff}
+  .heavy .heavy-name{font-weight:900;font-size:18px;letter-spacing:-0.01em;line-height:1.05;text-transform:uppercase;margin-bottom:4px}
+  .heavy .heavy-role{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:700;line-height:1.4}
+  .heavy .heavy-cat{position:absolute;top:8px;left:8px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;padding:3px 7px;background:rgba(0,0,0,0.7);color:#fff;backdrop-filter:blur(6px)}
+  .heavy .heavy-flag{position:absolute;top:8px;right:8px;font-size:8px;letter-spacing:0.18em;font-weight:700;padding:3px 7px;color:#fff;background:var(--hot)}
+  .heavy.add-heavy{display:flex;align-items:center;justify-content:center;background:transparent;border:1px dashed var(--mute);color:var(--mute);font-size:32px}
+  .heavy.add-heavy:hover{color:#fff;border-color:#fff;border-style:solid}
+  .contacts-section-h{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:var(--mute);padding:18px 0 10px;border-bottom:1px solid var(--hair);margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline}
+  .contacts-section-h .ct{font-size:9px;letter-spacing:0.18em}
+  .lt-row .lt-avatar{width:32px;height:32px;background:#0a0a0a;border:1px solid var(--hair);overflow:hidden;display:inline-block;vertical-align:middle;margin-right:10px;flex:0 0 32px}
+  .lt-row .lt-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .lt-row .lt-avatar .ltr-mono{display:flex;width:100%;height:100%;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--mute)}
   .rules-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border:1px solid var(--hair)}
   .rules-wall .r{padding:24px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);font-weight:900;font-size:18px;letter-spacing:-0.01em;text-transform:uppercase;line-height:1.1}
   .rules-wall .r .num{display:block;font-size:9px;color:var(--mute);letter-spacing:0.24em;font-weight:700;margin-bottom:10px}
@@ -249,6 +270,7 @@
   </div>
   <nav class="tabs" id="nav">
     <a href="#today" data-view="today" class="active">Today</a>
+    <a href="#calendar" data-view="calendar">Calendar</a>
     <a href="#pipeline" data-view="pipeline">Pipeline</a>
     <a href="#contacts" data-view="contacts">Contacts</a>
     <a href="#work" data-view="work">Work</a>
@@ -280,6 +302,22 @@
   </div>
 </section>
 
+<!-- CALENDAR -->
+<section class="view" id="view-calendar">
+  <div class="sec-h"><h1>Calendar</h1><div class="meta">Events · openings · launches · shoots<br>Upcoming first</div></div>
+  <div class="filters">
+    <button class="on" data-cf="upcoming">Upcoming</button>
+    <button data-cf="all">All</button>
+    <button data-cf="past">Past</button>
+    <button data-cf="shoot">Shoots</button>
+    <button data-cf="attend">To attend</button>
+    <button data-cf="opening">Openings</button>
+    <button data-cf="launch">Launches</button>
+    <button onclick="openEventModal()">+ New event</button>
+  </div>
+  <div id="calendar-list"></div>
+</section>
+
 <!-- PIPELINE -->
 <section class="view" id="view-pipeline">
   <div class="sec-h"><h1>Pipeline</h1><div class="meta">Who do I message?<br>Click cards to update</div></div>
@@ -289,7 +327,10 @@
 
 <!-- CONTACTS -->
 <section class="view" id="view-contacts">
-  <div class="sec-h"><h1>Contacts</h1><div class="meta">The networking engine<br>Tag · rate · follow up</div></div>
+  <div class="sec-h"><h1>Contacts</h1><div class="meta">The networking engine<br>Heavy hitters first · the rest behind</div></div>
+  <div class="contacts-section-h"><span>Heavy hitters</span><span class="ct" id="ct-heavies">—</span></div>
+  <div class="heavies" id="contacts-heavies"></div>
+  <div class="contacts-section-h"><span>Everyone else</span><span class="ct" id="ct-rest">—</span></div>
   <div class="filters">
     <button class="on" data-cf="all">All</button>
     <button data-cf="CLIENT">Clients</button>
@@ -365,10 +406,12 @@
     </div>
     <div class="archive-filters" id="archive-filters">
       <button class="on" data-af="all">All</button>
-      <button data-af="MINE">My work</button>
-      <button data-af="IDOL">Idols</button>
-      <button data-af="IG">Instagram</button>
-      <button data-af="VIDEO">Video</button>
+      <button data-af="mine">My work</button>
+      <button data-af="idol">Idols</button>
+      <button data-af="instagram">Instagram</button>
+      <button data-af="campaign">Campaigns</button>
+      <button data-af="publication">Publications</button>
+      <button data-af="video">Video</button>
       <input type="text" id="archive-search" placeholder="SEARCH ARCHIVE">
     </div>
     <div class="archive-grid" id="library-refs"></div>
@@ -388,6 +431,27 @@
       <button class="add" onclick="openTestModal()">+ Add test</button>
     </div>
     <div id="library-test"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span>Watch / read <span class="count" id="ct-intake">—</span></span>
+      <button class="add" onclick="openIntakeModal()">+ Add</button>
+    </div>
+    <div class="archive-filters" id="intake-filters">
+      <button class="on" data-if="queued">Queued</button>
+      <button data-if="in_progress">In progress</button>
+      <button data-if="done">Done</button>
+      <button data-if="all">All</button>
+      <span style="flex:1"></span>
+      <button data-if-type="film">Film</button>
+      <button data-if-type="show">Show</button>
+      <button data-if-type="book">Book</button>
+      <button data-if-type="article">Article</button>
+      <button data-if-type="magazine">Magazine</button>
+      <button data-if-type="doc">Doc</button>
+    </div>
+    <div id="library-intake"></div>
   </div>
 </section>
 
@@ -615,9 +679,13 @@ function lbUpdateNav(){
   const ct=document.getElementById('lb-counter');
   if(ct)ct.textContent=`${lbState.index+1} / ${lbState.images.length}`;
   document.querySelectorAll('.lb-thumb').forEach((t,i)=>t.classList.toggle('active',i===lbState.index));
-  // Scroll active thumb into view
+  // Scroll active thumb horizontally inside the gallery only — never the lightbox itself
+  const gallery=document.querySelector('.lb-gallery');
   const active=document.querySelector('.lb-thumb.active');
-  if(active)active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  if(gallery&&active){
+    const targetLeft=active.offsetLeft-(gallery.clientWidth/2)+(active.clientWidth/2);
+    gallery.scrollTo({left:Math.max(0,targetLeft),behavior:'smooth'});
+  }
 }
 function lbPreloadAdjacent(){
   // Preload next + previous images so navigation is instant
@@ -657,8 +725,8 @@ document.getElementById('lightbox').addEventListener('click',e=>{
 });
 (function(){const t=new Date();document.getElementById('now-meta').textContent=`${days[t.getDay()]} ${String(t.getDate()).padStart(2,'0')} ${months[t.getMonth()]} ${t.getFullYear()}`;document.getElementById('today-date').textContent=`${days[t.getDay()]} ${String(t.getDate()).padStart(2,'0')} ${months[t.getMonth()]} ${t.getFullYear()}`})();
 
-function setView(v){document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>a.classList.toggle('active',a.dataset.view===v));const fn={today:renderToday,pipeline:renderPipeline,contacts:renderContacts,work:renderWork,money:renderMoney,direct:renderDirect,library:renderLibrary}[v];if(fn)fn();window.scrollTo(0,0)}
-function getView(){const h=(location.hash||'#today').replace('#','');return['today','pipeline','contacts','work','money','direct','library'].includes(h)?h:'today'}
+function setView(v){document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>a.classList.toggle('active',a.dataset.view===v));const fn={today:renderToday,calendar:renderCalendar,pipeline:renderPipeline,contacts:renderContacts,work:renderWork,money:renderMoney,direct:renderDirect,library:renderLibrary}[v];if(fn)fn();window.scrollTo(0,0)}
+function getView(){const h=(location.hash||'#today').replace('#','');return['today','calendar','pipeline','contacts','work','money','direct','library'].includes(h)?h:'today'}
 window.addEventListener('hashchange',()=>setView(getView()));
 
 async function renderToday(){
@@ -702,15 +770,35 @@ async function renderPipeline(){
 }
 
 let contactFilter='all';
+function contactInitials(name){if(!name)return'·';return name.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase()}
 async function renderContacts(){
-  const {data}=await sb.from('contacts').select('*').order('value_rating',{ascending:false}).order('updated_at',{ascending:false});
+  const {data}=await sb.from('contacts').select('*').order('featured',{ascending:false}).order('value_rating',{ascending:false}).order('updated_at',{ascending:false});
+  const all=data||[];
+  // HEAVY HITTERS — featured contacts always render at top, no filtering
+  const heavies=all.filter(c=>c.featured);
+  document.getElementById('ct-heavies').textContent=heavies.length;
+  document.getElementById('contacts-heavies').innerHTML=heavies.map(c=>{
+    const owesReply=c.next_followup_date&&daysFromToday(c.next_followup_date)<=0;
+    return `<div class="heavy" onclick="editContact(${c.id})">
+      ${c.avatar_url?`<img src="${escapeHtml(c.avatar_url)}" loading="lazy" alt=""/>`:`<div class="heavy-mono">${contactInitials(c.name)}</div>`}
+      ${c.category?`<span class="heavy-cat">${escapeHtml(c.category)}</span>`:''}
+      ${owesReply?'<span class="heavy-flag">OWE REPLY</span>':''}
+      <div class="heavy-meta"><div class="heavy-name">${escapeHtml(c.name)}</div>${c.role?`<div class="heavy-role">${escapeHtml(c.role)}</div>`:''}</div>
+    </div>`;
+  }).join('')+`<div class="heavy add-heavy" onclick="openContactModal()">+</div>`;
+
+  // EVERYONE ELSE — non-featured (with filters/search)
   const search=(document.getElementById('contacts-search')?.value||'').toLowerCase();
-  let list=data||[];
-  if(['CLIENT','CONNECTOR','TALENT','GATEKEEPER'].includes(contactFilter))list=list.filter(c=>c.category===contactFilter);
-  else if(contactFilter==='high')list=list.filter(c=>c.value_rating==='high');
-  else if(contactFilter==='dormant_30')list=list.filter(c=>!c.last_contact_date||daysFromToday(c.last_contact_date)<-30);
-  if(search)list=list.filter(c=>(c.name||'').toLowerCase().includes(search)||(c.location||'').toLowerCase().includes(search)||(c.role||'').toLowerCase().includes(search));
-  document.getElementById('contacts-list').innerHTML=list.length?list.map(c=>`<div class="lt-row" onclick="editContact(${c.id})"><span><strong>${escapeHtml(c.name)}</strong>${c.role?` <span style="color:var(--mute);font-size:10px">· ${escapeHtml(c.role)}</span>`:''}${c.instagram?`<br><small style="color:var(--mute);font-size:10px">${escapeHtml(c.instagram)}</small>`:''}</span><span><span class="badge ${(c.category||'').toLowerCase()}">${escapeHtml(c.category||'')}</span></span><span><span class="badge ${c.value_rating}">${(c.value_rating||'').toUpperCase()}</span></span><span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);font-weight:700">${escapeHtml(c.status||'')}</span><span class="meta ${dateClass(c.last_contact_date)}">${c.last_contact_date?fmtDate(c.last_contact_date):'—'}</span><span class="meta ${dateClass(c.next_followup_date)}">${c.next_followup_date?fmtDate(c.next_followup_date):'—'}</span></div>`).join(''):'<div class="empty">No contacts match</div>';
+  let rest=all.filter(c=>!c.featured);
+  if(['CLIENT','CONNECTOR','TALENT','GATEKEEPER'].includes(contactFilter))rest=rest.filter(c=>c.category===contactFilter);
+  else if(contactFilter==='high')rest=rest.filter(c=>c.value_rating==='high');
+  else if(contactFilter==='dormant_30')rest=rest.filter(c=>!c.last_contact_date||daysFromToday(c.last_contact_date)<-30);
+  if(search)rest=rest.filter(c=>(c.name||'').toLowerCase().includes(search)||(c.location||'').toLowerCase().includes(search)||(c.role||'').toLowerCase().includes(search));
+  document.getElementById('ct-rest').textContent=rest.length;
+  document.getElementById('contacts-list').innerHTML=rest.length?rest.map(c=>{
+    const av=c.avatar_url?`<span class="lt-avatar"><img src="${escapeHtml(c.avatar_url)}" loading="lazy"/></span>`:`<span class="lt-avatar"><span class="ltr-mono">${contactInitials(c.name)}</span></span>`;
+    return `<div class="lt-row" onclick="editContact(${c.id})"><span style="display:flex;align-items:center">${av}<span><strong>${escapeHtml(c.name)}</strong>${c.role?` <span style="color:var(--mute);font-size:10px">· ${escapeHtml(c.role)}</span>`:''}${c.instagram?`<br><small style="color:var(--mute);font-size:10px;margin-left:42px">${escapeHtml(c.instagram)}</small>`:''}</span></span><span><span class="badge ${(c.category||'').toLowerCase()}">${escapeHtml(c.category||'')}</span></span><span><span class="badge ${c.value_rating}">${(c.value_rating||'').toUpperCase()}</span></span><span style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);font-weight:700">${escapeHtml(c.status||'')}</span><span class="meta ${dateClass(c.last_contact_date)}">${c.last_contact_date?fmtDate(c.last_contact_date):'—'}</span><span class="meta ${dateClass(c.next_followup_date)}">${c.next_followup_date?fmtDate(c.next_followup_date):'—'}</span></div>`;
+  }).join(''):'<div class="empty">No contacts match</div>';
 }
 
 let workFilter='active';
@@ -752,12 +840,94 @@ async function renderDirect(){
   document.getElementById('casting-list').innerHTML=(casting||[]).length?(casting||[]).map(c=>`<div class="row" onclick="editCasting(${c.id})"><span></span><span class="body"><strong>${escapeHtml(c.trait)}</strong>${c.notes?`<small>${escapeHtml(c.notes)}</small>`:''}</span><span style="font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em;font-weight:700">${escapeHtml(c.trait_type||'')}</span><span><span class="badge ${c.category==='works_for_me'?'client':'low'}">${c.category==='works_for_me'?'WORKS':'NO'}</span></span></div>`).join(''):'<div class="empty">Empty — define who works in your world</div>';
 }
 
+// =========== CALENDAR ===========
+let calendarFilter='upcoming';
+async function renderCalendar(){
+  const{data}=await sb.from('events').select('*').order('event_date',{nullsFirst:false});
+  const list=data||[];
+  let f=list;
+  if(calendarFilter==='upcoming')f=list.filter(e=>!e.event_date||daysFromToday(e.event_date)>=0).reverse();
+  else if(calendarFilter==='past')f=list.filter(e=>e.event_date&&daysFromToday(e.event_date)<0);
+  else if(['shoot','attend','opening','launch'].includes(calendarFilter))f=list.filter(e=>e.type===calendarFilter);
+  // Group by month for upcoming/all
+  let html='';
+  let currentMonth='';
+  if(calendarFilter==='upcoming'||calendarFilter==='all'){
+    f.sort((a,b)=>(a.event_date||'9999').localeCompare(b.event_date||'9999'));
+  }
+  f.forEach(e=>{
+    const d=e.event_date?new Date(e.event_date):null;
+    const monthKey=d?`${months[d.getMonth()]} ${d.getFullYear()}`:'NO DATE';
+    if(monthKey!==currentMonth){
+      currentMonth=monthKey;
+      html+=`<div style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;color:var(--mute);padding:18px 16px 8px;border-bottom:1px solid var(--hair);background:rgba(255,255,255,.02)">${monthKey}</div>`;
+    }
+    const dc=dateClass(e.event_date);
+    const day=d?String(d.getDate()).padStart(2,'0'):'—';
+    const dayName=d?days[d.getDay()]:'';
+    html+=`<div class="row" onclick="editEvent(${e.id})" style="grid-template-columns:60px 1fr auto auto">
+      <span style="text-align:center"><div style="font-weight:900;font-size:18px;letter-spacing:-0.02em">${day}</div><div style="font-size:9px;color:var(--mute);letter-spacing:0.18em;font-weight:700">${dayName}</div></span>
+      <span class="body"><strong>${escapeHtml(e.title)}</strong>${e.location?`<small>${escapeHtml(e.location)}${e.event_time?' · '+e.event_time.slice(0,5):''}</small>`:e.event_time?`<small>${e.event_time.slice(0,5)}</small>`:''}</span>
+      <span style="font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em;font-weight:700">${escapeHtml(e.type||'')}</span>
+      <span class="meta ${dc}">${dc==='overdue'?'PAST':dc==='due-today'?'TODAY':dc==='upcoming'?fmtDate(e.event_date):e.event_date?fmtDate(e.event_date):'—'}</span>
+    </div>`;
+  });
+  document.getElementById('calendar-list').innerHTML=`<div class="card">${html||'<div class="empty">No events match</div>'}</div>`;
+}
+
+function openEventModal(e){e=e||{};modal(`<h2>${e.id?'Edit':'New'} event</h2><form>
+<label>Title</label><input name="title" value="${escapeHtml(e.title||'')}" required autofocus placeholder="LFW · GALLERY OPENING · BRAND LAUNCH · SHOOT">
+<label>Type</label><select name="type">${['attend','shoot','opening','launch','meeting','other'].map(o=>`<option ${e.type===o?'selected':''}>${o}</option>`).join('')}</select>
+<label>Date</label><input name="event_date" type="date" value="${e.event_date||''}">
+<label>Time</label><input name="event_time" type="time" value="${e.event_time||''}">
+<label>End date (if multi-day)</label><input name="end_date" type="date" value="${e.end_date||''}">
+<label>Location</label><input name="location" value="${escapeHtml(e.location||'')}" placeholder="VENUE · CITY">
+<label>URL</label><input name="url" value="${escapeHtml(e.url||'')}" placeholder="https://...">
+<label>Notes</label><textarea name="notes">${escapeHtml(e.notes||'')}</textarea>
+<div class="modal-actions">${e.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${e.id?'Save':'Add'}</button></div>
+</form>`,async(d)=>{if(e.id)await sb.from('events').update(d).eq('id',e.id);else await sb.from('events').insert(d)},e.id?async()=>{await sb.from('events').delete().eq('id',e.id)}:null)}
+async function editEvent(id){const{data}=await sb.from('events').select('*').eq('id',id).single();openEventModal(data)}
+
+// =========== INTAKE (watch / read) ===========
+let intakeStatusFilter='queued';
+let intakeTypeFilter=null;
+async function renderIntake(){
+  const{data}=await sb.from('intake').select('*').order('created_at',{ascending:false});
+  let list=data||[];
+  if(intakeStatusFilter!=='all')list=list.filter(i=>i.status===intakeStatusFilter);
+  if(intakeTypeFilter)list=list.filter(i=>i.type===intakeTypeFilter);
+  document.getElementById('ct-intake').textContent=list.length;
+  document.getElementById('library-intake').innerHTML=list.length?list.map(i=>`
+    <div class="row" onclick="editIntake(${i.id})" style="grid-template-columns:auto 1fr auto auto">
+      <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;color:var(--mute);padding:2px 8px;border:1px solid var(--hair)">${escapeHtml((i.type||'').toUpperCase())}</span>
+      <span class="body"><strong>${escapeHtml(i.title)}</strong>${i.creator?`<small>${escapeHtml(i.creator)}</small>`:''}</span>
+      <span style="font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:0.16em;font-weight:700">${i.rating?'★'.repeat(i.rating):''}</span>
+      <span><span class="badge ${i.status==='done'?'delivered':i.status==='in_progress'?'editing':'shooting'}">${(i.status||'').replace('_',' ').toUpperCase()}</span></span>
+    </div>
+  `).join(''):'<div class="empty">Nothing queued — add films, books, magazines, articles to consume</div>';
+}
+
+function openIntakeModal(i){i=i||{};modal(`<h2>${i.id?'Edit':'New'} intake</h2><form>
+<label>Title</label><input name="title" value="${escapeHtml(i.title||'')}" required autofocus>
+<label>Type</label><select name="type">${['film','show','book','article','magazine','doc','video','other'].map(o=>`<option ${i.type===o?'selected':''}>${o}</option>`).join('')}</select>
+<label>Creator (director / author / outlet)</label><input name="creator" value="${escapeHtml(i.creator||'')}">
+<label>URL</label><input name="url" value="${escapeHtml(i.url||'')}" placeholder="https://...">
+<label>Cover image (drag-drop or click)</label>${dropZoneHtml('cover_image_url',i.cover_image_url,'DROP COVER OR CLICK')}
+<label>Status</label><select name="status">${['queued','in_progress','done'].map(o=>`<option ${i.status===o?'selected':''}>${o.replace('_',' ')}</option>`).join('')}</select>
+<label>Rating (1-5, only if done)</label><input name="rating" type="number" min="1" max="5" value="${i.rating||''}">
+<label>Notes</label><textarea name="notes">${escapeHtml(i.notes||'')}</textarea>
+<label>Takeaways (what to pull from it)</label><textarea name="takeaways">${escapeHtml(i.takeaways||'')}</textarea>
+<div class="modal-actions">${i.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${i.id?'Save':'Add'}</button></div>
+</form>`,async(d)=>{if(d.rating)d.rating=parseInt(d.rating);if(i.id)await sb.from('intake').update(d).eq('id',i.id);else await sb.from('intake').insert(d)},i.id?async()=>{await sb.from('intake').delete().eq('id',i.id)}:null)}
+async function editIntake(id){const{data}=await sb.from('intake').select('*').eq('id',id).single();openIntakeModal(data)}
+
 async function renderLibrary(){
   const [{data:looks},{data:tests},{data:refs}]=await Promise.all([
     sb.from('looks').select('*').order('is_active',{ascending:false}).order('updated_at',{ascending:false}),
     sb.from('test_queue').select('*').order('when_to_test',{nullsFirst:false}),
     sb.from('inspo_refs').select('*').order('position')
   ]);
+  renderIntake();
   const activeLooks=(looks||[]).filter(l=>l.is_active);
   document.getElementById('ct-looks-active').textContent=`${activeLooks.length} ACTIVE / ${(looks||[]).length}`;
   document.getElementById('library-looks').innerHTML=(looks||[]).length?(looks||[]).map(l=>{
@@ -778,16 +948,15 @@ async function renderLibrary(){
   const archiveSearch=(document.getElementById('archive-search')?.value||'').toLowerCase();
   const archiveFilter=document.querySelector('#archive-filters button.on')?.dataset.af||'all';
   let filtered=refs||[];
-  if(archiveFilter==='MINE')filtered=filtered.filter(r=>(r.tags||[]).includes('MINE'));
-  else if(archiveFilter==='IDOL')filtered=filtered.filter(r=>(r.tags||[]).includes('IDOL'));
-  else if(archiveFilter==='IG')filtered=filtered.filter(r=>(r.video_url||'').includes('instagram.com')||(r.tags||[]).includes('IG'));
-  else if(archiveFilter==='VIDEO')filtered=filtered.filter(r=>r.video_url);
+  if(archiveFilter==='video')filtered=filtered.filter(r=>r.video_url&&!detectInstagramUrl(r.video_url));
+  else if(archiveFilter!=='all')filtered=filtered.filter(r=>r.category===archiveFilter);
   if(archiveSearch)filtered=filtered.filter(r=>(r.title||'').toLowerCase().includes(archiveSearch)||(r.subtitle||'').toLowerCase().includes(archiveSearch)||(r.body||'').toLowerCase().includes(archiveSearch)||(r.tags||[]).some(t=>t.toLowerCase().includes(archiveSearch)));
+  const CAT_LABEL={mine:'MINE',idol:'IDOL',instagram:'IG',campaign:'CAMPAIGN',publication:'PUB',other:''};
   const tiles=filtered.map(r=>{
     const ig=detectInstagramUrl(r.video_url);
     const hasVideo=r.video_url&&!ig;
     const hasImg=r.hero_image_url;
-    const badge=ig?'IG':hasVideo?'VIDEO':(r.tags||[]).find(t=>['MINE','IDOL'].includes(t))||'';
+    const badge=CAT_LABEL[r.category]||(ig?'IG':hasVideo?'VIDEO':'');
     return `<div class="archive-tile ${!hasImg?'no-img':''}" onclick="openLightbox(${r.id})">
       ${hasImg?`<img src="${escapeHtml(r.hero_image_url)}" loading="lazy"/>`:''}
       ${badge?`<span class="archive-badge">${badge}</span>`:''}
@@ -828,7 +997,24 @@ function closeModal(){document.getElementById('modal-bg').classList.remove('on')
 
 function openTaskModal(){modal(`<h2>New task</h2><form><label>Title</label><input name="title" required autofocus><label>Notes</label><textarea name="body"></textarea><label>Due date</label><input name="due_date" type="date"><label><input type="checkbox" name="pinned" style="width:auto;margin-right:8px">Pinned</label><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{await sb.from('tasks').insert(d)})}
 
-function openContactModal(c){c=c||{};modal(`<h2>${c.id?'Edit':'New'} contact</h2><form><label>Name</label><input name="name" value="${escapeHtml(c.name||'')}" required autofocus><label>Role</label><input name="role" value="${escapeHtml(c.role||'')}" placeholder="STYLIST · MODEL · PR · DESIGNER"><label>Category</label><select name="category">${['CLIENT','CONNECTOR','TALENT','GATEKEEPER'].map(o=>`<option ${c.category===o?'selected':''}>${o}</option>`).join('')}</select><label>Instagram</label><input name="instagram" value="${escapeHtml(c.instagram||'')}" placeholder="@handle"><label>Email</label><input name="email" value="${escapeHtml(c.email||'')}" type="email"><label>Phone</label><input name="phone" value="${escapeHtml(c.phone||'')}"><label>Location</label><input name="location" value="${escapeHtml(c.location||'')}"><label>Value</label><select name="value_rating">${['high','medium','low'].map(o=>`<option ${c.value_rating===o?'selected':''}>${o}</option>`).join('')}</select><label>Status</label><select name="status">${['new','warm','ongoing','dormant'].map(o=>`<option ${c.status===o?'selected':''}>${o}</option>`).join('')}</select><label>Last contact</label><input name="last_contact_date" type="date" value="${c.last_contact_date||''}"><label>Next follow-up</label><input name="next_followup_date" type="date" value="${c.next_followup_date||''}"><label>Notes</label><textarea name="notes">${escapeHtml(c.notes||'')}</textarea><div class="modal-actions">${c.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${c.id?'Save':'Add'}</button></div></form>`,async(d)=>{if(c.id)await sb.from('contacts').update(d).eq('id',c.id);else await sb.from('contacts').insert(d)},c.id?async()=>{await sb.from('contacts').delete().eq('id',c.id)}:null)}
+function openContactModal(c){c=c||{};modal(`<h2>${c.id?'Edit':'New'} contact</h2><form>
+<label>Avatar / portrait (drag-drop)</label>${dropZoneHtml('avatar_url',c.avatar_url,'DROP IMAGE OR CLICK')}
+<label><input type="checkbox" name="featured" ${c.featured?'checked':''} style="width:auto;margin-right:8px">★ Heavy hitter (surface on top)</label>
+<label>Name</label><input name="name" value="${escapeHtml(c.name||'')}" required>
+<label>Role</label><input name="role" value="${escapeHtml(c.role||'')}" placeholder="STYLIST · MODEL · PR · DESIGNER">
+<label>Category</label><select name="category">${['CLIENT','CONNECTOR','TALENT','GATEKEEPER'].map(o=>`<option ${c.category===o?'selected':''}>${o}</option>`).join('')}</select>
+<label>Bio / one-liner</label><textarea name="bio" placeholder="WHO THEY ARE IN ONE LINE">${escapeHtml(c.bio||'')}</textarea>
+<label>Instagram</label><input name="instagram" value="${escapeHtml(c.instagram||'')}" placeholder="@handle">
+<label>Email</label><input name="email" value="${escapeHtml(c.email||'')}" type="email">
+<label>Phone</label><input name="phone" value="${escapeHtml(c.phone||'')}">
+<label>Location</label><input name="location" value="${escapeHtml(c.location||'')}">
+<label>Value</label><select name="value_rating">${['high','medium','low'].map(o=>`<option ${c.value_rating===o?'selected':''}>${o}</option>`).join('')}</select>
+<label>Status</label><select name="status">${['new','warm','ongoing','dormant'].map(o=>`<option ${c.status===o?'selected':''}>${o}</option>`).join('')}</select>
+<label>Last contact</label><input name="last_contact_date" type="date" value="${c.last_contact_date||''}">
+<label>Next follow-up</label><input name="next_followup_date" type="date" value="${c.next_followup_date||''}">
+<label>Notes</label><textarea name="notes">${escapeHtml(c.notes||'')}</textarea>
+<div class="modal-actions">${c.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${c.id?'Save':'Add'}</button></div>
+</form>`,async(d)=>{if(c.id)await sb.from('contacts').update(d).eq('id',c.id);else await sb.from('contacts').insert(d)},c.id?async()=>{await sb.from('contacts').delete().eq('id',c.id)}:null)}
 async function editContact(id){const{data}=await sb.from('contacts').select('*').eq('id',id).single();openContactModal(data)}
 
 function openPipelineModal(p){p=p||{};modal(`<h2>${p.id?'Edit':'New'} lead</h2><form><label>Name</label><input name="name" value="${escapeHtml(p.name||'')}" required autofocus><label>Type</label><input name="type" value="${escapeHtml(p.type||'')}" placeholder="BRAND · STYLIST · INFLUENCER · VENUE"><label>Stage</label><select name="stage">${STAGES.map(s=>`<option value="${s.key}" ${p.stage===s.key?'selected':''}>${s.label}</option>`).join('')}</select><label>Last contact</label><input name="last_contact_date" type="date" value="${p.last_contact_date||''}"><label>Next follow-up</label><input name="next_followup_date" type="date" value="${p.next_followup_date||''}"><label>Notes</label><textarea name="notes">${escapeHtml(p.notes||'')}</textarea><div class="modal-actions">${p.id?'<button type="button" class="danger">Delete</button>':''}<button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">${p.id?'Save':'Add'}</button></div></form>`,async(d)=>{if(p.id)await sb.from('pipeline').update(d).eq('id',p.id);else await sb.from('pipeline').insert(d)},p.id?async()=>{await sb.from('pipeline').delete().eq('id',p.id)}:null)}
@@ -873,7 +1059,8 @@ async function editLook(id){const{data:l}=await sb.from('looks').select('*').eq(
 function openTestModal(){modal(`<h2>New test</h2><form><label>What to test (look name)</label><input name="title" required autofocus><label>When</label><input name="when_to_test" type="date"><label>Who with (model / contact)</label><input name="who_with"><label>Status</label><select name="status"><option value="to_test">To test</option><option value="planned">Planned</option><option value="done">Done</option></select><label>Notes</label><textarea name="notes"></textarea><div class="modal-actions"><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Add</button></div></form>`,async(d)=>{await sb.from('test_queue').insert(d)})}
 async function editTest(id){const{data:t}=await sb.from('test_queue').select('*').eq('id',id).single();modal(`<h2>Edit test</h2><form><label>What to test</label><input name="title" value="${escapeHtml(t.title||'')}" required><label>When</label><input name="when_to_test" type="date" value="${t.when_to_test||''}"><label>Who with</label><input name="who_with" value="${escapeHtml(t.who_with||'')}"><label>Status</label><select name="status"><option value="to_test" ${t.status==='to_test'?'selected':''}>To test</option><option value="planned" ${t.status==='planned'?'selected':''}>Planned</option><option value="done" ${t.status==='done'?'selected':''}>Done</option></select><label>Notes</label><textarea name="notes">${escapeHtml(t.notes||'')}</textarea><div class="modal-actions"><button type="button" class="danger">Delete</button><button type="button" onclick="closeModal()">Cancel</button><button type="submit" class="primary">Save</button></div></form>`,async(d)=>{await sb.from('test_queue').update(d).eq('id',id)},async()=>{await sb.from('test_queue').delete().eq('id',id)})}
 
-function inspoModalHTML(r){r=r||{};return `<h2>${r.id?'Edit':'New'} reference</h2><form>
+function inspoModalHTML(r){r=r||{};const cats=[['mine','My work'],['idol','Idol'],['instagram','Instagram'],['campaign','Campaign'],['publication','Publication'],['other','Other']];return `<h2>${r.id?'Edit':'New'} reference</h2><form>
+<label>Category</label><select name="category">${cats.map(([k,v])=>`<option value="${k}" ${(r.category||'other')===k?'selected':''}>${v}</option>`).join('')}</select>
 <label>Title</label><input name="title" value="${escapeHtml(r.title||'')}" required autofocus placeholder="TERRY · DIOR HOMME · IG SCREENSHOT">
 <label>Subtitle / source</label><input name="subtitle" value="${escapeHtml(r.subtitle||'')}" placeholder="WHO MADE IT · WHEN">
 <label>Hero image (drag-drop or click)</label>${dropZoneHtml('hero_image_url',r.hero_image_url,'DROP HERO IMAGE OR CLICK')}
@@ -892,6 +1079,15 @@ document.querySelectorAll('#view-work .filters button[data-wf]').forEach(b=>b.on
 document.querySelectorAll('#view-money .filters button[data-mf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-money .filters button[data-mf]').forEach(x=>x.classList.toggle('on',x===b));moneyFilter=b.dataset.mf;renderMoney()});
 document.querySelectorAll('#archive-filters button[data-af]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#archive-filters button[data-af]').forEach(x=>x.classList.toggle('on',x===b));renderLibrary()});
 document.getElementById('archive-search')?.addEventListener('input',()=>renderLibrary());
+document.querySelectorAll('#view-calendar .filters button[data-cf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#view-calendar .filters button[data-cf]').forEach(x=>x.classList.toggle('on',x===b));calendarFilter=b.dataset.cf;renderCalendar()});
+document.querySelectorAll('#intake-filters button[data-if]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#intake-filters button[data-if]').forEach(x=>x.classList.toggle('on',x===b));intakeStatusFilter=b.dataset.if;renderIntake()});
+document.querySelectorAll('#intake-filters button[data-if-type]').forEach(b=>b.onclick=()=>{
+  const wasOn=b.classList.contains('on');
+  document.querySelectorAll('#intake-filters button[data-if-type]').forEach(x=>x.classList.remove('on'));
+  if(!wasOn){b.classList.add('on');intakeTypeFilter=b.dataset.ifType}
+  else intakeTypeFilter=null;
+  renderIntake();
+});
 
 setView(getView());
 </script>
