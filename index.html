@@ -158,6 +158,13 @@
   .dz-thumb img{width:100%;height:100%;object-fit:cover;display:block}
   .dz-thumb .dz-rm{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.7);color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;cursor:pointer;border:0}
   .dz-thumb .dz-rm:hover{background:var(--hot)}
+  .dz-paste{display:flex;gap:0;margin-top:6px;border:1px solid var(--hair)}
+  .dz-paste input{flex:1;padding:10px 12px;font-size:11px;color:var(--ink);background:transparent;border:0;outline:none;letter-spacing:0.04em}
+  .dz-paste input::placeholder{color:var(--mute);text-transform:uppercase;letter-spacing:0.18em;font-size:10px;font-weight:700}
+  .dz-paste button{padding:10px 16px;background:transparent;color:var(--ink);border:0;border-left:1px solid var(--hair);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;cursor:pointer}
+  .dz-paste button:hover{background:#fff;color:#000}
+  .dz-paste button:disabled{opacity:0.5;cursor:default}
+  .dz-paste button:disabled:hover{background:transparent;color:var(--ink)}
   /* ARCHIVE GRID */
   .archive-filters{display:flex;gap:0;margin:0;padding:12px 16px;border-bottom:1px solid var(--hair);overflow-x:auto;background:rgba(255,255,255,.02)}
   .archive-filters button{padding:6px 12px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--mute);border:1px solid var(--hair);margin-right:6px;white-space:nowrap}
@@ -580,11 +587,17 @@ async function uploadFile(file){
   return publicUrl;
 }
 function dropZoneHtml(name,value,label){
-  return `<div class="dz" data-name="${name}">
-    <input type="hidden" name="${name}" value="${escapeHtml(value||'')}">
-    <input type="file" accept="image/*,video/*" hidden>
-    ${value?`<img src="${escapeHtml(value)}" class="dz-img"/>`:''}
-    <div class="dz-overlay"><span>${value?'REPLACE':label||'DROP IMAGE OR CLICK'}</span></div>
+  return `<div class="dz-wrap" data-target-name="${name}">
+    <div class="dz" data-name="${name}">
+      <input type="hidden" name="${name}" value="${escapeHtml(value||'')}">
+      <input type="file" accept="image/*,video/*" hidden>
+      ${value?`<img src="${escapeHtml(value)}" class="dz-img"/>`:''}
+      <div class="dz-overlay"><span>${value?'REPLACE':label||'DROP IMAGE OR CLICK'}</span></div>
+    </div>
+    <div class="dz-paste">
+      <input type="url" placeholder="OR PASTE IMAGE URL (RIGHT-CLICK ANY IMAGE → COPY IMAGE ADDRESS)">
+      <button type="button">ADD</button>
+    </div>
   </div>`;
 }
 function dropZoneMultiHtml(name,values){
@@ -595,7 +608,40 @@ function dropZoneMultiHtml(name,values){
       ${values.map((v,i)=>`<div class="dz-thumb"><img src="${escapeHtml(v)}"/><button type="button" class="dz-rm" data-i="${i}">×</button></div>`).join('')}
       <div class="dz dz-add"><input type="file" accept="image/*" hidden multiple><div class="dz-overlay" style="opacity:1;background:transparent;font-size:24px;color:var(--mute)">+</div></div>
     </div>
+    <div class="dz-paste">
+      <input type="url" placeholder="OR PASTE IMAGE URL (ADDS TO GALLERY)">
+      <button type="button">ADD</button>
+    </div>
   </div>`;
+}
+async function fetchImageAsFile(url){
+  // Try direct fetch (works when CORS is permissive)
+  try{
+    const r=await fetch(url,{mode:'cors'});
+    if(r.ok){
+      const blob=await r.blob();
+      if(blob.size>0&&blob.type.startsWith('image/')){
+        const ext=(url.match(/\.(jpg|jpeg|png|webp|gif|avif)(\?|$|#)/i)?.[1]||'jpg').toLowerCase();
+        return new File([blob],`pasted.${ext}`,{type:blob.type||'image/jpeg'});
+      }
+    }
+  }catch(e){}
+  // Fallback: <img crossorigin> + canvas (works when image-server permits anonymous CORS)
+  try{
+    const img=await new Promise((resolve,reject)=>{
+      const i=new Image();
+      i.crossOrigin='anonymous';
+      i.onload=()=>resolve(i);
+      i.onerror=reject;
+      i.src=url;
+    });
+    const c=document.createElement('canvas');
+    c.width=img.naturalWidth;c.height=img.naturalHeight;
+    c.getContext('2d').drawImage(img,0,0);
+    const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.92));
+    if(blob)return new File([blob],'pasted.jpg',{type:'image/jpeg'});
+  }catch(e){}
+  return null;
 }
 function setupDropZones(formEl){
   formEl.querySelectorAll('.dz').forEach(dz=>{
@@ -604,35 +650,39 @@ function setupDropZones(formEl){
     const fileInput=dz.querySelector('input[type=file]');
     const isMulti=dz.classList.contains('dz-add');
     const hidden=isMulti?dz.closest('.dz-multi-wrap').querySelector('input[type=hidden]'):dz.querySelector('input[type=hidden]');
+    const applyUrl=(url)=>{
+      if(isMulti){
+        const arr=JSON.parse(hidden.value||'[]');arr.push(url);hidden.value=JSON.stringify(arr);
+        const wrap=dz.parentElement;
+        const thumb=document.createElement('div');
+        thumb.className='dz-thumb';
+        thumb.innerHTML=`<img src="${url}"/><button type="button" class="dz-rm">×</button>`;
+        wrap.insertBefore(thumb,dz);
+        thumb.querySelector('.dz-rm').onclick=()=>{
+          const a=JSON.parse(hidden.value||'[]');
+          const i=Array.from(wrap.querySelectorAll('.dz-thumb')).indexOf(thumb);
+          a.splice(i,1);hidden.value=JSON.stringify(a);
+          thumb.remove();
+        };
+      } else {
+        hidden.value=url;
+        let img=dz.querySelector('.dz-img');
+        if(!img){img=document.createElement('img');img.className='dz-img';dz.insertBefore(img,dz.firstChild)}
+        img.src=url;
+        dz.querySelector('.dz-overlay span').textContent='REPLACE';
+      }
+    };
     const handle=async(files)=>{
       dz.classList.add('uploading');
       for(const f of files){
         const url=await uploadFile(f);
-        if(!url)continue;
-        if(isMulti){
-          const arr=JSON.parse(hidden.value||'[]');arr.push(url);hidden.value=JSON.stringify(arr);
-          // append thumb
-          const wrap=dz.parentElement;
-          const thumb=document.createElement('div');
-          thumb.className='dz-thumb';
-          thumb.innerHTML=`<img src="${url}"/><button type="button" class="dz-rm" data-i="${arr.length-1}">×</button>`;
-          wrap.insertBefore(thumb,dz);
-          thumb.querySelector('.dz-rm').onclick=()=>{
-            const a=JSON.parse(hidden.value||'[]');
-            const i=Array.from(wrap.querySelectorAll('.dz-thumb')).indexOf(thumb);
-            a.splice(i,1);hidden.value=JSON.stringify(a);
-            thumb.remove();
-          };
-        } else {
-          hidden.value=url;
-          let img=dz.querySelector('.dz-img');
-          if(!img){img=document.createElement('img');img.className='dz-img';dz.insertBefore(img,dz.firstChild)}
-          img.src=url;
-          dz.querySelector('.dz-overlay span').textContent='REPLACE';
-        }
+        if(url)applyUrl(url);
       }
       dz.classList.remove('uploading');
     };
+    // Stash for paste-row handler
+    dz._dzApply=applyUrl;
+    dz._dzHandle=handle;
     dz.addEventListener('click',e=>{if(e.target.classList.contains('dz-rm'))return;fileInput.click()});
     dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over')});
     dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
@@ -653,6 +703,40 @@ function setupDropZones(formEl){
         thumb.remove();
       };
     });
+  });
+  // Wire URL paste rows
+  formEl.querySelectorAll('.dz-paste').forEach(row=>{
+    if(row.dataset.wired)return;
+    row.dataset.wired='1';
+    const input=row.querySelector('input');
+    const btn=row.querySelector('button');
+    // Find the matching drop zone — single (.dz-wrap > .dz) or multi (.dz-multi-wrap > .dz-multi > .dz.dz-add)
+    const wrap=row.parentElement;
+    const dz=wrap.classList.contains('dz-multi-wrap')?wrap.querySelector('.dz.dz-add'):wrap.querySelector('.dz');
+    const submit=async()=>{
+      const url=(input.value||'').trim();
+      if(!url||!/^https?:\/\//i.test(url)){alert('Paste a full image URL (starting with http or https)');return}
+      btn.disabled=true;
+      const orig=btn.textContent;btn.textContent='FETCHING...';
+      dz.classList.add('uploading');
+      const file=await fetchImageAsFile(url);
+      if(!file){
+        dz.classList.remove('uploading');
+        btn.disabled=false;btn.textContent=orig;
+        alert('Could not fetch that image (CORS-blocked by source). Right-click the image → "Save Image As..." → drag the file into the box instead.');
+        return;
+      }
+      btn.textContent='COMPRESSING...';
+      const supabaseUrl=await uploadFile(file);
+      dz.classList.remove('uploading');
+      btn.disabled=false;btn.textContent=orig;
+      if(supabaseUrl){
+        dz._dzApply(supabaseUrl);
+        input.value='';
+      }
+    };
+    btn.addEventListener('click',submit);
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}});
   });
 }
 function detectInstagramUrl(url){
