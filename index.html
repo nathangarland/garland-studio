@@ -648,7 +648,7 @@ async function fetchImageAsFile(url){
       if(blob)return{ok:true,file:new File([blob],'pasted.jpg',{type:'image/jpeg'})};
     }catch(e){}
   }
-  // 3. Final fallback: server-side proxy (always works as long as upstream is reachable)
+  // 3. Server-side proxy (Vercel function — cleanest path if deployed)
   try{
     const r=await fetch('/api/fetch-image?url='+encodeURIComponent(url));
     if(r.ok){
@@ -658,8 +658,7 @@ async function fetchImageAsFile(url){
         const ext=(ct.split('/')[1]||'jpg').split(';')[0];
         return{ok:true,file:new File([blob],`pasted.${ext}`,{type:ct})};
       }
-    } else {
-      // Try to read structured error
+    } else if(r.status!==404){
       try{
         const err=await r.json();
         if(err && err.contentType && !err.contentType.startsWith('image/')){
@@ -668,6 +667,27 @@ async function fetchImageAsFile(url){
       }catch(_){}
     }
   }catch(e){}
+  // 4. Public CORS proxy fallback (works without any backend)
+  const proxies=[
+    u=>'https://corsproxy.io/?'+encodeURIComponent(u),
+    u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)
+  ];
+  for(const buildUrl of proxies){
+    try{
+      const r=await fetch(buildUrl(url));
+      if(r.ok){
+        const ct=(r.headers.get('content-type')||'').toLowerCase();
+        const blob=await r.blob();
+        if((ct.startsWith('image/')||blob.type.startsWith('image/'))&&blob.size>0){
+          const ext=(url.match(/\.(jpg|jpeg|png|webp|gif|avif)(\?|$|#)/i)?.[1]||'jpg').toLowerCase();
+          return{ok:true,file:new File([blob],`pasted.${ext}`,{type:blob.type||ct||'image/jpeg'})};
+        }
+        if(ct.includes('html')||ct.includes('text')){
+          return{ok:false,reason:'page'};
+        }
+      }
+    }catch(e){}
+  }
   return{ok:false,reason:looksLikeImage?'cors':'page'};
 }
 function setupDropZones(formEl){
