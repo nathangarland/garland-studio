@@ -667,8 +667,11 @@ async function fetchImageAsFile(url){
       }catch(_){}
     }
   }catch(e){}
-  // 4. Public CORS proxy fallback (works without any backend)
+  // 4. Public proxy fallbacks (work without any backend)
+  // weserv.nl is purpose-built for images and bypasses hotlink protection
   const proxies=[
+    u=>'https://wsrv.nl/?url='+encodeURIComponent(u.replace(/^https?:\/\//,''))+'&output=jpg&n=-1',
+    u=>'https://images.weserv.nl/?url='+encodeURIComponent(u.replace(/^https?:\/\//,''))+'&output=jpg&n=-1',
     u=>'https://corsproxy.io/?'+encodeURIComponent(u),
     u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)
   ];
