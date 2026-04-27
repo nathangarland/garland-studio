@@ -615,33 +615,60 @@ function dropZoneMultiHtml(name,values){
   </div>`;
 }
 async function fetchImageAsFile(url){
-  // Try direct fetch (works when CORS is permissive)
+  const looksLikeImage=/\.(jpg|jpeg|png|webp|gif|avif|heic|heif)(\?|$|#)/i.test(url);
+  // 1. Try direct fetch (fast path — works when source has permissive CORS)
   try{
     const r=await fetch(url,{mode:'cors'});
     if(r.ok){
+      const ct=(r.headers.get('content-type')||'').toLowerCase();
       const blob=await r.blob();
-      if(blob.size>0&&blob.type.startsWith('image/')){
+      if((ct.startsWith('image/')||blob.type.startsWith('image/'))&&blob.size>0){
         const ext=(url.match(/\.(jpg|jpeg|png|webp|gif|avif)(\?|$|#)/i)?.[1]||'jpg').toLowerCase();
-        return new File([blob],`pasted.${ext}`,{type:blob.type||'image/jpeg'});
+        return{ok:true,file:new File([blob],`pasted.${ext}`,{type:blob.type||'image/jpeg'})};
+      }
+      if(ct.includes('html')||ct.includes('text')){
+        return{ok:false,reason:'page'};
       }
     }
   }catch(e){}
-  // Fallback: <img crossorigin> + canvas (works when image-server permits anonymous CORS)
+  // 2. Fallback: <img crossorigin> + canvas (works when image-server permits anonymous CORS)
+  if(looksLikeImage){
+    try{
+      const img=await new Promise((resolve,reject)=>{
+        const i=new Image();
+        i.crossOrigin='anonymous';
+        i.onload=()=>resolve(i);
+        i.onerror=reject;
+        i.src=url;
+      });
+      const c=document.createElement('canvas');
+      c.width=img.naturalWidth;c.height=img.naturalHeight;
+      c.getContext('2d').drawImage(img,0,0);
+      const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.92));
+      if(blob)return{ok:true,file:new File([blob],'pasted.jpg',{type:'image/jpeg'})};
+    }catch(e){}
+  }
+  // 3. Final fallback: server-side proxy (always works as long as upstream is reachable)
   try{
-    const img=await new Promise((resolve,reject)=>{
-      const i=new Image();
-      i.crossOrigin='anonymous';
-      i.onload=()=>resolve(i);
-      i.onerror=reject;
-      i.src=url;
-    });
-    const c=document.createElement('canvas');
-    c.width=img.naturalWidth;c.height=img.naturalHeight;
-    c.getContext('2d').drawImage(img,0,0);
-    const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.92));
-    if(blob)return new File([blob],'pasted.jpg',{type:'image/jpeg'});
+    const r=await fetch('/api/fetch-image?url='+encodeURIComponent(url));
+    if(r.ok){
+      const ct=(r.headers.get('content-type')||'').toLowerCase();
+      const blob=await r.blob();
+      if(ct.startsWith('image/')&&blob.size>0){
+        const ext=(ct.split('/')[1]||'jpg').split(';')[0];
+        return{ok:true,file:new File([blob],`pasted.${ext}`,{type:ct})};
+      }
+    } else {
+      // Try to read structured error
+      try{
+        const err=await r.json();
+        if(err && err.contentType && !err.contentType.startsWith('image/')){
+          return{ok:false,reason:'page'};
+        }
+      }catch(_){}
+    }
   }catch(e){}
-  return null;
+  return{ok:false,reason:looksLikeImage?'cors':'page'};
 }
 function setupDropZones(formEl){
   formEl.querySelectorAll('.dz').forEach(dz=>{
@@ -719,15 +746,19 @@ function setupDropZones(formEl){
       btn.disabled=true;
       const orig=btn.textContent;btn.textContent='FETCHING...';
       dz.classList.add('uploading');
-      const file=await fetchImageAsFile(url);
-      if(!file){
+      const result=await fetchImageAsFile(url);
+      if(!result.ok){
         dz.classList.remove('uploading');
         btn.disabled=false;btn.textContent=orig;
-        alert('Could not fetch that image (CORS-blocked by source). Right-click the image → "Save Image As..." → drag the file into the box instead.');
+        if(result.reason==='page'){
+          alert('That looks like a webpage URL, not an image URL.\n\nOpen the page, right-click the actual image, choose "Copy image address", and paste that.');
+        } else {
+          alert('Couldn\'t fetch that image directly — the source server is blocking it (CORS).\n\nFastest workaround: right-click the image → "Save Image As..." → then drag the saved file into the box.');
+        }
         return;
       }
       btn.textContent='COMPRESSING...';
-      const supabaseUrl=await uploadFile(file);
+      const supabaseUrl=await uploadFile(result.file);
       dz.classList.remove('uploading');
       btn.disabled=false;btn.textContent=orig;
       if(supabaseUrl){
